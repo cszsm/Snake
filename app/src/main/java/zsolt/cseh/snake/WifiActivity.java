@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
@@ -38,7 +39,6 @@ public class WifiActivity extends Activity {
 
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(this, getMainLooper(), null);
-        receiver = new WifiDirectBroadcastReceiver(manager, channel, this, peerListListener);
 
         intentFilter = new IntentFilter();
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
@@ -55,20 +55,18 @@ public class WifiActivity extends Activity {
             @Override
             public void onPeersAvailable(WifiP2pDeviceList peers) {
 
-                Toast.makeText(WifiActivity.this, "onPeersAvailable", Toast.LENGTH_LONG).show();
-                Log.v("wifi", "OnPeersAvailable");
                 peerList.clear();
+
+                for (WifiP2pDevice device : peers.getDeviceList()) {
+                    Log.v("wifi", device.deviceName);
+                }
+
                 peerList.addAll(peers.getDeviceList());
                 arrayAdapter.notifyDataSetChanged();
-                if (peerList.size() == 0) {
-                    Toast.makeText(WifiActivity.this, "no peers", Toast.LENGTH_LONG).show();
-                    Log.v("wifi", "NoPeers");
-                } else {
-                    Toast.makeText(WifiActivity.this, peerList.size(), Toast.LENGTH_LONG).show();
-                    Log.v("wifi", "Peers");
-                }
             }
         };
+
+        receiver = new WifiDirectBroadcastReceiver(manager, channel, this, peerListListener);
 
         listView.setAdapter(arrayAdapter);
 
