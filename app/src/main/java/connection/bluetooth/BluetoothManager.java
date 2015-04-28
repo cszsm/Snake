@@ -13,9 +13,7 @@ public class BluetoothManager {
     private BluetoothSocket bluetoothSocket;
     private DeviceType deviceType;
 
-    protected BluetoothManager() {
-
-    }
+    protected BluetoothManager() {}
 
     public static BluetoothManager getInstance() {
         if(instance == null)

@@ -63,7 +63,7 @@ public class BluetoothActivity extends Activity {
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     arrayAdapter.add(device.getName());
                     devices.put(device.getName(), device);
-                    if(device.getUuids() != null)
+                    if (device.getUuids() != null)
                         Toast.makeText(BluetoothActivity.this, device.getName() + " - " + device.getUuids()[0].getUuid().toString(), Toast.LENGTH_LONG).show();
                 }
             }
