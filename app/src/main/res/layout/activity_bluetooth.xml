@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffbfbfbf"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="zsolt.cseh.snake.BluetoothActivity">
+
+    <ListView
+        android:id="@+id/listDevices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/btnStartDiscovery"
+        android:layout_toRightOf="@+id/btnStartDiscovery" />
+
+    <Button
+        android:id="@+id/btnStartDiscovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start discovery" />
+
+    <Button
+        android:id="@+id/btnStopDiscovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnStartDiscovery"
+        android:layout_alignLeft="@+id/btnStartDiscovery"
+        android:layout_alignRight="@+id/btnStartDiscovery"
+        android:layout_alignStart="@+id/btnStartDiscovery"
+        android:layout_below="@+id/btnStartDiscovery"
+        android:text="Stop discovery" />
+
+    <Button
+        android:id="@+id/btnStartServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnStopDiscovery"
+        android:layout_alignLeft="@+id/btnStopDiscovery"
+        android:layout_alignRight="@+id/btnStopDiscovery"
+        android:layout_alignStart="@+id/btnStopDiscovery"
+        android:layout_below="@+id/btnStopDiscovery"
+        android:text="Start server" />
+
+</RelativeLayout>
