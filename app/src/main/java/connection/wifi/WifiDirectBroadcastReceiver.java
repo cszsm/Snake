@@ -46,15 +46,13 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             }
 
             // The peer list changed
-            Toast.makeText(context, "WIFI_P2P_PEERS_CHANGED_ACTION", Toast.LENGTH_SHORT).show();
+            Log.v("wifi", "WIFI_P2P_PEERS_CHANGED_ACTION");
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             // Connection state changed
-
-            Toast.makeText(context, "WIFI_P2P_CONNECTION_CHANGED_ACTION", Toast.LENGTH_SHORT).show();
             Log.v("wifi", "WIFI_P2P_CONNECTION_CHANGED_ACTION");
         } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
             // Device changed
-            Toast.makeText(context, "WIFI_P2P_THIS_DEVICE_CHANGED_ACTION", Toast.LENGTH_SHORT).show();
+            Log.v("wifi", "WIFI_P2P_THIS_DEVICE_CHANGED_ACTION");
         }
     }
 }

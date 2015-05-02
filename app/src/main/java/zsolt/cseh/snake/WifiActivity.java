@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +36,7 @@ public class WifiActivity extends Activity {
     private WifiP2pManager.PeerListListener peerListListener;
     private List peerList;
     private ListView listView;
+    private SimpleArrayMap devices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class WifiActivity extends Activity {
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
         listView = (ListView) findViewById(R.id.listWifiDevices);
+        devices = new SimpleArrayMap<>();
 
         peerList = new ArrayList();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(WifiActivity.this,
@@ -58,12 +63,14 @@ public class WifiActivity extends Activity {
             public void onPeersAvailable(WifiP2pDeviceList peers) {
 
                 peerList.clear();
+                devices.clear();
 
                 for (WifiP2pDevice device : peers.getDeviceList()) {
                     Log.v("wifi", device.deviceName);
+                    devices.put(device.deviceAddress, device);
+                    peerList.add(device.deviceAddress);
                 }
 
-                peerList.addAll(peers.getDeviceList());
                 arrayAdapter.notifyDataSetChanged();
             }
         };
@@ -97,7 +104,20 @@ public class WifiActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView clickedView = (TextView) view;
-                Toast.makeText(WifiActivity.this, clickedView.getText().toString(), Toast.LENGTH_SHORT).show();
+                WifiP2pDevice clickedDevice = (WifiP2pDevice) devices.get(clickedView.getText());
+                WifiP2pConfig config = new WifiP2pConfig();
+                config.deviceAddress = clickedDevice.deviceAddress;
+                manager.connect(channel, config, new WifiP2pManager.ActionListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(WifiActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int reason) {
+                        Toast.makeText(WifiActivity.this, "FAILURE", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -112,5 +132,21 @@ public class WifiActivity extends Activity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+
+    public static class FileServerAsyncTask extends AsyncTask {
+
+        private Context context;
+        private TextView statusText;
+
+        public FileServerAsyncTask(Context context, View statusText) {
+            this.context = context;
+            this.statusText = (TextView) statusText;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            return null;
+        }
     }
 }
