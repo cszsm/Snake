@@ -1,10 +1,12 @@
 package test;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import connection.Packet;
 import connection.PacketSerialization;
-import connection.bluetooth.TransferThread;
+import connection.wifi.TransferThread;
 import model.enumeration.Direction;
 
 /**
@@ -26,12 +28,13 @@ public class TestThread extends Thread {
 
         for(int i = 0; i < 10; i++) {
             try {
+                Log.v("wtest", "sent");
                 transferThread.write(PacketSerialization.serialize(packet));
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                this.sleep(500);
+                this.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,5 +1,7 @@
 package connection.wifi;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,18 +46,20 @@ public class TransferThread extends Thread {
 
         while (true) {
             if(bytes != 0) {
-
+                Log.v("wifi", "bytes not 0");
                 try {
+                    Log.v("wtest", "arrived");
                     packet = PacketSerialization.deserialize(buffer);
                     arrivedPackets++;
+                    Log.v("wifi", packet.getDirection().toString() + String.valueOf(packet.getFoodX()) + String.valueOf(packet.getFoodY()));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.v("wifi", e.toString());
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    Log.v("wifi", "ClassNotFoundExcpetion");
                 }
             }
             try {
-                bytes = inputStream.read();
+                bytes = inputStream.read(buffer);
             } catch (IOException e) {
                 e.printStackTrace();
             }

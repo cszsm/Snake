@@ -20,7 +20,7 @@ public class BluetoothTestActivity extends Activity {
 
     private TransferThread transferThread;
     private Packet packet;
-    private TestThread testThread;
+//    private TestThread testThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class BluetoothTestActivity extends Activity {
         transferThread.start();
 
         packet = new Packet(Direction.UP, 10, 10);
-        testThread = new TestThread(transferThread);
+//        testThread = new TestThread(transferThread);
 
         Button btnTest = (Button) findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
