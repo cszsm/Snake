@@ -30,6 +30,7 @@ public class AcceptThread extends Thread {
         this.activity = activity;
     }
 
+    @Override
     public void run() {
         BluetoothSocket bluetoothSocket = null;
         while (true) {
