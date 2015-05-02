@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 
-import connection.bluetooth.BluetoothManager;
 import connection.enumaration.DeviceType;
+import connection.wifi.WifiDirectManager;
 import model.Game;
 import view.GameControl;
 
@@ -18,7 +18,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BluetoothManager.getInstance().setDeviceType(DeviceType.NONE);
+        WifiDirectManager.getInstance().setDeviceType(DeviceType.NONE);
 
         Point point = new Point(getIntent().getIntExtra("resolutionX", 480), getIntent().getIntExtra("resolutionY", 320));
         Game.getInstance().reset();

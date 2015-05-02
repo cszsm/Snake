@@ -1,11 +1,9 @@
 package zsolt.cseh.snake;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothSocket;
 import android.graphics.Point;
 import android.os.Bundle;
 
-import connection.bluetooth.BluetoothManager;
 import connection.bluetooth.TransferThread;
 import model.Game;
 import view.MultiplayerView;
@@ -21,14 +19,14 @@ public class MultiplayerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BluetoothSocket bluetoothSocket = BluetoothManager.getInstance().getBluetoothSocket();
-        transferThread = new TransferThread(bluetoothSocket);
+//        BluetoothSocket bluetoothSocket = BluetoothManager.getInstance().getBluetoothSocket();
+//        transferThread = new TransferThread(bluetoothSocket);
         transferThread.start();
 
         Game.getInstance().reset();
-        Game.getInstance().getGameManager().setTransferThread(transferThread);
+//        Game.getInstance().getGameManager().setTransferThread(transferThread);
         Point point = new Point(ScreenResolution.getInstance().getX(), ScreenResolution.getInstance().getY());
-        multiplayerView = new MultiplayerView(getApplicationContext(), null, point, transferThread);
+//        multiplayerView = new MultiplayerView(getApplicationContext(), null, point, transferThread);
 
         setContentView(multiplayerView);
 

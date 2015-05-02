@@ -1,6 +1,6 @@
 package model;
 
-import connection.bluetooth.TransferThread;
+import connection.wifi.TransferThread;
 
 /**
  * Created by Zsolt on 2015.03.14..

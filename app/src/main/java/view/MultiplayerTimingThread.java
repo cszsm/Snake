@@ -1,7 +1,7 @@
 package view;
 
-import connection.bluetooth.BluetoothManager;
 import connection.enumaration.DeviceType;
+import connection.wifi.WifiDirectManager;
 import model.Game;
 
 /**
@@ -23,7 +23,7 @@ public class MultiplayerTimingThread extends Thread {
     public void run() {
         while(!stopSignal){
             try {
-                if(BluetoothManager.getInstance().getDeviceType() == DeviceType.MASTER)
+                if(WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
                     Thread.sleep(1000);
                 if(!pauseSignal) {
                     Game.getInstance().getGameManager().step();

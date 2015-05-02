@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import connection.enumaration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
 
 /**
@@ -38,6 +39,7 @@ public class ConnectThread extends Thread {
         }
 
         WifiDirectManager.getInstance().setSocket(socket);
+        WifiDirectManager.getInstance().setDeviceType(DeviceType.SLAVE);
         activity.startGame();
     }
 }

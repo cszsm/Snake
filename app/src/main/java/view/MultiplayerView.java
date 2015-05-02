@@ -9,9 +9,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import connection.bluetooth.BluetoothManager;
-import connection.bluetooth.TransferThread;
+import connection.wifi.TransferThread;
 import connection.enumaration.DeviceType;
+import connection.wifi.WifiDirectManager;
 import model.CollisionDetector;
 import model.Game;
 
@@ -76,7 +76,7 @@ public class MultiplayerView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(BluetoothManager.getInstance().getDeviceType() == DeviceType.MASTER)
+        if(WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
             if(event.getAction() == MotionEvent.ACTION_DOWN)
                 touch.setLastDown(event);
             else if(event.getAction() == MotionEvent.ACTION_UP) {

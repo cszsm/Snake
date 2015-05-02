@@ -4,8 +4,9 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
-import connection.bluetooth.BluetoothManager;
+import connection.wifi.WifiDirectManager;
 import connection.enumaration.DeviceType;
+import connection.wifi.WifiDirectManager;
 
 /**
  * Created by Zsolt on 2015.03.06..
@@ -27,9 +28,9 @@ public class Game {
         SnakeManager snakeManager = new SnakeManager(new Snake(snake));
         FoodManager foodManager = new FoodManager(board, snakeManager.getSnake());
 
-        if (BluetoothManager.getInstance().getDeviceType() == DeviceType.NONE)
+        if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.NONE)
             gameManager = new SingleGameManager(snakeManager, foodManager);
-        else if (BluetoothManager.getInstance().getDeviceType() == DeviceType.MASTER)
+        else if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
             gameManager = new MasterGameManager(snakeManager, foodManager);
         else
             gameManager = new SlaveGameManager(snakeManager, foodManager);

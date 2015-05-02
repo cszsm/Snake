@@ -175,7 +175,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
 
 
     public void startGame() {
-        Intent intent = new Intent(WifiActivity.this, WifiTestActivity.class);
+        Intent intent = new Intent(WifiActivity.this, WifiMultiplayerActivity.class);
         startActivity(intent);
     }
 
