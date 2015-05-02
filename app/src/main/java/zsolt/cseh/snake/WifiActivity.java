@@ -3,12 +3,16 @@ package zsolt.cseh.snake;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
+import android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.util.SimpleArrayMap;
@@ -21,13 +25,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import connection.wifi.AcceptThread;
+import connection.wifi.ConnectThread;
 import connection.wifi.WifiDirectBroadcastReceiver;
 
 
-public class WifiActivity extends Activity {
+public class WifiActivity extends Activity implements ConnectionInfoListener {
 
     private IntentFilter intentFilter;
     private WifiP2pManager manager;
@@ -37,6 +48,10 @@ public class WifiActivity extends Activity {
     private List peerList;
     private ListView listView;
     private SimpleArrayMap devices;
+    private WifiP2pInfo info;
+
+    private AcceptThread acceptThread;
+    private ConnectThread connectThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +115,36 @@ public class WifiActivity extends Activity {
             }
         });
 
+        Button btnStartServer = (Button) findViewById(R.id.btnWifiStartServer);
+        btnStartServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                acceptThread = new AcceptThread(WifiActivity.this);
+                acceptThread.start();
+                Toast.makeText(WifiActivity.this, "accept - wifiactivity", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button btnConnect = (Button) findViewById(R.id.btnWifiConnect);
+        btnConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connectThread = new ConnectThread(WifiActivity.this, info);
+                connectThread.start();
+                Toast.makeText(WifiActivity.this, "connect - wifiactivity", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView clickedView = (TextView) view;
+
                 WifiP2pDevice clickedDevice = (WifiP2pDevice) devices.get(clickedView.getText());
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = clickedDevice.deviceAddress;
+                //config.wps.setup = WpsInfo.PBC;
+
                 manager.connect(channel, config, new WifiP2pManager.ActionListener() {
                     @Override
                     public void onSuccess() {
@@ -134,19 +172,17 @@ public class WifiActivity extends Activity {
         unregisterReceiver(receiver);
     }
 
-    public static class FileServerAsyncTask extends AsyncTask {
 
-        private Context context;
-        private TextView statusText;
 
-        public FileServerAsyncTask(Context context, View statusText) {
-            this.context = context;
-            this.statusText = (TextView) statusText;
-        }
+    public void startGame() {
+        Intent intent = new Intent(WifiActivity.this, WifiTestActivity.class);
+        startActivity(intent);
+    }
 
-        @Override
-        protected Object doInBackground(Object[] params) {
-            return null;
-        }
+    @Override
+    public void onConnectionInfoAvailable(WifiP2pInfo info) {
+        this.info = info;
+        String groupOwnerAddress = info.groupOwnerAddress.getHostAddress();
+        Log.v("wifi", groupOwnerAddress);
     }
 }

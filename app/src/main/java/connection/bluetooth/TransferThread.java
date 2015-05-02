@@ -44,6 +44,7 @@ public class TransferThread extends Thread {
         outputStream = tmpOut;
     }
 
+    @Override
     public void run() {
         byte[] buffer = new byte[1024];
         int bytes = 0;
