@@ -33,6 +33,7 @@ public class ConnectThread extends Thread {
         bluetoothSocket = tmp;
     }
 
+    @Override
     public void run() {
         bluetoothAdapter.cancelDiscovery();
 

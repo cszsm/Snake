@@ -3,6 +3,7 @@ package connection.wifi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.util.Log;
@@ -49,6 +50,15 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             Log.v("wifi", "WIFI_P2P_PEERS_CHANGED_ACTION");
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             // Connection state changed
+            if(manager == null) {
+                return;
+            }
+
+            NetworkInfo networkInfo = (NetworkInfo) intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
+
+            if(networkInfo.isConnected()) {
+                manager.requestConnectionInfo(channel, wifiActivity);
+            }
             Log.v("wifi", "WIFI_P2P_CONNECTION_CHANGED_ACTION");
         } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
             // Device changed
