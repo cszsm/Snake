@@ -10,7 +10,6 @@ public class ScreenResolution {
     int y;
 
     protected ScreenResolution() {
-
     }
 
     public static ScreenResolution getInstance() {

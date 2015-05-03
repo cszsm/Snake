@@ -1,22 +1,14 @@
 package zsolt.cseh.snake;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
-import java.io.IOException;
-import java.net.Socket;
 
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
 import connection.Packet;
-import connection.PacketSerialization;
 import connection.wifi.TransferThread;
-import connection.wifi.WifiDirectManager;
 import model.enumeration.Direction;
 import test.TestThread;
 

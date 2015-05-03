@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 
-import java.net.Socket;
-
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
 import connection.wifi.TransferThread;
-import connection.wifi.WifiDirectManager;
 import model.Game;
 import view.MultiplayerView;
 import view.ScreenResolution;
