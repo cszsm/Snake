@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import connection.ConnectionManager;
 import connection.enumaration.DeviceType;
 import connection.wifi.TransferThread;
 import connection.wifi.WifiDirectManager;
@@ -76,7 +77,7 @@ public class MultiplayerView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
+        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.MASTER)
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 touch.setLastDown(event);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {

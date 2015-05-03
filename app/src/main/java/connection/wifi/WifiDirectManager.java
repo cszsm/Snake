@@ -13,10 +13,11 @@ public class WifiDirectManager {
     private Socket socket;
     private DeviceType deviceType;
 
-    protected WifiDirectManager() {}
+    protected WifiDirectManager() {
+    }
 
-    public static WifiDirectManager getInstance(){
-        if(instance == null)
+    public static WifiDirectManager getInstance() {
+        if (instance == null)
             instance = new WifiDirectManager();
         return instance;
     }

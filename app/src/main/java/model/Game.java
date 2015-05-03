@@ -4,6 +4,7 @@ import android.graphics.Point;
 
 import java.util.ArrayList;
 
+import connection.ConnectionManager;
 import connection.wifi.WifiDirectManager;
 import connection.enumaration.DeviceType;
 import connection.wifi.WifiDirectManager;
@@ -28,9 +29,9 @@ public class Game {
         SnakeManager snakeManager = new SnakeManager(new Snake(snake));
         FoodManager foodManager = new FoodManager(board, snakeManager.getSnake());
 
-        if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.NONE)
+        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.NONE)
             gameManager = new SingleGameManager(snakeManager, foodManager);
-        else if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
+        else if (ConnectionManager.getInstance().getDeviceType() == DeviceType.MASTER)
             gameManager = new MasterGameManager(snakeManager, foodManager);
         else
             gameManager = new SlaveGameManager(snakeManager, foodManager);

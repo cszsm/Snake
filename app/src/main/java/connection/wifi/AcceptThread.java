@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import connection.ConnectionManager;
 import connection.enumaration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
 
@@ -47,8 +48,8 @@ public class AcceptThread extends Thread {
                     e.printStackTrace();
                 }
 
-                WifiDirectManager.getInstance().setSocket(client);
-                WifiDirectManager.getInstance().setDeviceType(DeviceType.MASTER);
+                ConnectionManager.getInstance().setSocket(new WifiDirectSocket(client));
+                ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
                 activity.startGame();
                 break;
             }

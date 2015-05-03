@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import java.net.Socket;
 
+import connection.ConnectionManager;
+import connection.ConnectionSocket;
 import connection.wifi.TransferThread;
 import connection.wifi.WifiDirectManager;
 import model.Game;
@@ -22,7 +24,7 @@ public class WifiMultiplayerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Socket socket = WifiDirectManager.getInstance().getSocket();
+        ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
         transferThread = new TransferThread(socket);
         transferThread.start();
 

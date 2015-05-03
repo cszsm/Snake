@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.sql.Connection;
 
+import connection.ConnectionSocket;
 import connection.Packet;
 import connection.PacketSerialization;
 
@@ -14,14 +16,14 @@ import connection.PacketSerialization;
  * Created by Zsolt on 2015.05.02..
  */
 public class TransferThread extends Thread {
-    private final Socket socket;
+    private final ConnectionSocket socket;
     private final InputStream inputStream;
     private final OutputStream outputStream;
 
     private Packet packet;
     private int arrivedPackets;
 
-    public TransferThread(Socket socket) {
+    public TransferThread(ConnectionSocket socket) {
         this.socket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;

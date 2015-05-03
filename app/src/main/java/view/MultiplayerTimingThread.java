@@ -1,5 +1,6 @@
 package view;
 
+import connection.ConnectionManager;
 import connection.enumaration.DeviceType;
 import connection.wifi.WifiDirectManager;
 import model.Game;
@@ -23,7 +24,7 @@ public class MultiplayerTimingThread extends Thread {
     public void run() {
         while (!stopSignal) {
             try {
-                if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
+                if (ConnectionManager.getInstance().getDeviceType() == DeviceType.MASTER)
                     Thread.sleep(1000);
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();

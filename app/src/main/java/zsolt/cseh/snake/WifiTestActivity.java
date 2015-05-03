@@ -11,6 +11,8 @@ import android.widget.Button;
 import java.io.IOException;
 import java.net.Socket;
 
+import connection.ConnectionManager;
+import connection.ConnectionSocket;
 import connection.Packet;
 import connection.PacketSerialization;
 import connection.wifi.TransferThread;
@@ -30,7 +32,7 @@ public class WifiTestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_test);
 
-        Socket socket = WifiDirectManager.getInstance().getSocket();
+        ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
         transferThread = new TransferThread(socket);
         transferThread.start();
 
