@@ -1,7 +1,6 @@
 package connection.wifi;
 
 import java.net.Socket;
-import java.util.logging.SocketHandler;
 
 import connection.enumaration.DeviceType;
 

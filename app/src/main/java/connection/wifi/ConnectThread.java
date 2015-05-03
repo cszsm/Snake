@@ -1,7 +1,6 @@
 package connection.wifi;
 
 import android.content.Context;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.util.Log;
 

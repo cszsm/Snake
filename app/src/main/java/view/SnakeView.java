@@ -34,7 +34,7 @@ public class SnakeView extends RectangleView {
     }
 
     public void draw(Canvas canvas) {
-        for(Point point : snake.getBody()) {
+        for (Point point : snake.getBody()) {
             drawRectangle(point.x, point.y, canvas, paintBody);
             drawRectangle(point.x, point.y, canvas, paintBorder);
         }

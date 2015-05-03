@@ -2,10 +2,7 @@ package view;
 
 import android.view.MotionEvent;
 
-import model.GameManager;
 import model.SnakeManager;
-import model.enumeration.Direction;
-import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.07..
@@ -31,13 +28,12 @@ public class TouchControl {
     }
 
     public void setDirection(SnakeManager snakeManager) {
-        if(Math.abs(differenceY) < Math.abs(differenceX)) {
+        if (Math.abs(differenceY) < Math.abs(differenceX)) {
             if (0 < differenceX)
                 snakeManager.setRight();
             else if (differenceX < 0)
                 snakeManager.setLeft();
-        }
-        else {
+        } else {
             if (0 < differenceY)
                 snakeManager.setDown();
             else if (differenceY < 0)

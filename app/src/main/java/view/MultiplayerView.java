@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import connection.wifi.TransferThread;
 import connection.enumaration.DeviceType;
+import connection.wifi.TransferThread;
 import connection.wifi.WifiDirectManager;
 import model.CollisionDetector;
 import model.Game;
@@ -66,20 +66,20 @@ public class MultiplayerView extends View {
         snakeView.draw(canvas);
         foodView.draw(canvas);
 
-        if(collisionControl.doesCollide()) {
+        if (collisionControl.doesCollide()) {
             gameOver = true;
             pause();
         }
-        if(gameOver)
+        if (gameOver)
             canvas.drawText("Game Over", 100, 220, textPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
-            if(event.getAction() == MotionEvent.ACTION_DOWN)
+        if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 touch.setLastDown(event);
-            else if(event.getAction() == MotionEvent.ACTION_UP) {
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 touch.setLastUp(event);
                 touch.setDirection(Game.getInstance().getSnakeManager());
             }

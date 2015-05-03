@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.util.Log;
-import android.widget.Toast;
 
 import zsolt.cseh.snake.WifiActivity;
 

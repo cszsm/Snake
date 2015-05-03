@@ -14,7 +14,7 @@ public class ScreenResolution {
     }
 
     public static ScreenResolution getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new ScreenResolution();
         return instance;
     }

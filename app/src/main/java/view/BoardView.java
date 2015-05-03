@@ -34,13 +34,13 @@ public class BoardView extends RectangleView {
     }
 
     public void draw(Canvas canvas) {
-        for(int row = 0; row < 9; row++)
-            for(int column = 0; column < 15; column++)
+        for (int row = 0; row < 9; row++)
+            for (int column = 0; column < 15; column++)
                 drawField(canvas, column, row, gameBoard.getFields()[column][row]);
     }
 
     private void drawField(Canvas canvas, int column, int row, BoardElement element) {
-        if(element == BoardElement.WALL)
+        if (element == BoardElement.WALL)
             drawRectangle(column, row, canvas, paintWall);
         else
             drawRectangle(column, row, canvas, paintFloor);

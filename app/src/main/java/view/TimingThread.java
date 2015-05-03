@@ -19,10 +19,10 @@ public class TimingThread extends Thread {
 
     @Override
     public void run() {
-        while(!stopSignal){
+        while (!stopSignal) {
             try {
                 Thread.sleep(500);
-                if(!pauseSignal) {
+                if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
                     gameControl.postInvalidate();
                 }

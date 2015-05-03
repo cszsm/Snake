@@ -64,11 +64,11 @@ public class GameControl extends View {
         snakeView.draw(canvas);
         foodView.draw(canvas);
 
-        if(collisionControl.doesCollide()) {
+        if (collisionControl.doesCollide()) {
             gameOver = true;
             pause();
         }
-        if(gameOver) {
+        if (gameOver) {
             int x = (ScreenResolution.getInstance().getX() / 2) - 349;
             int y = (ScreenResolution.getInstance().getY() / 2) + 53;
             canvas.drawRect(0, 0, ScreenResolution.getInstance().getX(), ScreenResolution.getInstance().getY(), backgroundPaint);
@@ -78,9 +78,9 @@ public class GameControl extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN)
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
             touch.setLastDown(event);
-        else if(event.getAction() == MotionEvent.ACTION_UP) {
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
             touch.setLastUp(event);
             touch.setDirection(Game.getInstance().getSnakeManager());
         }

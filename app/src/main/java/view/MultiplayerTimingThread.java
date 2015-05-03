@@ -21,11 +21,11 @@ public class MultiplayerTimingThread extends Thread {
 
     @Override
     public void run() {
-        while(!stopSignal){
+        while (!stopSignal) {
             try {
-                if(WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
+                if (WifiDirectManager.getInstance().getDeviceType() == DeviceType.MASTER)
                     Thread.sleep(1000);
-                if(!pauseSignal) {
+                if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
 //                    if(BluetoothManager.getInstance().getDeviceType() == DeviceType.MASTER) {
 //                        Thread.sleep(100);
