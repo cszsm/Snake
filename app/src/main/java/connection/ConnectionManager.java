@@ -1,6 +1,6 @@
 package connection;
 
-import connection.enumaration.DeviceType;
+import connection.enumeration.DeviceType;
 
 /**
  * Created by Zsolt on 2015.05.03..

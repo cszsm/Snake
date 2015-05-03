@@ -9,7 +9,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.UUID;
 
-import connection.enumaration.DeviceType;
+import connection.ConnectionManager;
+import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.BluetoothActivity;
 
 /**
@@ -56,8 +57,8 @@ public class ConnectThread extends Thread {
             return;
         }
 
-        BluetoothManager.getInstance().setBluetoothSocket(bluetoothSocket);
-        BluetoothManager.getInstance().setDeviceType(DeviceType.SLAVE);
+        ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
+        ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
         activity.startGame();
     }
 

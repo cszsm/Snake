@@ -2,7 +2,7 @@ package connection.bluetooth;
 
 import android.bluetooth.BluetoothSocket;
 
-import connection.enumaration.DeviceType;
+import connection.enumeration.DeviceType;
 
 /**
  * Created by Zsolt on 2015.04.02..

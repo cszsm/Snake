@@ -1,8 +1,7 @@
 package view;
 
 import connection.ConnectionManager;
-import connection.enumaration.DeviceType;
-import connection.wifi.WifiDirectManager;
+import connection.enumeration.DeviceType;
 import model.Game;
 
 /**

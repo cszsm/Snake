@@ -5,8 +5,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 
 import connection.ConnectionManager;
-import connection.enumaration.DeviceType;
-import connection.wifi.WifiDirectManager;
+import connection.enumeration.DeviceType;
 import model.Game;
 import view.GameControl;
 

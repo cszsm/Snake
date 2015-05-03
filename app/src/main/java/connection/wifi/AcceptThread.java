@@ -7,7 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import connection.ConnectionManager;
-import connection.enumaration.DeviceType;
+import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
 
 /**

@@ -1,19 +1,20 @@
-package connection.wifi;
+package connection.bluetooth;
+
+import android.bluetooth.BluetoothSocket;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
 
 import connection.ConnectionSocket;
 
 /**
  * Created by Zsolt on 2015.05.03..
  */
-public class WifiDirectSocket implements ConnectionSocket {
-    private Socket socket;
+public class BluetoothConnectionSocket implements ConnectionSocket{
+    private BluetoothSocket socket;
 
-    public WifiDirectSocket(Socket socket) {
+    public BluetoothConnectionSocket(BluetoothSocket socket) {
         this.socket = socket;
     }
 

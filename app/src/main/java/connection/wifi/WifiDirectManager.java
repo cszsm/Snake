@@ -2,7 +2,7 @@ package connection.wifi;
 
 import java.net.Socket;
 
-import connection.enumaration.DeviceType;
+import connection.enumeration.DeviceType;
 
 /**
  * Created by Zsolt on 2015.05.02..

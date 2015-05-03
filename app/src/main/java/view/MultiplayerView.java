@@ -10,9 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import connection.ConnectionManager;
-import connection.enumaration.DeviceType;
+import connection.enumeration.DeviceType;
 import connection.wifi.TransferThread;
-import connection.wifi.WifiDirectManager;
 import model.CollisionDetector;
 import model.Game;
 
@@ -31,6 +30,7 @@ public class MultiplayerView extends View {
     private TransferThread transferThread;
 
     private Paint textPaint;
+    private Paint backgroundPaint;
 
     private boolean gameOver;
 
@@ -53,8 +53,11 @@ public class MultiplayerView extends View {
         timingThread.start();
 
         textPaint = new Paint();
-        textPaint.setColor(Color.YELLOW);
+        textPaint.setColor(Color.DKGRAY);
         textPaint.setTextSize(144);
+
+        backgroundPaint = new Paint();
+        backgroundPaint.setColor(Color.argb(127, 255, 255, 255));
 
         gameOver = false;
     }
@@ -71,8 +74,12 @@ public class MultiplayerView extends View {
             gameOver = true;
             pause();
         }
-        if (gameOver)
-            canvas.drawText("Game Over", 100, 220, textPaint);
+        if (gameOver){
+            int x = (ScreenResolution.getInstance().getX() / 2) - 349;
+            int y = (ScreenResolution.getInstance().getY() / 2) + 53;
+            canvas.drawRect(0, 0, ScreenResolution.getInstance().getX(), ScreenResolution.getInstance().getY(), backgroundPaint);
+            canvas.drawText("Game Over", x, y, textPaint);
+        }
     }
 
     @Override

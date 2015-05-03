@@ -5,9 +5,7 @@ import android.graphics.Point;
 import java.util.ArrayList;
 
 import connection.ConnectionManager;
-import connection.wifi.WifiDirectManager;
-import connection.enumaration.DeviceType;
-import connection.wifi.WifiDirectManager;
+import connection.enumeration.DeviceType;
 
 /**
  * Created by Zsolt on 2015.03.06..
