@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import connection.ConnectionManager;
+import connection.enumeration.DeviceType;
 import control.TimingThread;
 import control.TouchControl;
 import control.CollisionDetector;
@@ -85,11 +87,13 @@ public class GameView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
-            touch.setLastDown(event);
-        else if (event.getAction() == MotionEvent.ACTION_UP) {
-            touch.setLastUp(event);
-            touch.setDirection(Game.getInstance().getSnakeManager());
+        if(ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN)
+                touch.setLastDown(event);
+            else if (event.getAction() == MotionEvent.ACTION_UP) {
+                touch.setLastUp(event);
+                touch.setDirection(Game.getInstance().getSnakeManager());
+            }
         }
         return true;
     }

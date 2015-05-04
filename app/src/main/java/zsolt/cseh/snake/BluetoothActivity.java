@@ -193,7 +193,7 @@ public class BluetoothActivity extends Activity {
 //    }
 
     public void startGame() {
-        Intent intent = new Intent(BluetoothActivity.this, WifiMultiplayerActivity.class);
+        Intent intent = new Intent(BluetoothActivity.this, MultiplayerActivity.class);
         startActivity(intent);
     }
 

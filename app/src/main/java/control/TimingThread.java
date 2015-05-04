@@ -1,5 +1,7 @@
 package control;
 
+import connection.ConnectionManager;
+import connection.enumeration.DeviceType;
 import model.Game;
 import view.GameView;
 
@@ -22,7 +24,9 @@ public class TimingThread extends Thread {
     public void run() {
         while (!stopSignal) {
             try {
-                Thread.sleep(500);
+                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
+                    Thread.sleep(1000);
+                }
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
                     gameView.postInvalidate();

@@ -3,6 +3,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="0dp"
-                tools:context="zsolt.cseh.snake.WifiMultiplayerActivity">
+                tools:context="zsolt.cseh.snake.MultiplayerActivity">
 
 </RelativeLayout>
