@@ -28,7 +28,7 @@ public class GameView extends View {
     private SnakeView snakeView;
     private FoodView foodView;
 
-    private TouchControl touch;
+    private TouchControl touchControl;
 
     private CollisionDetector collisionDetector;
 
@@ -39,6 +39,7 @@ public class GameView extends View {
 
     private boolean gameOver;
 
+    /** Creates other view and control objects, then starts the game */
     public GameView(Context context, AttributeSet attrs, Point resolution) {
         super(context, attrs);
 
@@ -48,7 +49,7 @@ public class GameView extends View {
         snakeView = new SnakeView(blockSize, Game.getInstance().getSnake());
         foodView = new FoodView(blockSize, Game.getInstance().getFoodManager());
 
-        touch = new TouchControl();
+        touchControl = new TouchControl();
 
         collisionDetector = new CollisionDetector(Game.getInstance().getBoard(), Game.getInstance().getSnake());
 
@@ -65,6 +66,7 @@ public class GameView extends View {
         gameOver = false;
     }
 
+    /** Draws the game */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -75,24 +77,29 @@ public class GameView extends View {
 
         if (collisionDetector.doesCollide()) {
             gameOver = true;
-            pause();
         }
+
         if (gameOver) {
+            pause();
+
+            //** Coordinates of the center */
             int x = (ScreenResolution.getInstance().getX() / 2) - 349;
             int y = (ScreenResolution.getInstance().getY() / 2) + 53;
+
             canvas.drawRect(0, 0, ScreenResolution.getInstance().getX(), ScreenResolution.getInstance().getY(), backgroundPaint);
             canvas.drawText("Game Over", x, y, textPaint);
         }
     }
 
+    //** Sets the snake's direction defined by the swipe gesture */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
             if (event.getAction() == MotionEvent.ACTION_DOWN)
-                touch.setLastDown(event);
+                touchControl.setLastDown(event);
             else if (event.getAction() == MotionEvent.ACTION_UP) {
-                touch.setLastUp(event);
-                touch.setDirection(Game.getInstance().getSnakeManager());
+                touchControl.setLastUp(event);
+                touchControl.setDirection(Game.getInstance().getSnakeManager());
             }
         }
         return true;
