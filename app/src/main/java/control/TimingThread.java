@@ -1,18 +1,19 @@
-package view;
+package control;
 
 import model.Game;
+import view.GameView;
 
 /**
  * Created by Zsolt on 2015.03.10..
  */
 public class TimingThread extends Thread {
 
-    private GameControl gameControl;
+    private GameView gameView;
     private volatile boolean stopSignal;
     private volatile boolean pauseSignal;
 
-    public TimingThread(GameControl gameControl) {
-        this.gameControl = gameControl;
+    public TimingThread(GameView gameView) {
+        this.gameView = gameView;
         stopSignal = false;
         pauseSignal = false;
     }
@@ -24,7 +25,7 @@ public class TimingThread extends Thread {
                 Thread.sleep(500);
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
-                    gameControl.postInvalidate();
+                    gameView.postInvalidate();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

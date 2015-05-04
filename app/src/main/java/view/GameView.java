@@ -9,13 +9,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import control.TimingThread;
+import control.TouchControl;
 import model.CollisionDetector;
 import model.Game;
 
 /**
  * Created by Zsolt on 2015.03.06..
  */
-public class GameControl extends View {
+public class GameView extends View {
     private BoardView boardView;
     private SnakeView snakeView;
     private FoodView foodView;
@@ -30,7 +32,7 @@ public class GameControl extends View {
 
     private boolean gameOver;
 
-    public GameControl(Context context, AttributeSet attrs, Point resolution) {
+    public GameView(Context context, AttributeSet attrs, Point resolution) {
         super(context, attrs);
 
         int blockSize = resolution.y / 9;

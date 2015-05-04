@@ -1,4 +1,4 @@
-package view;
+package control;
 
 import android.view.MotionEvent;
 

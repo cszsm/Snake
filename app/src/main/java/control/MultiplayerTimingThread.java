@@ -1,8 +1,9 @@
-package view;
+package control;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
 import model.Game;
+import view.MultiplayerView;
 
 /**
  * Created by Zsolt on 2015.04.02..

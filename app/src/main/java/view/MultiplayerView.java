@@ -12,6 +12,8 @@ import android.view.View;
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
 import connection.wifi.TransferThread;
+import control.MultiplayerTimingThread;
+import control.TouchControl;
 import model.CollisionDetector;
 import model.Game;
 

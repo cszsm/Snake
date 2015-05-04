@@ -7,12 +7,12 @@ import android.os.Bundle;
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
 import model.Game;
-import view.GameControl;
+import view.GameView;
 
 
 public class GameActivity extends Activity {
 
-    private GameControl gameControl;
+    private GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,19 +22,19 @@ public class GameActivity extends Activity {
 
         Point point = new Point(getIntent().getIntExtra("resolutionX", 480), getIntent().getIntExtra("resolutionY", 320));
         Game.getInstance().reset();
-        gameControl = new GameControl(getApplicationContext(), null, point);
-        setContentView(gameControl);
+        gameView = new GameView(getApplicationContext(), null, point);
+        setContentView(gameView);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        gameControl.pause();
+        gameView.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        gameControl.resume();
+        gameView.resume();
     }
 }
