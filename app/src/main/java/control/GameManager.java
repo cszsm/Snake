@@ -1,6 +1,7 @@
-package model;
+package control;
 
 import connection.wifi.TransferThread;
+import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.14..

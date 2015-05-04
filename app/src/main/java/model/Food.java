@@ -8,6 +8,8 @@ import model.enumeration.BoardElement;
 
 /**
  * Created by Zsolt on 2015.03.07..
+ *
+ * Represents a food in the game
  */
 public class Food {
     private int x;

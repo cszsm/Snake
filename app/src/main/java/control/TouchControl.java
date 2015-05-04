@@ -2,8 +2,6 @@ package control;
 
 import android.view.MotionEvent;
 
-import model.SnakeManager;
-
 /**
  * Created by Zsolt on 2015.03.07..
  */

@@ -1,5 +1,7 @@
-package model;
+package control;
 
+import model.Food;
+import model.Snake;
 import model.enumeration.Direction;
 
 /**

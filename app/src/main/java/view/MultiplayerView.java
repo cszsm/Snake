@@ -14,7 +14,7 @@ import connection.enumeration.DeviceType;
 import connection.wifi.TransferThread;
 import control.MultiplayerTimingThread;
 import control.TouchControl;
-import model.CollisionDetector;
+import control.CollisionDetector;
 import model.Game;
 
 /**

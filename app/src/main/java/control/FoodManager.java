@@ -1,9 +1,12 @@
-package model;
+package control;
 
 import android.graphics.Point;
 
 import java.util.Random;
 
+import model.Board;
+import model.Food;
+import model.Snake;
 import model.enumeration.BoardElement;
 
 /**

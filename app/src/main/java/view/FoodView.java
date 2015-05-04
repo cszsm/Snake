@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import model.FoodManager;
+import control.FoodManager;
 
 /**
  * Created by Zsolt on 2015.03.07..

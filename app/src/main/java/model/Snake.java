@@ -8,14 +8,16 @@ import model.enumeration.Direction;
 
 /**
  * Created by Zsolt on 2015.03.06..
+ *
+ * Represents a snake with coordinates and a direction
  */
 public class Snake {
     private ArrayList<Point> body;
     private Direction direction;
 
-    public Snake(ArrayList<Point> start) {
-        body = start;
-
+    /** Sets the snake's initial values */
+    public Snake(ArrayList<Point> body) {
+        this.body = body;
         direction = Direction.RIGTH;
     }
 
@@ -31,6 +33,7 @@ public class Snake {
         this.direction = direction;
     }
 
+    /** Moves the snake toward the current direction */
     public void step() {
         Point head = getHead();
 

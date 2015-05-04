@@ -5,13 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import control.TimingThread;
 import control.TouchControl;
-import model.CollisionDetector;
+import control.CollisionDetector;
 import model.Game;
 
 /**
@@ -51,6 +52,7 @@ public class GameView extends View {
         textPaint = new Paint();
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTextSize(144);
+
 
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.argb(127, 255, 255, 255));

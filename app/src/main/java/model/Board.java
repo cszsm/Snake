@@ -4,10 +4,13 @@ import model.enumeration.BoardElement;
 
 /**
  * Created by Zsolt on 2015.03.06..
+ *
+ * Represents the game's board
  */
 public class Board {
     private BoardElement[][] fields;
 
+    /** Creates a standard, empty board surrounded by four walls */
     public Board() {
         fields = new BoardElement[16][9];
 

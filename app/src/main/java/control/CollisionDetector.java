@@ -1,4 +1,4 @@
-package model;
+package control;
 
 import android.graphics.Point;
 
