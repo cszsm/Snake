@@ -8,6 +8,8 @@ import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.07..
+ *
+ * Detects collision between the snake and a wall, or between two parts of the snake
  */
 public class CollisionDetector {
     private Board board;
@@ -18,6 +20,7 @@ public class CollisionDetector {
         this.snake = snake;
     }
 
+    /** Detects collision */
     public boolean doesCollide() {
         if(board.getFields()[snake.getHead().x][snake.getHead().y] == BoardElement.WALL)
             return true;

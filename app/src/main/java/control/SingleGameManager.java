@@ -2,6 +2,8 @@ package control;
 
 /**
  * Created by Zsolt on 2015.04.21..
+ *
+ * Manages the single player game
  */
 public class SingleGameManager extends GameManager {
 
@@ -9,6 +11,7 @@ public class SingleGameManager extends GameManager {
         super(snakeManager, foodManager);
     }
 
+    /** Steps the game */
     public void step() {
 
         snakeManager.step();
