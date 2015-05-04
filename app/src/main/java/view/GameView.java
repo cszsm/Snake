@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,14 +16,19 @@ import model.Game;
 
 /**
  * Created by Zsolt on 2015.03.06..
+ *
+ * Draws the game
+ * This is the GameActivity's view
  */
 public class GameView extends View {
+
     private BoardView boardView;
     private SnakeView snakeView;
     private FoodView foodView;
 
     private TouchControl touch;
-    private CollisionDetector collisionControl;
+
+    private CollisionDetector collisionDetector;
 
     private TimingThread timingThread;
 
@@ -44,7 +48,7 @@ public class GameView extends View {
 
         touch = new TouchControl();
 
-        collisionControl = new CollisionDetector(Game.getInstance().getBoard(), Game.getInstance().getSnake());
+        collisionDetector = new CollisionDetector(Game.getInstance().getBoard(), Game.getInstance().getSnake());
 
         timingThread = new TimingThread(this);
         timingThread.start();
@@ -52,7 +56,6 @@ public class GameView extends View {
         textPaint = new Paint();
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTextSize(144);
-
 
         backgroundPaint = new Paint();
         backgroundPaint.setColor(Color.argb(127, 255, 255, 255));
@@ -68,7 +71,7 @@ public class GameView extends View {
         snakeView.draw(canvas);
         foodView.draw(canvas);
 
-        if (collisionControl.doesCollide()) {
+        if (collisionDetector.doesCollide()) {
             gameOver = true;
             pause();
         }

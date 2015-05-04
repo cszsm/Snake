@@ -2,6 +2,9 @@ package view;
 
 /**
  * Created by Zsolt on 2015.04.02..
+ *
+ * Stores the screen's resolution
+ * Singleton pattern
  */
 public class ScreenResolution {
     private static ScreenResolution instance = null;
@@ -9,8 +12,7 @@ public class ScreenResolution {
     int x;
     int y;
 
-    protected ScreenResolution() {
-    }
+    protected ScreenResolution() {}
 
     public static ScreenResolution getInstance() {
         if (instance == null)

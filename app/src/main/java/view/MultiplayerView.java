@@ -29,7 +29,6 @@ public class MultiplayerView extends View {
     private CollisionDetector collisionControl;
 
     private MultiplayerTimingThread timingThread;
-    private TransferThread transferThread;
 
     private Paint textPaint;
     private Paint backgroundPaint;
@@ -40,8 +39,6 @@ public class MultiplayerView extends View {
         super(context, attrs);
 
         int blockSize = resolution.y / 9;
-
-        this.transferThread = transferThread;
 
         boardView = new BoardView(blockSize, Game.getInstance().getBoard());
         snakeView = new SnakeView(blockSize, Game.getInstance().getSnake());

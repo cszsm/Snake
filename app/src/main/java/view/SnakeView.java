@@ -9,6 +9,8 @@ import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.07..
+ *
+ * Draws the snake
  */
 public class SnakeView extends RectangleView {
     private Snake snake;
@@ -16,6 +18,7 @@ public class SnakeView extends RectangleView {
     private Paint paintHead;
     private Paint paintBody;
 
+    /** Sets the colors of the food */
     public SnakeView(int size, Snake snake) {
         fieldSize = size;
         this.snake = snake;
@@ -27,17 +30,15 @@ public class SnakeView extends RectangleView {
         paintBody = new Paint();
         paintBody.setStyle(Paint.Style.FILL);
         paintBody.setColor(Color.argb(255, 0, 128, 0));
-
-        paintBorder = new Paint();
-        paintBorder.setStyle(Paint.Style.STROKE);
-        paintBorder.setColor(Color.BLACK);
     }
 
+    /** Draws the snake */
     public void draw(Canvas canvas) {
         for (Point point : snake.getBody()) {
             drawRectangle(point.x, point.y, canvas, paintBody);
             drawRectangle(point.x, point.y, canvas, paintBorder);
         }
+
         Point head = snake.getBody().get(0);
         drawRectangle(head.x, head.y, canvas, paintHead);
         drawRectangle(head.x, head.y, canvas, paintBorder);
