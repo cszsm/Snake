@@ -14,12 +14,14 @@ import zsolt.cseh.snake.BluetoothActivity;
 
 /**
  * Created by Zsolt on 2015.03.21..
+ *
+ * Waits for another device to connect
  */
-public class AcceptThread extends Thread {
+public class BluetoothAcceptThread extends Thread {
     private final BluetoothServerSocket bluetoothServerSocket;
     private BluetoothActivity activity;
 
-    public AcceptThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothActivity activity) {
+    public BluetoothAcceptThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothActivity activity) {
         BluetoothServerSocket tmp = null;
         try {
             tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord("Snake", uuid);
@@ -31,6 +33,7 @@ public class AcceptThread extends Thread {
         this.activity = activity;
     }
 
+    /** Waits for another device to connect, then starts the game */
     @Override
     public void run() {
         BluetoothSocket bluetoothSocket = null;
@@ -42,12 +45,6 @@ public class AcceptThread extends Thread {
             }
 
             if (bluetoothSocket != null) {
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(activity, "Server started", Toast.LENGTH_LONG).show();
-                    }
-                });
                 try {
                     bluetoothServerSocket.close();
                 } catch (IOException e) {
@@ -60,14 +57,6 @@ public class AcceptThread extends Thread {
 
                 break;
             }
-        }
-    }
-
-    public void cancel() {
-        try {
-            bluetoothServerSocket.close();
-        } catch (IOException e) {
-
         }
     }
 }

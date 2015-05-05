@@ -21,8 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import connection.bluetooth.AcceptThread;
-import connection.bluetooth.ConnectThread;
+import connection.bluetooth.BluetoothAcceptThread;
+import connection.bluetooth.BluetoothConnectThread;
 
 
 public class BluetoothActivity extends Activity {
@@ -35,8 +35,8 @@ public class BluetoothActivity extends Activity {
     private ListView listView;
     private UUID uuid;
 
-    private ConnectThread connectThread;
-    private AcceptThread acceptThread;
+    private BluetoothConnectThread connectThread;
+    private BluetoothAcceptThread acceptThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +137,7 @@ public class BluetoothActivity extends Activity {
                     Toast.makeText(BluetoothActivity.this, "null", Toast.LENGTH_LONG).show();
                 else {
                     Toast.makeText(BluetoothActivity.this, "00001101-0000-1000-8000-00805f9b34fb", Toast.LENGTH_LONG).show();
-                    connectThread = new ConnectThread(bluetoothAdapter, UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
+                    connectThread = new BluetoothConnectThread(bluetoothAdapter, UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
                     connectThread.start();
                     Toast.makeText(BluetoothActivity.this, "connect - BA", Toast.LENGTH_LONG).show();
                 }
@@ -153,7 +153,7 @@ public class BluetoothActivity extends Activity {
                 enableDiscoverabilityIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
                 startActivity(enableDiscoverabilityIntent);
 
-                acceptThread = new AcceptThread(bluetoothAdapter, uuid, BluetoothActivity.this);
+                acceptThread = new BluetoothAcceptThread(bluetoothAdapter, uuid, BluetoothActivity.this);
                 acceptThread.start();
                 Toast.makeText(BluetoothActivity.this, "accept - BA", Toast.LENGTH_LONG).show();
             }

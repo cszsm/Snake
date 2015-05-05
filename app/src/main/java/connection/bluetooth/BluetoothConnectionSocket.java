@@ -10,6 +10,8 @@ import connection.ConnectionSocket;
 
 /**
  * Created by Zsolt on 2015.05.03..
+ *
+ *
  */
 public class BluetoothConnectionSocket implements ConnectionSocket{
     private BluetoothSocket socket;

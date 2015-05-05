@@ -41,7 +41,6 @@ public class AcceptThread extends Thread {
             }
 
             if (client != null) {
-                Log.v("wifi", "Server started");
                 try {
                     serverSocket.close();
                 } catch (IOException e) {

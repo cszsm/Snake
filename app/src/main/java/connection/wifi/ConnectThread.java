@@ -26,7 +26,6 @@ public class ConnectThread extends Thread {
 
     @Override
     public void run() {
-        Context context = activity.getApplicationContext();
         Socket socket = new Socket();
         String host = info.groupOwnerAddress.getHostAddress();
 
