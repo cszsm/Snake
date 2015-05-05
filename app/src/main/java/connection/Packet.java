@@ -6,6 +6,8 @@ import model.enumeration.Direction;
 
 /**
  * Created by Zsolt on 2015.03.24..
+ *
+ * A packet which can be transferred between devices
  */
 public class Packet implements Serializable {
 
