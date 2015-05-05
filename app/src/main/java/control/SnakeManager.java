@@ -6,6 +6,8 @@ import model.enumeration.Direction;
 
 /**
  * Created by Zsolt on 2015.03.14..
+ *
+ * Manages the snake
  */
 public class SnakeManager {
 
