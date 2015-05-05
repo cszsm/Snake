@@ -29,6 +29,8 @@ public class TimingThread extends Thread {
             try {
                 if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
                     Thread.sleep(400);
+                } else {
+                    Thread.sleep(50);
                 }
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();

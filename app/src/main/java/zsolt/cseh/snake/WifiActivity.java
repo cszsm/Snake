@@ -26,8 +26,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import connection.wifi.AcceptThread;
-import connection.wifi.ConnectThread;
+import connection.wifi.WifiDirectAcceptThread;
+import connection.wifi.WifiDirectConnectThread;
 import connection.wifi.WifiDirectBroadcastReceiver;
 
 
@@ -43,8 +43,8 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     private SimpleArrayMap devices;
     private WifiP2pInfo info;
 
-    private AcceptThread acceptThread;
-    private ConnectThread connectThread;
+    private WifiDirectAcceptThread acceptThread;
+    private WifiDirectConnectThread connectThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         btnStartServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acceptThread = new AcceptThread(WifiActivity.this);
+                acceptThread = new WifiDirectAcceptThread(WifiActivity.this);
                 acceptThread.start();
                 Toast.makeText(WifiActivity.this, "accept - wifiactivity", Toast.LENGTH_SHORT).show();
             }
@@ -122,7 +122,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                connectThread = new ConnectThread(WifiActivity.this, info);
+                connectThread = new WifiDirectConnectThread(WifiActivity.this, info);
                 connectThread.start();
                 Toast.makeText(WifiActivity.this, "connect - wifiactivity", Toast.LENGTH_SHORT).show();
             }

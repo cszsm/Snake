@@ -12,13 +12,15 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
+ *
+ * Waits for another device to connect
  */
-public class AcceptThread extends Thread {
+public class WifiDirectAcceptThread extends Thread {
 
     private final ServerSocket serverSocket;
     private WifiActivity activity;
 
-    public AcceptThread(WifiActivity activity) {
+    public WifiDirectAcceptThread(WifiActivity activity) {
         ServerSocket tmp = null;
         try {
             tmp = new ServerSocket(8888);
@@ -30,6 +32,7 @@ public class AcceptThread extends Thread {
         this.activity = activity;
     }
 
+    /** Waits for another device to connect, then starts the game */
     @Override
     public void run() {
         Socket client = null;

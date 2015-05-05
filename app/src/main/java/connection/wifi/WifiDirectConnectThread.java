@@ -14,16 +14,19 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
+ *
+ * Connects to another device, which run a WifiDirectAcceptThread
  */
-public class ConnectThread extends Thread {
+public class WifiDirectConnectThread extends Thread {
     private WifiActivity activity;
     private WifiP2pInfo info;
 
-    public ConnectThread(WifiActivity activity, WifiP2pInfo info) {
+    public WifiDirectConnectThread(WifiActivity activity, WifiP2pInfo info) {
         this.activity = activity;
         this.info = info;
     }
 
+    /** Connects another device via the socket */
     @Override
     public void run() {
         Socket socket = new Socket();
