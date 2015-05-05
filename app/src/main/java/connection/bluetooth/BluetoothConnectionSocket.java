@@ -11,7 +11,8 @@ import connection.ConnectionSocket;
 /**
  * Created by Zsolt on 2015.05.03..
  *
- *
+ * Delegator class for BluetoothSocket
+ * Implements ConnectionSocket
  */
 public class BluetoothConnectionSocket implements ConnectionSocket{
     private BluetoothSocket socket;

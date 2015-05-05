@@ -15,6 +15,8 @@ import zsolt.cseh.snake.BluetoothActivity;
 
 /**
  * Created by Zsolt on 2015.03.21..
+ *
+ * Connects to another device, which run a BluetoothAcceptThread
  */
 public class BluetoothConnectThread extends Thread {
     private final BluetoothSocket bluetoothSocket;
@@ -34,6 +36,7 @@ public class BluetoothConnectThread extends Thread {
         bluetoothSocket = tmp;
     }
 
+    /** Connects another device via the socket */
     @Override
     public void run() {
         bluetoothAdapter.cancelDiscovery();
