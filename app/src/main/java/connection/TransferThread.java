@@ -14,6 +14,8 @@ import connection.PacketSerialization;
 
 /**
  * Created by Zsolt on 2015.05.02..
+ *
+ * Transfers packages between devices
  */
 public class TransferThread extends Thread {
     private final ConnectionSocket socket;
@@ -41,6 +43,7 @@ public class TransferThread extends Thread {
         outputStream = tmpOut;
     }
 
+    /** Accepts packages from other devices */
     @Override
     public void run() {
         byte[] buffer = new byte[1024];
@@ -65,6 +68,7 @@ public class TransferThread extends Thread {
         }
     }
 
+    /** Send packages to another device */
     public void write(byte[] bytes) {
         try {
             outputStream.write(bytes);
@@ -73,6 +77,7 @@ public class TransferThread extends Thread {
         }
     }
 
+    /** Returns with the last accepted package */
     public Packet getPacket() {
         if(0 < arrivedPackets){
             arrivedPackets--;

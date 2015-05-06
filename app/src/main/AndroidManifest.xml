@@ -58,28 +58,8 @@
                 android:value="zsolt.cseh.snake.MenuActivity"/>
         </activity>
         <activity
-            android:name=".BluetoothTestActivity"
-            android:label="@string/title_activity_bluetooth_test"
-            android:parentActivityName=".MenuActivity"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="zsolt.cseh.snake.MenuActivity"/>
-        </activity>
-        <activity
             android:name=".WifiActivity"
             android:label="@string/title_activity_wifi"
-            android:parentActivityName=".MenuActivity"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="zsolt.cseh.snake.MenuActivity"/>
-        </activity>
-        <activity
-            android:name=".WifiTestActivity"
-            android:label="@string/title_activity_wifi_test"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
