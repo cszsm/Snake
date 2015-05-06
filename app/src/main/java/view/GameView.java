@@ -40,10 +40,10 @@ public class GameView extends View {
     private boolean gameOver;
 
     /** Creates other view and control objects, then starts the game */
-    public GameView(Context context, AttributeSet attrs, Point resolution) {
+    public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        int blockSize = resolution.y / 9;
+        int blockSize = ScreenResolution.getInstance().getY() / 9;
 
         boardView = new BoardView(blockSize, Game.getInstance().getBoard());
         snakeView = new SnakeView(blockSize, Game.getInstance().getSnake());

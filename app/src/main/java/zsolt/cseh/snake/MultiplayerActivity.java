@@ -11,7 +11,9 @@ import model.Game;
 import view.GameView;
 import view.ScreenResolution;
 
-
+/**
+ * A multiplayer game
+ */
 public class MultiplayerActivity extends Activity {
 
     private GameView multiplayerView;
@@ -27,8 +29,7 @@ public class MultiplayerActivity extends Activity {
 
         Game.getInstance().reset();
         Game.getInstance().getGameManager().setTransferThread(transferThread);
-        Point point = new Point(ScreenResolution.getInstance().getX(), ScreenResolution.getInstance().getY());
-        multiplayerView = new GameView(getApplicationContext(), null, point);
+        multiplayerView = new GameView(getApplicationContext(), null);
 
         setContentView(multiplayerView);
     }

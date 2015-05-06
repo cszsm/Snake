@@ -24,7 +24,10 @@ import java.util.UUID;
 import connection.bluetooth.BluetoothAcceptThread;
 import connection.bluetooth.BluetoothConnectThread;
 
-
+/**
+ * The bluetooth menu activity
+ * Allows to create a multiplayer game or connect to another via bluetooth
+ */
 public class BluetoothActivity extends Activity {
 
     private BluetoothAdapter bluetoothAdapter;
@@ -44,7 +47,6 @@ public class BluetoothActivity extends Activity {
 
         setContentView(R.layout.activity_bluetooth);
 
-//        uuid = UUID.randomUUID();
         uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
         listView = (ListView) findViewById(R.id.listDevices);
@@ -54,7 +56,7 @@ public class BluetoothActivity extends Activity {
             Toast.makeText(BluetoothActivity.this, "Device does not support Bluetooth.", Toast.LENGTH_LONG).show();
 
         arrayList = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<String>(BluetoothActivity.this, android.R.layout.simple_list_item_1, arrayList);
+        arrayAdapter = new ArrayAdapter<>(BluetoothActivity.this, android.R.layout.simple_list_item_1, arrayList);
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -76,19 +78,11 @@ public class BluetoothActivity extends Activity {
 
         turnOn();
 
-
-//        Button btnShow = (Button) findViewById(R.id.btnShow);
-//        btnShow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getPairedDevices();
-//            }
-//        });
-
         Button btnStart = (Button) findViewById(R.id.btnStartDiscovery);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bluetoothAdapter.cancelDiscovery();
                 arrayList.clear();
                 devices.clear();
                 arrayAdapter.notifyDataSetChanged();
@@ -104,42 +98,19 @@ public class BluetoothActivity extends Activity {
             }
         });
 
-//        Button btnEnable = (Button) findViewById(R.id.btnEnableDiscoverability);
-//        btnEnable.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                enableDiscoverability();
-//            }
-//        });
-
-//        Button btnUUIDS = (Button) findViewById(R.id.btnUuid);
-//        btnUUIDS.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(uuid != null)
-//                    Toast.makeText(BluetoothActivity.this, uuid.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView clickedView = (TextView) view;
-//                Toast.makeText(BluetoothActivity.this, devices.get(clickedView.getText()).getAddress(), Toast.LENGTH_LONG).show();
                 BluetoothDevice clickedDevice = devices.get(clickedView.getText());
                 clickedDevice.fetchUuidsWithSdp();
                 ParcelUuid[] parcelUuids = clickedDevice.getUuids();
-//                if(parcelUuids != null)
-//                    Toast.makeText(BluetoothActivity.this, parcelUuids[0].getUuid().toString(), Toast.LENGTH_LONG).show();
-//                else
-//                    Toast.makeText(BluetoothActivity.this, clickedDevice.getName(), Toast.LENGTH_LONG).show();
+
                 if (parcelUuids == null)
-                    Toast.makeText(BluetoothActivity.this, "null", Toast.LENGTH_LONG).show();
+                    Toast.makeText(BluetoothActivity.this, "This device is not running the game", Toast.LENGTH_LONG).show();
                 else {
-                    Toast.makeText(BluetoothActivity.this, "00001101-0000-1000-8000-00805f9b34fb", Toast.LENGTH_LONG).show();
                     connectThread = new BluetoothConnectThread(bluetoothAdapter, UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
                     connectThread.start();
-                    Toast.makeText(BluetoothActivity.this, "connect - BA", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -155,17 +126,8 @@ public class BluetoothActivity extends Activity {
 
                 acceptThread = new BluetoothAcceptThread(bluetoothAdapter, uuid, BluetoothActivity.this);
                 acceptThread.start();
-                Toast.makeText(BluetoothActivity.this, "accept - BA", Toast.LENGTH_LONG).show();
             }
         });
-
-//        Button btnSend = (Button) findViewById(R.id.btnSend);
-//        btnSend.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                connectThread.send();
-//            }
-//        });
     }
 
     private void turnOn() {
@@ -174,31 +136,11 @@ public class BluetoothActivity extends Activity {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BT);
-        } else
-            Toast.makeText(BluetoothActivity.this, "Bluetooth is already enabled.", Toast.LENGTH_LONG).show();
+        }
     }
-
-//    private void getPairedDevices() {
-//        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-//
-//        if (pairedDevices.size() > 0)
-//            for (BluetoothDevice bluetoothDevice : pairedDevices)
-//                Toast.makeText(BluetoothActivity.this, bluetoothDevice.getName(), Toast.LENGTH_LONG).show();
-//    }
-//
-//    private void enableDiscoverability() {
-//        Intent enableDiscoverabilityIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-//        enableDiscoverabilityIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-//        startActivity(enableDiscoverabilityIntent);
-//    }
 
     public void startGame() {
         Intent intent = new Intent(BluetoothActivity.this, MultiplayerActivity.class);
         startActivity(intent);
     }
-
-//    public void startGame() {
-//        Intent intent = new Intent(BluetoothActivity.this, BluetoothTestActivity.class);
-//        startActivity(intent);
-//    }
 }

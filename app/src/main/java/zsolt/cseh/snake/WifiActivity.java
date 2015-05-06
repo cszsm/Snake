@@ -30,7 +30,10 @@ import connection.wifi.WifiDirectAcceptThread;
 import connection.wifi.WifiDirectConnectThread;
 import connection.wifi.WifiDirectBroadcastReceiver;
 
-
+/**
+ * The wifi menu activity
+ * Allows to create a multiplayer game or connect to another via wifi direct
+ */
 public class WifiActivity extends Activity implements ConnectionInfoListener {
 
     private IntentFilter intentFilter;
@@ -74,7 +77,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
                 devices.clear();
 
                 for (WifiP2pDevice device : peers.getDeviceList()) {
-                    Log.v("wifi", device.deviceName);
                     devices.put(device.deviceAddress, device);
                     peerList.add(device.deviceAddress);
                 }
@@ -96,13 +98,11 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(WifiActivity.this, "Discover success", Toast.LENGTH_SHORT).show();
-                        Log.v("wifi", "Discover SUCCESS");
                     }
 
                     @Override
                     public void onFailure(int reason) {
-                        Toast.makeText(WifiActivity.this, "Discover failure" + String.valueOf(reason), Toast.LENGTH_SHORT).show();
-                        Log.v("wifi", "Discover FAILURE");
+                        Toast.makeText(WifiActivity.this, "Discover failure", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -114,7 +114,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             public void onClick(View v) {
                 acceptThread = new WifiDirectAcceptThread(WifiActivity.this);
                 acceptThread.start();
-                Toast.makeText(WifiActivity.this, "accept - wifiactivity", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,7 +123,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             public void onClick(View v) {
                 connectThread = new WifiDirectConnectThread(WifiActivity.this, info);
                 connectThread.start();
-                Toast.makeText(WifiActivity.this, "connect - wifiactivity", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -136,7 +134,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
                 WifiP2pDevice clickedDevice = (WifiP2pDevice) devices.get(clickedView.getText());
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = clickedDevice.deviceAddress;
-                //config.wps.setup = WpsInfo.PBC;
 
                 manager.connect(channel, config, new WifiP2pManager.ActionListener() {
                     @Override
@@ -174,7 +171,5 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo info) {
         this.info = info;
-        String groupOwnerAddress = info.groupOwnerAddress.getHostAddress();
-        Log.v("wifi", groupOwnerAddress);
     }
 }

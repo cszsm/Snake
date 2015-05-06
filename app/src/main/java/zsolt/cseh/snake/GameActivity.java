@@ -9,7 +9,9 @@ import connection.enumeration.DeviceType;
 import model.Game;
 import view.GameView;
 
-
+/**
+ * A single player game
+ */
 public class GameActivity extends Activity {
 
     private GameView gameView;
@@ -20,9 +22,8 @@ public class GameActivity extends Activity {
 
         ConnectionManager.getInstance().setDeviceType(DeviceType.NONE);
 
-        Point point = new Point(getIntent().getIntExtra("resolutionX", 480), getIntent().getIntExtra("resolutionY", 320));
         Game.getInstance().reset();
-        gameView = new GameView(getApplicationContext(), null, point);
+        gameView = new GameView(getApplicationContext(), null);
         setContentView(gameView);
     }
 
