@@ -8,7 +8,7 @@ import android.widget.Button;
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
 import connection.Packet;
-import connection.wifi.TransferThread;
+import connection.TransferThread;
 import model.enumeration.Direction;
 import test.TestThread;
 

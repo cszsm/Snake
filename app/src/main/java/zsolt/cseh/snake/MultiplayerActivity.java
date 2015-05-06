@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
-import connection.wifi.TransferThread;
+import connection.TransferThread;
 import model.Game;
 import view.GameView;
 import view.ScreenResolution;

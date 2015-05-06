@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import connection.Packet;
 import connection.PacketSerialization;
-import connection.wifi.TransferThread;
+import connection.TransferThread;
 import model.enumeration.Direction;
 
 /**

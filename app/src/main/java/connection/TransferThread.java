@@ -1,4 +1,4 @@
-package connection.wifi;
+package connection;
 
 import android.util.Log;
 
@@ -48,12 +48,9 @@ public class TransferThread extends Thread {
 
         while (true) {
             if(bytes != 0) {
-                Log.v("wifi", "bytes not 0");
                 try {
-                    Log.v("wtest", "arrived");
                     packet = PacketSerialization.deserialize(buffer);
                     arrivedPackets++;
-                    Log.v("wifi", packet.getDirection().toString() + String.valueOf(packet.getFoodX()) + String.valueOf(packet.getFoodY()));
                 } catch (IOException e) {
                     Log.v("wifi", e.toString());
                 } catch (ClassNotFoundException e) {

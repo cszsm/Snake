@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import connection.Packet;
 import connection.PacketSerialization;
-import connection.bluetooth.TransferThread;
+import connection.TransferThread;
 import model.enumeration.Direction;
 
 

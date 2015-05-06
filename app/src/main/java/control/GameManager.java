@@ -1,6 +1,6 @@
 package control;
 
-import connection.wifi.TransferThread;
+import connection.TransferThread;
 import model.Snake;
 
 /**
