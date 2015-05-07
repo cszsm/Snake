@@ -27,24 +27,14 @@
         android:text="Start discovery"/>
 
     <Button
-        android:id="@+id/btnWifiStartServer"
+        android:id="@+id/btnWifiStartGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btnWifiStartDiscovery"
         android:layout_toLeftOf="@+id/listWifiDevices"
-        android:text="Start server"/>
-
-    <Button
-        android:id="@+id/btnWifiConnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnWifiStartServer"
-        android:layout_toLeftOf="@+id/listWifiDevices"
         android:layout_toStartOf="@+id/listWifiDevices"
-        android:text="Connect"/>
+        android:text="Start game"/>
 
 </RelativeLayout>

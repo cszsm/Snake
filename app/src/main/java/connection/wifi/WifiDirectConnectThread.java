@@ -1,8 +1,7 @@
 package connection.wifi;
 
-import android.content.Context;
 import android.net.wifi.p2p.WifiP2pInfo;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,7 +13,7 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
- *
+ * <p/>
  * Connects to another device, which run a WifiDirectAcceptThread
  */
 public class WifiDirectConnectThread extends Thread {
@@ -26,15 +25,28 @@ public class WifiDirectConnectThread extends Thread {
         this.info = info;
     }
 
-    /** Connects another device via the socket */
+    /**
+     * Connects another device via the socket
+     */
     @Override
     public void run() {
-        Socket socket = new Socket();
-        String host = info.groupOwnerAddress.getHostAddress();
+            Socket socket = new Socket();
+            String host;
+        try {
+            host = info.groupOwnerAddress.getHostAddress();
+        } catch (NullPointerException e) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(activity, "An error occurred, please try connect again", Toast.LENGTH_LONG).show();
+                }
+            });
+            return;
+        }
 
         try {
             socket.bind(null);
-            socket.connect((new InetSocketAddress(host, 8888)), 500);
+            socket.connect((new InetSocketAddress(host, 8888)), 1000);
         } catch (IOException e) {
             e.printStackTrace();
             return;

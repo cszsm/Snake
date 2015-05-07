@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
-import android.util.Log;
 
 import zsolt.cseh.snake.WifiActivity;
 
@@ -19,15 +18,15 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
 
     private WifiP2pManager manager;
     private Channel channel;
-    private WifiActivity wifiActivity;
+    private WifiActivity activity;
     private WifiP2pManager.PeerListListener peerListListener;
 
     public WifiDirectBroadcastReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel,
-                                       WifiActivity wifiActivity, WifiP2pManager.PeerListListener peerListListener) {
+                                       WifiActivity activity, WifiP2pManager.PeerListListener peerListListener) {
         super();
         this.manager = manager;
         this.channel = channel;
-        this.wifiActivity = wifiActivity;
+        this.activity = activity;
         this.peerListListener = peerListListener;
     }
 
@@ -45,7 +44,8 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
 
             if(networkInfo.isConnected()) {
-                manager.requestConnectionInfo(channel, wifiActivity);
+                manager.requestConnectionInfo(channel, activity);
+                activity.enableStartButton();
             }
         }
     }

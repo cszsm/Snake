@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.wifi.WifiDirectAcceptThread;
-import connection.wifi.WifiDirectConnectThread;
 import connection.wifi.WifiDirectBroadcastReceiver;
+import connection.wifi.WifiDirectConnectThread;
 
 /**
  * The wifi menu activity
@@ -45,6 +45,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     private ListView listView;
     private SimpleArrayMap devices;
     private WifiP2pInfo info;
+    private Button btnStartGame;
 
     private WifiDirectAcceptThread acceptThread;
     private WifiDirectConnectThread connectThread;
@@ -95,7 +96,8 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             public void onClick(View v) {
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
                     @Override
-                    public void onSuccess() {}
+                    public void onSuccess() {
+                    }
 
                     @Override
                     public void onFailure(int reason) {
@@ -106,17 +108,9 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             }
         });
 
-        Button btnStartServer = (Button) findViewById(R.id.btnWifiStartServer);
-        btnStartServer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                acceptThread = new WifiDirectAcceptThread(WifiActivity.this);
-                acceptThread.start();
-            }
-        });
-
-        Button btnConnect = (Button) findViewById(R.id.btnWifiConnect);
-        btnConnect.setOnClickListener(new View.OnClickListener() {
+        btnStartGame = (Button) findViewById(R.id.btnWifiStartGame);
+        btnStartGame.setEnabled(false);
+        btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 connectThread = new WifiDirectConnectThread(WifiActivity.this, info);
@@ -135,7 +129,14 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
 
                 manager.connect(channel, config, new WifiP2pManager.ActionListener() {
                     @Override
-                    public void onSuccess() {}
+                    public void onSuccess() {
+                        if (acceptThread != null) {
+                            acceptThread.requestStop();
+                        }
+                        acceptThread = new WifiDirectAcceptThread(WifiActivity.this);
+                        acceptThread.start();
+                        Toast.makeText(WifiActivity.this, "Starting discovery...", Toast.LENGTH_LONG).show();
+                    }
 
                     @Override
                     public void onFailure(int reason) {
@@ -159,7 +160,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         unregisterReceiver(receiver);
     }
 
-
     public void startGame() {
         Intent intent = new Intent(WifiActivity.this, MultiplayerActivity.class);
         startActivity(intent);
@@ -168,5 +168,9 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo info) {
         this.info = info;
+    }
+
+    public void enableStartButton() {
+        btnStartGame.setEnabled(true);
     }
 }
