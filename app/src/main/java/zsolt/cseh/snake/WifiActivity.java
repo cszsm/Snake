@@ -94,15 +94,13 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             @Override
             public void onClick(View v) {
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
-
                     @Override
-                    public void onSuccess() {
-                        Toast.makeText(WifiActivity.this, "Discover success", Toast.LENGTH_SHORT).show();
-                    }
+                    public void onSuccess() {}
 
                     @Override
                     public void onFailure(int reason) {
-                        Toast.makeText(WifiActivity.this, "Discover failure", Toast.LENGTH_SHORT).show();
+                        Log.e("wifi", "Cannot discover devices - reason: " + String.valueOf(reason));
+                        Toast.makeText(WifiActivity.this, "Cannot discover devices.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -137,13 +135,12 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
 
                 manager.connect(channel, config, new WifiP2pManager.ActionListener() {
                     @Override
-                    public void onSuccess() {
-                        Toast.makeText(WifiActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
-                    }
+                    public void onSuccess() {}
 
                     @Override
                     public void onFailure(int reason) {
-                        Toast.makeText(WifiActivity.this, "FAILURE", Toast.LENGTH_SHORT).show();
+                        Log.e("wifi", "Cannot connect to device - reason: " + String.valueOf(reason));
+                        Toast.makeText(WifiActivity.this, "Cannot connect to this device.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

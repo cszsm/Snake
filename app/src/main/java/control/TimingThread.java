@@ -32,6 +32,7 @@ public class TimingThread extends Thread {
                 } else {
                     Thread.sleep(50);
                 }
+
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
                     gameView.postInvalidate();

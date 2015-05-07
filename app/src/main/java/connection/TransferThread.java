@@ -54,10 +54,8 @@ public class TransferThread extends Thread {
                 try {
                     packet = PacketSerialization.deserialize(buffer);
                     arrivedPackets++;
-                } catch (IOException e) {
-                    Log.v("wifi", e.toString());
-                } catch (ClassNotFoundException e) {
-                    Log.v("wifi", "ClassNotFoundExcpetion");
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
             try {

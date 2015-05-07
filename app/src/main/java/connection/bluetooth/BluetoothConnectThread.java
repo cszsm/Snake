@@ -31,7 +31,7 @@ public class BluetoothConnectThread extends Thread {
         try {
             tmp = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
         bluetoothSocket = tmp;
     }
@@ -45,9 +45,10 @@ public class BluetoothConnectThread extends Thread {
             bluetoothSocket.connect();
         } catch (IOException connectException) {
             try {
+                connectException.printStackTrace();
                 bluetoothSocket.close();
             } catch (IOException closeException) {
-
+                closeException.printStackTrace();
             }
             return;
         }

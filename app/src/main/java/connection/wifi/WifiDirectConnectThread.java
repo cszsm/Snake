@@ -36,7 +36,7 @@ public class WifiDirectConnectThread extends Thread {
             socket.bind(null);
             socket.connect((new InetSocketAddress(host, 8888)), 500);
         } catch (IOException e) {
-            Log.v("wifi", e.getMessage());
+            e.printStackTrace();
             return;
         }
 

@@ -33,4 +33,16 @@ public class MultiplayerActivity extends Activity {
 
         setContentView(multiplayerView);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        multiplayerView.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        multiplayerView.resume();
+    }
 }

@@ -26,7 +26,7 @@ public class BluetoothAcceptThread extends Thread {
         try {
             tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord("Snake", uuid);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
         bluetoothServerSocket = tmp;
 
@@ -36,11 +36,12 @@ public class BluetoothAcceptThread extends Thread {
     /** Waits for another device to connect, then starts the game */
     @Override
     public void run() {
-        BluetoothSocket bluetoothSocket = null;
+        BluetoothSocket bluetoothSocket;
         while (true) {
             try {
                 bluetoothSocket = bluetoothServerSocket.accept();
             } catch (IOException e) {
+                e.printStackTrace();
                 break;
             }
 
@@ -48,7 +49,7 @@ public class BluetoothAcceptThread extends Thread {
                 try {
                     bluetoothServerSocket.close();
                 } catch (IOException e) {
-
+                    e.printStackTrace();
                 }
 
                 ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
