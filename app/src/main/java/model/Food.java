@@ -1,17 +1,12 @@
 package model;
 
-import android.graphics.Point;
-
-import java.util.Random;
-
-import model.enumeration.BoardElement;
-
 /**
  * Created by Zsolt on 2015.03.07..
- *
+ * <p/>
  * Represents a food in the game
  */
 public class Food {
+
     private int x;
     private int y;
 
@@ -24,12 +19,12 @@ public class Food {
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
-
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
