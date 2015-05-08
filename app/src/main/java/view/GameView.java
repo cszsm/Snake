@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +18,7 @@ import model.Game;
 
 /**
  * Created by Zsolt on 2015.03.06..
- * <p/>
+ *
  * Draws the game
  * This is the GameActivity's view
  */
@@ -96,7 +97,7 @@ public class GameView extends View {
 
     //** Sets the snake's direction defined by the swipe gesture */
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
             if (event.getAction() == MotionEvent.ACTION_DOWN)
                 touchControl.setLastDown(event);

@@ -2,7 +2,6 @@ package zsolt.cseh.snake;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 
 import connection.ConnectionManager;
@@ -10,7 +9,6 @@ import connection.ConnectionSocket;
 import connection.TransferThread;
 import model.Game;
 import view.GameView;
-import view.ScreenResolution;
 
 /**
  * A multiplayer game

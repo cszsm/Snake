@@ -13,7 +13,7 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
- * <p/>
+ *
  * Connects to another device, which run a WifiDirectAcceptThread
  */
 public class WifiDirectConnectThread extends Thread {

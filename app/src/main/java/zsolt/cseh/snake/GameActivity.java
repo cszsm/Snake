@@ -1,7 +1,6 @@
 package zsolt.cseh.snake;
 
 import android.app.Activity;
-import android.graphics.Point;
 import android.os.Bundle;
 
 import connection.ConnectionManager;

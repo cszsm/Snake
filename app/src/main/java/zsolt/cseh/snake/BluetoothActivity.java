@@ -34,8 +34,6 @@ public class BluetoothActivity extends Activity {
     private ArrayList<String> arrayList;
     private ArrayAdapter<String> arrayAdapter;
     private SimpleArrayMap<String, BluetoothDevice> devices;
-    private BroadcastReceiver broadcastReceiver;
-    private ListView listView;
     private UUID uuid;
 
     private BluetoothConnectThread connectThread;
@@ -49,7 +47,7 @@ public class BluetoothActivity extends Activity {
 
         uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
-        listView = (ListView) findViewById(R.id.listDevices);
+        ListView listView = (ListView) findViewById(R.id.listDevices);
         devices = new SimpleArrayMap<>();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null)
@@ -57,7 +55,7 @@ public class BluetoothActivity extends Activity {
 
         arrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<>(BluetoothActivity.this, android.R.layout.simple_list_item_1, arrayList);
-        broadcastReceiver = new BroadcastReceiver() {
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
@@ -102,7 +100,8 @@ public class BluetoothActivity extends Activity {
                 if (parcelUuids == null)
                     Toast.makeText(BluetoothActivity.this, "This device is not running the game", Toast.LENGTH_LONG).show();
                 else {
-                    connectThread = new BluetoothConnectThread(bluetoothAdapter, UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
+                    connectThread = new BluetoothConnectThread(bluetoothAdapter,
+                            UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
                     connectThread.start();
                 }
             }

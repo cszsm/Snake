@@ -40,9 +40,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     private WifiP2pManager manager;
     private Channel channel;
     private BroadcastReceiver receiver;
-    private WifiP2pManager.PeerListListener peerListListener;
     private List peerList;
-    private ListView listView;
     private SimpleArrayMap devices;
     private WifiP2pInfo info;
     private Button btnStartGame;
@@ -64,13 +62,13 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
-        listView = (ListView) findViewById(R.id.listWifiDevices);
+        ListView listView = (ListView) findViewById(R.id.listWifiDevices);
         devices = new SimpleArrayMap<>();
 
         peerList = new ArrayList();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(WifiActivity.this,
                 android.R.layout.simple_list_item_1, peerList);
-        peerListListener = new WifiP2pManager.PeerListListener() {
+        WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
             @Override
             public void onPeersAvailable(WifiP2pDeviceList peers) {
 
