@@ -38,4 +38,10 @@ public class GameActivity extends Activity {
         super.onResume();
         gameView.resume();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gameView.stop();
+    }
 }

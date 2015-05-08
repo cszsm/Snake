@@ -50,8 +50,8 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
                 manager.requestConnectionInfo(channel, activity);
                 if(ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
                     activity.setStartButtonEnabled(true);
-                    Toast.makeText(activity, "Device connected", Toast.LENGTH_LONG).show();
                 }
+                Toast.makeText(activity, "Device connected", Toast.LENGTH_LONG).show();
             } else {
                 activity.setStartButtonEnabled(false);
             }

@@ -4,21 +4,20 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
+import control.CollisionDetector;
 import control.TimingThread;
 import control.TouchControl;
-import control.CollisionDetector;
 import model.Game;
 
 /**
  * Created by Zsolt on 2015.03.06..
- *
+ * <p/>
  * Draws the game
  * This is the GameActivity's view
  */
@@ -39,7 +38,9 @@ public class GameView extends View {
 
     private boolean gameOver;
 
-    /** Creates other view and control objects, then starts the game */
+    /**
+     * Creates other view and control objects, then starts the game
+     */
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -66,7 +67,9 @@ public class GameView extends View {
         gameOver = false;
     }
 
-    /** Draws the game */
+    /**
+     * Draws the game
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -94,7 +97,7 @@ public class GameView extends View {
     //** Sets the snake's direction defined by the swipe gesture */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
+        if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
             if (event.getAction() == MotionEvent.ACTION_DOWN)
                 touchControl.setLastDown(event);
             else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -111,5 +114,9 @@ public class GameView extends View {
 
     public void resume() {
         timingThread.setPauseSignal(false);
+    }
+
+    public void stop() {
+        timingThread.requestStop();
     }
 }

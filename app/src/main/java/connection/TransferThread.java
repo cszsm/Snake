@@ -24,6 +24,7 @@ public class TransferThread extends Thread {
 
     private Packet packet;
     private int arrivedPackets;
+    private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
         this.socket = socket;
@@ -41,6 +42,7 @@ public class TransferThread extends Thread {
 
         inputStream = tmpIn;
         outputStream = tmpOut;
+        stopSignal = false;
     }
 
     /** Accepts packages from other devices */
@@ -49,7 +51,7 @@ public class TransferThread extends Thread {
         byte[] buffer = new byte[1024];
         int bytes = 0;
 
-        while (true) {
+        while (!stopSignal) {
             if(bytes != 0) {
                 try {
                     packet = PacketSerialization.deserialize(buffer);
@@ -86,6 +88,7 @@ public class TransferThread extends Thread {
     }
 
     public void cancel() {
+        stopSignal = true;
         try {
             socket.close();
         } catch (IOException e) {

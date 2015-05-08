@@ -38,8 +38,15 @@ public class MultiplayerActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        transferThread.cancel();
         Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        multiplayerView.stop();
     }
 }

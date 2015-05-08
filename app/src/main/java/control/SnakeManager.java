@@ -25,9 +25,7 @@ public class SnakeManager {
     }
 
     public boolean eat(Food food) {
-        if(snake.getHead().equals(food.getX(), food.getY()))
-            return true;
-        return false;
+        return snake.getHead().equals(food.getX(), food.getY());
     }
 
     public void removeTail() {
