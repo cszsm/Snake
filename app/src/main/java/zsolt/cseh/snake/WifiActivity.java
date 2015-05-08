@@ -43,6 +43,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     private List<String> peerList;
     private SimpleArrayMap<String, WifiP2pDevice> devices;
     private WifiP2pInfo info;
+
     private Button btnStartGame;
     private ArrayAdapter<String> arrayAdapter;
 

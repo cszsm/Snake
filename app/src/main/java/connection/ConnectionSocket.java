@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 /**
  * Created by Zsolt on 2015.05.03..
- *
+ * <p/>
  * Interface for sockets
  */
 public interface ConnectionSocket {

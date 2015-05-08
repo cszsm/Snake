@@ -4,16 +4,18 @@ import connection.enumeration.DeviceType;
 
 /**
  * Created by Zsolt on 2015.05.03..
- *
+ * <p/>
  * Manages the connection, stores the socket and the device's type
  */
 public class ConnectionManager {
+
     private static ConnectionManager instance = null;
 
     private ConnectionSocket socket;
     private DeviceType deviceType;
 
-    protected ConnectionManager() {}
+    protected ConnectionManager() {
+    }
 
     public static ConnectionManager getInstance() {
         if (instance == null)

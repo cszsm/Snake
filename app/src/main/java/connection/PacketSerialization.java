@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * Created by Zsolt on 2015.03.24..
- *
+ * <p/>
  * Serialize and deserialize a packet
  */
 public class PacketSerialization {

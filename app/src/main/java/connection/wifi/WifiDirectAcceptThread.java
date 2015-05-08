@@ -1,13 +1,8 @@
 package connection.wifi;
 
-import android.widget.Toast;
-
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
@@ -15,7 +10,7 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
- *
+ * <p/>
  * Waits for another device to connect
  */
 public class WifiDirectAcceptThread extends Thread {
@@ -25,7 +20,9 @@ public class WifiDirectAcceptThread extends Thread {
     private volatile boolean stopSignal;
 
     public WifiDirectAcceptThread(WifiActivity activity) {
+
         ServerSocket tmp = null;
+
         try {
             tmp = new ServerSocket(8888);
         } catch (IOException e) {
@@ -33,9 +30,10 @@ public class WifiDirectAcceptThread extends Thread {
         }
 
         serverSocket = tmp;
+
         this.activity = activity;
-        stopSignal = false;
         ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
+        stopSignal = false;
     }
 
     /**
@@ -43,12 +41,15 @@ public class WifiDirectAcceptThread extends Thread {
      */
     @Override
     public void run() {
+
         Socket client = null;
+
         while (!stopSignal) {
             try {
                 client = serverSocket.accept();
             } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
+                break;
             }
 
             if (client != null) {

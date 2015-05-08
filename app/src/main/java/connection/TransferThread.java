@@ -1,23 +1,16 @@
 package connection;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
-import java.sql.Connection;
-
-import connection.ConnectionSocket;
-import connection.Packet;
-import connection.PacketSerialization;
 
 /**
  * Created by Zsolt on 2015.05.02..
- *
+ * <p/>
  * Transfers packages between devices
  */
 public class TransferThread extends Thread {
+
     private final ConnectionSocket socket;
     private final InputStream inputStream;
     private final OutputStream outputStream;
@@ -27,6 +20,7 @@ public class TransferThread extends Thread {
     private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
+
         this.socket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
@@ -45,14 +39,18 @@ public class TransferThread extends Thread {
         stopSignal = false;
     }
 
-    /** Accepts packages from other devices */
+    /**
+     * Accepts packages from other devices
+     */
     @Override
     public void run() {
+
         byte[] buffer = new byte[1024];
         int bytes = 0;
 
         while (!stopSignal) {
-            if(bytes != 0) {
+
+            if (bytes != 0) {
                 try {
                     packet = PacketSerialization.deserialize(buffer);
                     arrivedPackets++;
@@ -60,6 +58,7 @@ public class TransferThread extends Thread {
                     e.printStackTrace();
                 }
             }
+
             try {
                 bytes = inputStream.read(buffer);
             } catch (IOException e) {
@@ -68,7 +67,9 @@ public class TransferThread extends Thread {
         }
     }
 
-    /** Send packages to another device */
+    /**
+     * Send packages to another device
+     */
     public void write(byte[] bytes) {
         try {
             outputStream.write(bytes);
@@ -77,9 +78,11 @@ public class TransferThread extends Thread {
         }
     }
 
-    /** Returns with the last accepted package */
+    /**
+     * Returns with the last accepted package
+     */
     public Packet getPacket() {
-        if(0 < arrivedPackets){
+        if (0 < arrivedPackets) {
             arrivedPackets--;
             return packet;
         } else {
@@ -88,7 +91,9 @@ public class TransferThread extends Thread {
     }
 
     public void cancel() {
+
         stopSignal = true;
+
         try {
             socket.close();
         } catch (IOException e) {

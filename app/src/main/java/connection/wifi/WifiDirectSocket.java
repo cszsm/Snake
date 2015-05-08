@@ -9,11 +9,12 @@ import connection.ConnectionSocket;
 
 /**
  * Created by Zsolt on 2015.05.03..
- *
+ * <p/>
  * Delegator class for Socket
  * Implements ConnectionSocket
  */
 public class WifiDirectSocket implements ConnectionSocket {
+
     private Socket socket;
 
     public WifiDirectSocket(Socket socket) {

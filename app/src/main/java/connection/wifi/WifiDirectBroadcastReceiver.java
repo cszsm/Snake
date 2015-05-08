@@ -14,7 +14,7 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by Zsolt on 2015.04.25..
- *
+ * <p/>
  * Allows to receive wifi direct intents broadcast by the system
  */
 public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
@@ -35,22 +35,29 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         String action = intent.getAction();
+
         if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
             if (manager != null) {
                 manager.requestPeers(channel, peerListListener);
             }
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
-            if(manager == null) {
+
+            if (manager == null) {
                 return;
             }
+
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
 
-            if(networkInfo.isConnected()) {
+            if (networkInfo.isConnected()) {
+
                 manager.requestConnectionInfo(channel, activity);
-                if(ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
+
+                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
                     activity.setStartButtonEnabled(true);
                 }
+
                 Toast.makeText(activity, "Device connected", Toast.LENGTH_LONG).show();
             } else {
                 activity.setStartButtonEnabled(false);

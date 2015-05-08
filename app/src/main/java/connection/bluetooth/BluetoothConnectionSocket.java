@@ -10,11 +10,12 @@ import connection.ConnectionSocket;
 
 /**
  * Created by Zsolt on 2015.05.03..
- *
+ * <p/>
  * Delegator class for BluetoothSocket
  * Implements ConnectionSocket
  */
-public class BluetoothConnectionSocket implements ConnectionSocket{
+public class BluetoothConnectionSocket implements ConnectionSocket {
+
     private BluetoothSocket socket;
 
     public BluetoothConnectionSocket(BluetoothSocket socket) {

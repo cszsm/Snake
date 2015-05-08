@@ -3,7 +3,6 @@ package connection.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -14,21 +13,25 @@ import zsolt.cseh.snake.BluetoothActivity;
 
 /**
  * Created by Zsolt on 2015.03.21..
- *
+ * <p/>
  * Waits for another device to connect
  */
 public class BluetoothAcceptThread extends Thread {
+
     private final BluetoothServerSocket bluetoothServerSocket;
     private BluetoothActivity activity;
     private volatile boolean stopSignal;
 
     public BluetoothAcceptThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothActivity activity) {
+
         BluetoothServerSocket tmp = null;
+
         try {
             tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord("Snake", uuid);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         bluetoothServerSocket = tmp;
 
         this.activity = activity;
@@ -36,10 +39,14 @@ public class BluetoothAcceptThread extends Thread {
         stopSignal = false;
     }
 
-    /** Waits for another device to connect, then starts the game */
+    /**
+     * Waits for another device to connect, then starts the game
+     */
     @Override
     public void run() {
+
         BluetoothSocket bluetoothSocket;
+
         while (!stopSignal) {
             try {
                 bluetoothSocket = bluetoothServerSocket.accept();
@@ -49,6 +56,7 @@ public class BluetoothAcceptThread extends Thread {
             }
 
             if (bluetoothSocket != null) {
+
                 try {
                     bluetoothServerSocket.close();
                 } catch (IOException e) {
@@ -57,7 +65,6 @@ public class BluetoothAcceptThread extends Thread {
 
                 ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
                 activity.startGame();
-
                 break;
             }
         }
