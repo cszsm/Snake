@@ -64,9 +64,9 @@ public class BluetoothActivity extends Activity {
                 if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     arrayAdapter.add(device.getName());
-                    devices.put(device.getName(), device);
-                    if (device.getUuids() != null)
-                        Toast.makeText(BluetoothActivity.this, device.getName() + " - " + device.getUuids()[0].getUuid().toString(), Toast.LENGTH_LONG).show();
+                    if (device.getUuids() != null) {
+                        devices.put(device.getName(), device);
+                    }
                 }
             }
         };
@@ -78,8 +78,8 @@ public class BluetoothActivity extends Activity {
 
         turnOn();
 
-        Button btnStart = (Button) findViewById(R.id.btnStartDiscovery);
-        btnStart.setOnClickListener(new View.OnClickListener() {
+        Button btnStartDiscovery = (Button) findViewById(R.id.btnStartDiscovery);
+        btnStartDiscovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bluetoothAdapter.cancelDiscovery();
@@ -87,14 +87,7 @@ public class BluetoothActivity extends Activity {
                 devices.clear();
                 arrayAdapter.notifyDataSetChanged();
                 bluetoothAdapter.startDiscovery();
-            }
-        });
-
-        Button btnStop = (Button) findViewById(R.id.btnStopDiscovery);
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bluetoothAdapter.cancelDiscovery();
+                Toast.makeText(BluetoothActivity.this, "Starting discovery...", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -124,8 +117,12 @@ public class BluetoothActivity extends Activity {
                 enableDiscoverabilityIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
                 startActivity(enableDiscoverabilityIntent);
 
+                if(acceptThread != null) {
+                    acceptThread.requestStop();
+                }
                 acceptThread = new BluetoothAcceptThread(bluetoothAdapter, uuid, BluetoothActivity.this);
                 acceptThread.start();
+                Toast.makeText(BluetoothActivity.this, "Waiting for another device...", Toast.LENGTH_LONG).show();
             }
         });
     }

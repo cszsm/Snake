@@ -24,28 +24,20 @@
         android:id="@+id/btnStartDiscovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start discovery" />
-
-    <Button
-        android:id="@+id/btnStopDiscovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnStartDiscovery"
-        android:layout_alignLeft="@+id/btnStartDiscovery"
-        android:layout_alignRight="@+id/btnStartDiscovery"
-        android:layout_alignStart="@+id/btnStartDiscovery"
-        android:layout_below="@+id/btnStartDiscovery"
-        android:text="Stop discovery" />
+        android:text="Start discovery"
+        android:layout_above="@+id/btnStartServer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/btnStartServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnStopDiscovery"
-        android:layout_alignLeft="@+id/btnStopDiscovery"
-        android:layout_alignRight="@+id/btnStopDiscovery"
-        android:layout_alignStart="@+id/btnStopDiscovery"
-        android:layout_below="@+id/btnStopDiscovery"
-        android:text="Start server" />
+        android:text="Start server"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/listDevices"
+        android:layout_toStartOf="@+id/listDevices"/>
 
 </RelativeLayout>

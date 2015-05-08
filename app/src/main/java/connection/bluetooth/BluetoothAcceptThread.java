@@ -20,6 +20,7 @@ import zsolt.cseh.snake.BluetoothActivity;
 public class BluetoothAcceptThread extends Thread {
     private final BluetoothServerSocket bluetoothServerSocket;
     private BluetoothActivity activity;
+    private volatile boolean stopSignal;
 
     public BluetoothAcceptThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothActivity activity) {
         BluetoothServerSocket tmp = null;
@@ -31,13 +32,15 @@ public class BluetoothAcceptThread extends Thread {
         bluetoothServerSocket = tmp;
 
         this.activity = activity;
+        ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
+        stopSignal = false;
     }
 
     /** Waits for another device to connect, then starts the game */
     @Override
     public void run() {
         BluetoothSocket bluetoothSocket;
-        while (true) {
+        while (!stopSignal) {
             try {
                 bluetoothSocket = bluetoothServerSocket.accept();
             } catch (IOException e) {
@@ -53,11 +56,14 @@ public class BluetoothAcceptThread extends Thread {
                 }
 
                 ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
-                ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
                 activity.startGame();
 
                 break;
             }
         }
+    }
+
+    public void requestStop() {
+        stopSignal = true;
     }
 }

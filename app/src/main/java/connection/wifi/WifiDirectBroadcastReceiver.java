@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
+import android.widget.Toast;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
@@ -49,6 +50,7 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
                 manager.requestConnectionInfo(channel, activity);
                 if(ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
                     activity.setStartButtonEnabled(true);
+                    Toast.makeText(activity, "Device connected", Toast.LENGTH_LONG).show();
                 }
             } else {
                 activity.setStartButtonEnabled(false);
