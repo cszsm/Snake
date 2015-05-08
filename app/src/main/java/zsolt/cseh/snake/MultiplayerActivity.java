@@ -47,4 +47,12 @@ public class MultiplayerActivity extends Activity {
         super.onDestroy();
         multiplayerView.stop();
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

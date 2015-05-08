@@ -1,6 +1,7 @@
 package zsolt.cseh.snake;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import connection.ConnectionManager;
@@ -42,5 +43,13 @@ public class GameActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         gameView.stop();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent = new Intent(GameActivity.this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

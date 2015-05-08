@@ -49,12 +49,15 @@ public class BluetoothActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.listDevices);
         devices = new SimpleArrayMap<>();
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null)
+        if (bluetoothAdapter == null) {
             Toast.makeText(BluetoothActivity.this, "Device does not support Bluetooth.", Toast.LENGTH_LONG).show();
+        }
 
         arrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<>(BluetoothActivity.this, android.R.layout.simple_list_item_1, arrayList);
+
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -97,9 +100,9 @@ public class BluetoothActivity extends Activity {
                 clickedDevice.fetchUuidsWithSdp();
                 ParcelUuid[] parcelUuids = clickedDevice.getUuids();
 
-                if (parcelUuids == null)
+                if (parcelUuids == null) {
                     Toast.makeText(BluetoothActivity.this, "This device is not running the game", Toast.LENGTH_LONG).show();
-                else {
+                } else {
                     connectThread = new BluetoothConnectThread(bluetoothAdapter,
                             UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"), clickedDevice, BluetoothActivity.this);
                     connectThread.start();
@@ -111,14 +114,14 @@ public class BluetoothActivity extends Activity {
         btnStartServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent enableDiscoverabilityIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                 enableDiscoverabilityIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
                 startActivity(enableDiscoverabilityIntent);
 
-                if(acceptThread != null) {
+                if (acceptThread != null) {
                     acceptThread.requestStop();
                 }
+
                 acceptThread = new BluetoothAcceptThread(bluetoothAdapter, uuid, BluetoothActivity.this);
                 acceptThread.start();
                 Toast.makeText(BluetoothActivity.this, "Waiting for another device...", Toast.LENGTH_LONG).show();
