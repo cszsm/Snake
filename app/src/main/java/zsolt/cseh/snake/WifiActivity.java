@@ -40,10 +40,11 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
     private WifiP2pManager manager;
     private Channel channel;
     private BroadcastReceiver receiver;
-    private List peerList;
-    private SimpleArrayMap devices;
+    private List<String> peerList;
+    private SimpleArrayMap<String, WifiP2pDevice> devices;
     private WifiP2pInfo info;
     private Button btnStartGame;
+    private ArrayAdapter<String> arrayAdapter;
 
     private WifiDirectAcceptThread acceptThread;
     private WifiDirectConnectThread connectThread;
@@ -65,8 +66,8 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         ListView listView = (ListView) findViewById(R.id.listWifiDevices);
         devices = new SimpleArrayMap<>();
 
-        peerList = new ArrayList();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(WifiActivity.this,
+        peerList = new ArrayList<>();
+        arrayAdapter = new ArrayAdapter<>(WifiActivity.this,
                 android.R.layout.simple_list_item_1, peerList);
         WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
             @Override
@@ -122,7 +123,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView clickedView = (TextView) view;
 
-                WifiP2pDevice clickedDevice = (WifiP2pDevice) devices.get(clickedView.getText());
+                WifiP2pDevice clickedDevice = devices.get(clickedView.getText());
                 WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = clickedDevice.deviceAddress;
 
