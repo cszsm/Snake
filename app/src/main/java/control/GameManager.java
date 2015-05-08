@@ -5,7 +5,7 @@ import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.14..
- *
+ * <p/>
  * An abstract class for managing other managers
  */
 public abstract class GameManager {
@@ -18,7 +18,9 @@ public abstract class GameManager {
         this.foodManager = foodManager;
     }
 
-    /** Steps the game */
+    /**
+     * Steps the game
+     */
     public abstract void step();
 
     public Snake getSnake() {

@@ -6,7 +6,7 @@ import model.enumeration.Direction;
 
 /**
  * Created by Zsolt on 2015.03.14..
- *
+ * <p/>
  * Manages the snake
  */
 public class SnakeManager {
@@ -37,23 +37,27 @@ public class SnakeManager {
     }
 
     public void setRight() {
-        if(snake.getDirection() != Direction.LEFT)
+        if (snake.getDirection() != Direction.LEFT) {
             direction = Direction.RIGTH;
+        }
     }
 
     public void setLeft() {
-        if(snake.getDirection() != Direction.RIGTH)
+        if (snake.getDirection() != Direction.RIGTH) {
             direction = Direction.LEFT;
+        }
     }
 
     public void setDown() {
-        if(snake.getDirection() != Direction.UP)
+        if (snake.getDirection() != Direction.UP) {
             direction = Direction.DOWN;
+        }
     }
 
     public void setUp() {
-        if(snake.getDirection() != Direction.DOWN)
+        if (snake.getDirection() != Direction.DOWN) {
             direction = Direction.UP;
+        }
     }
 
     public Direction getDirection() {

@@ -7,7 +7,7 @@ import view.GameView;
 
 /**
  * Created by Zsolt on 2015.03.10..
- *
+ * <p/>
  * Controls the game's timing
  */
 public class TimingThread extends Thread {
@@ -22,7 +22,9 @@ public class TimingThread extends Thread {
         pauseSignal = false;
     }
 
-    /** Steps the game periodically */
+    /**
+     * Steps the game periodically
+     */
     @Override
     public void run() {
         while (!stopSignal) {
