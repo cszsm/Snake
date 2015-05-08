@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 
+import connection.ConnectionManager;
+import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
 
 /**
@@ -45,7 +47,11 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
 
             if(networkInfo.isConnected()) {
                 manager.requestConnectionInfo(channel, activity);
-                activity.enableStartButton();
+                if(ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
+                    activity.setStartButtonEnabled(true);
+                }
+            } else {
+                activity.setStartButtonEnabled(false);
             }
         }
     }

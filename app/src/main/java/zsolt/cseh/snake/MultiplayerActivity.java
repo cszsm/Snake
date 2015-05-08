@@ -1,6 +1,7 @@
 package zsolt.cseh.snake;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 
@@ -37,12 +38,8 @@ public class MultiplayerActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        multiplayerView.pause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        multiplayerView.resume();
+        Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

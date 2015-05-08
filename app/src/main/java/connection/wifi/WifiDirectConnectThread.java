@@ -23,6 +23,7 @@ public class WifiDirectConnectThread extends Thread {
     public WifiDirectConnectThread(WifiActivity activity, WifiP2pInfo info) {
         this.activity = activity;
         this.info = info;
+        ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
     }
 
     /**
@@ -53,7 +54,6 @@ public class WifiDirectConnectThread extends Thread {
         }
 
         ConnectionManager.getInstance().setSocket(new WifiDirectSocket(socket));
-        ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
         activity.startGame();
     }
 }

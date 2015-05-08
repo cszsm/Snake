@@ -35,6 +35,7 @@ public class WifiDirectAcceptThread extends Thread {
         serverSocket = tmp;
         this.activity = activity;
         stopSignal = false;
+        ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
     }
 
     /**
@@ -59,7 +60,6 @@ public class WifiDirectAcceptThread extends Thread {
                 }
 
                 ConnectionManager.getInstance().setSocket(new WifiDirectSocket(client));
-                ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
                 activity.startGame();
                 break;
             }

@@ -97,6 +97,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
                     @Override
                     public void onSuccess() {
+                        Toast.makeText(WifiActivity.this, "Starting discovery...", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -135,7 +136,6 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
                         }
                         acceptThread = new WifiDirectAcceptThread(WifiActivity.this);
                         acceptThread.start();
-                        Toast.makeText(WifiActivity.this, "Starting discovery...", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -170,7 +170,7 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         this.info = info;
     }
 
-    public void enableStartButton() {
-        btnStartGame.setEnabled(true);
+    public void setStartButtonEnabled(boolean b) {
+        btnStartGame.setEnabled(b);
     }
 }
