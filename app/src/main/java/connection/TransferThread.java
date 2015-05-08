@@ -67,7 +67,15 @@ public class TransferThread extends Thread {
     /**
      * Send packages to another device
      */
-    public void write(byte[] bytes) {
+    public void write(Packet packet) {
+        byte[] bytes = new byte[0];
+
+        try {
+            bytes = PacketSerialization.serialize(packet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         try {
             outputStream.write(bytes);
         } catch (IOException e) {

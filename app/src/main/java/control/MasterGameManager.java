@@ -1,9 +1,6 @@
 package control;
 
-import java.io.IOException;
-
 import connection.Packet;
-import connection.PacketSerialization;
 
 /**
  * Created by Zsolt on 2015.04.21..
@@ -36,10 +33,6 @@ public class MasterGameManager extends GameManager {
     private void sendPacket() {
         Packet packet = new Packet(snakeManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 
-        try {
-            transferThread.write(PacketSerialization.serialize(packet));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        transferThread.write(packet);
     }
 }
