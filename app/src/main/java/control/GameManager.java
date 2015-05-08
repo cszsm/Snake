@@ -9,6 +9,7 @@ import model.Snake;
  * An abstract class for managing other managers
  */
 public abstract class GameManager {
+
     protected SnakeManager snakeManager;
     protected FoodManager foodManager;
     protected TransferThread transferThread;

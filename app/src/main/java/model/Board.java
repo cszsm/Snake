@@ -15,16 +15,17 @@ public class Board {
      * Creates a standard, empty board surrounded by four walls
      */
     public Board() {
-
         fields = new BoardElement[16][9];
 
-        for (int row = 0; row < 9; row++)
-            for (int column = 0; column < 15; column++)
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 15; column++) {
                 if (row == 0 || row == 8 || column == 0 || column == 14) {
                     fields[column][row] = BoardElement.WALL;
                 } else {
                     fields[column][row] = BoardElement.FLOOR;
                 }
+            }
+        }
     }
 
     public BoardElement[][] getFields() {

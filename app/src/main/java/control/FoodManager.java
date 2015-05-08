@@ -32,7 +32,6 @@ public class FoodManager {
      * Creates a food randomly on a floor
      */
     public void createFood(Snake snake) {
-
         Random random = new Random();
         int x = random.nextInt(15);
         int y = random.nextInt(9);
@@ -49,15 +48,16 @@ public class FoodManager {
      * Checks whether the coordinates are not on a wall or the snake
      */
     private boolean checkCoordinates(int x, int y, Snake snake) {
-
         if (board.getFields()[x][y] == BoardElement.WALL) {
             return false;
         }
 
-        for (Point p : snake.getBody())
+        for (Point p : snake.getBody()) {
             if (p.equals(x, y)) {
                 return false;
             }
+        }
+
         return true;
     }
 }

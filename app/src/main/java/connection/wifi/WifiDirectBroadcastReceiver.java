@@ -35,7 +35,6 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         String action = intent.getAction();
 
         if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
@@ -43,7 +42,6 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
                 manager.requestPeers(channel, peerListListener);
             }
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
-
             if (manager == null) {
                 return;
             }
@@ -51,7 +49,6 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             NetworkInfo networkInfo = intent.getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
 
             if (networkInfo.isConnected()) {
-
                 manager.requestConnectionInfo(channel, activity);
 
                 if (ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {

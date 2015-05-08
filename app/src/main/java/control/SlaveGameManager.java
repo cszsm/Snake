@@ -18,11 +18,9 @@ public class SlaveGameManager extends GameManager {
      * Steps the game when a packet arrives
      */
     public void step() {
-
         Packet packet = transferThread.getPacket();
 
         if (packet != null) {
-
             snakeManager.getSnake().setDirection(packet.getDirection());
 
             setDirection(packet.getDirection());

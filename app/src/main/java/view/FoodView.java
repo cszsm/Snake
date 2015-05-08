@@ -8,7 +8,7 @@ import control.FoodManager;
 
 /**
  * Created by Zsolt on 2015.03.07..
- *
+ * <p/>
  * Draws the food on the board
  */
 public class FoodView extends RectangleView {
@@ -16,7 +16,9 @@ public class FoodView extends RectangleView {
     private FoodManager foodManager;
     private Paint paintFood;
 
-    /** Sets the colors of the food */
+    /**
+     * Sets the colors of the food
+     */
     public FoodView(int size, FoodManager foodManager) {
         fieldSize = size;
         this.foodManager = foodManager;
@@ -26,7 +28,9 @@ public class FoodView extends RectangleView {
         paintFood.setColor(Color.YELLOW);
     }
 
-    /** Draws the food */
+    /**
+     * Draws the food
+     */
     public void draw(Canvas canvas) {
         drawRectangle(foodManager.getFood().getX(), foodManager.getFood().getY(), canvas, paintFood);
         drawRectangle(foodManager.getFood().getX(), foodManager.getFood().getY(), canvas, paintBorder);

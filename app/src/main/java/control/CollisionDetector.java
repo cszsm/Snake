@@ -25,17 +25,17 @@ public class CollisionDetector {
      * Detects collision
      */
     public boolean doesCollide() {
-
         if (board.getFields()[snake.getHead().x][snake.getHead().y] == BoardElement.WALL) {
             return true;
         }
 
         Point head = snake.getHead();
 
-        for (Point point : snake.getBody())
+        for (Point point : snake.getBody()) {
             if (head.equals(point) && head != point) {
                 return true;
             }
+        }
 
         return false;
     }

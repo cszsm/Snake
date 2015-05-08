@@ -20,7 +20,6 @@ public class MasterGameManager extends GameManager {
      * Steps the game and send a packet to the slave device
      */
     public void step() {
-
         sendPacket();
 
         snakeManager.step();
@@ -35,7 +34,6 @@ public class MasterGameManager extends GameManager {
      * Sends a packet with the direction and the food's coordinates
      */
     private void sendPacket() {
-
         Packet packet = new Packet(snakeManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 
         try {

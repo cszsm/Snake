@@ -40,7 +40,6 @@ public class Snake {
      * Moves the snake toward the current direction
      */
     public void step() {
-
         Point head = getHead();
 
         switch (direction) {

@@ -32,7 +32,6 @@ public class Game {
      * Creates a standard board and sets the GameManager
      */
     protected Game() {
-
         board = new Board();
 
         SnakeManager snakeManager = new SnakeManager(createSnake());
@@ -85,7 +84,6 @@ public class Game {
      * Creates a snake with default coordinates
      */
     private Snake createSnake() {
-
         ArrayList<Point> snake = new ArrayList<>();
         snake.add(new Point(5, 2));
         snake.add(new Point(4, 2));

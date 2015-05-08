@@ -23,7 +23,6 @@ public class BluetoothAcceptThread extends Thread {
     private volatile boolean stopSignal;
 
     public BluetoothAcceptThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothActivity activity) {
-
         BluetoothServerSocket tmp = null;
 
         try {
@@ -44,7 +43,6 @@ public class BluetoothAcceptThread extends Thread {
      */
     @Override
     public void run() {
-
         BluetoothSocket bluetoothSocket;
 
         while (!stopSignal) {
@@ -56,7 +54,6 @@ public class BluetoothAcceptThread extends Thread {
             }
 
             if (bluetoothSocket != null) {
-
                 try {
                     bluetoothServerSocket.close();
                 } catch (IOException e) {

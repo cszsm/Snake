@@ -22,7 +22,6 @@ public class WifiDirectConnectThread extends Thread {
     private WifiP2pInfo info;
 
     public WifiDirectConnectThread(WifiActivity activity, WifiP2pInfo info) {
-
         this.activity = activity;
         this.info = info;
         ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
@@ -33,7 +32,6 @@ public class WifiDirectConnectThread extends Thread {
      */
     @Override
     public void run() {
-
         Socket socket = new Socket();
         String host;
 

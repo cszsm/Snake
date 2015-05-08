@@ -20,7 +20,6 @@ public class WifiDirectAcceptThread extends Thread {
     private volatile boolean stopSignal;
 
     public WifiDirectAcceptThread(WifiActivity activity) {
-
         ServerSocket tmp = null;
 
         try {
@@ -41,8 +40,7 @@ public class WifiDirectAcceptThread extends Thread {
      */
     @Override
     public void run() {
-
-        Socket client = null;
+        Socket client;
 
         while (!stopSignal) {
             try {
@@ -53,7 +51,6 @@ public class WifiDirectAcceptThread extends Thread {
             }
 
             if (client != null) {
-
                 try {
                     serverSocket.close();
                 } catch (IOException e) {

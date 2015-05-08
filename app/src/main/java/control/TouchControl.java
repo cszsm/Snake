@@ -19,7 +19,6 @@ public class TouchControl {
      * Sets the coordinates of the last down action
      */
     public void setLastDown(MotionEvent event) {
-
         lastDownX = event.getX();
         lastDownY = event.getY();
     }
@@ -28,7 +27,6 @@ public class TouchControl {
      * Sets the coordinates of the last up action, and calculates the difference
      */
     public void setLastUp(MotionEvent event) {
-
         float lastUpX = event.getX();
         float lastUpY = event.getY();
 

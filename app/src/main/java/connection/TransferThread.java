@@ -20,7 +20,6 @@ public class TransferThread extends Thread {
     private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
-
         this.socket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
@@ -44,12 +43,10 @@ public class TransferThread extends Thread {
      */
     @Override
     public void run() {
-
         byte[] buffer = new byte[1024];
         int bytes = 0;
 
         while (!stopSignal) {
-
             if (bytes != 0) {
                 try {
                     packet = PacketSerialization.deserialize(buffer);
@@ -91,7 +88,6 @@ public class TransferThread extends Thread {
     }
 
     public void cancel() {
-
         stopSignal = true;
 
         try {

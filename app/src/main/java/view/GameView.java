@@ -18,7 +18,7 @@ import model.Game;
 
 /**
  * Created by Zsolt on 2015.03.06..
- *
+ * <p/>
  * Draws the game
  * This is the GameActivity's view
  */
@@ -99,9 +99,9 @@ public class GameView extends View {
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN)
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 touchControl.setLastDown(event);
-            else if (event.getAction() == MotionEvent.ACTION_UP) {
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 touchControl.setLastUp(event);
                 touchControl.setDirection(Game.getInstance().getSnakeManager());
             }

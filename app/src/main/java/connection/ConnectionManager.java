@@ -21,6 +21,7 @@ public class ConnectionManager {
         if (instance == null) {
             instance = new ConnectionManager();
         }
+
         return instance;
     }
 

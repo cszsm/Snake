@@ -15,7 +15,6 @@ public class SingleGameManager extends GameManager {
      * Steps the game
      */
     public void step() {
-
         snakeManager.step();
 
         if (snakeManager.eat(foodManager.getFood())) {

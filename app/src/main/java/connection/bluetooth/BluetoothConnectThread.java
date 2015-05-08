@@ -24,7 +24,6 @@ public class BluetoothConnectThread extends Thread {
 
     public BluetoothConnectThread(BluetoothAdapter bluetoothAdapter, UUID uuid, BluetoothDevice bluetoothDevice,
                                   BluetoothActivity activity) {
-
         BluetoothSocket tmp = null;
         this.bluetoothAdapter = bluetoothAdapter;
         this.activity = activity;
@@ -44,7 +43,6 @@ public class BluetoothConnectThread extends Thread {
      */
     @Override
     public void run() {
-
         bluetoothAdapter.cancelDiscovery();
 
         try {
