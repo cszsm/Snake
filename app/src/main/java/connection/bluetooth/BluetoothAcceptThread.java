@@ -34,7 +34,7 @@ public class BluetoothAcceptThread extends Thread {
         bluetoothServerSocket = tmp;
 
         this.activity = activity;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
+        ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
         stopSignal = false;
     }
 

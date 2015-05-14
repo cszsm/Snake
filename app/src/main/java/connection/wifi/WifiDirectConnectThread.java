@@ -24,7 +24,7 @@ public class WifiDirectConnectThread extends Thread {
     public WifiDirectConnectThread(WifiActivity activity, WifiP2pInfo info) {
         this.activity = activity;
         this.info = info;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
+        ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
     }
 
     /**

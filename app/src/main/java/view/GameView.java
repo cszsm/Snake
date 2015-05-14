@@ -98,7 +98,7 @@ public class GameView extends View {
     //** Sets the snake's direction defined by the swipe gesture */
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-        if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SLAVE) {
+        if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 touchControl.setLastDown(event);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
