@@ -31,7 +31,7 @@ public class WifiDirectAcceptThread extends Thread {
         serverSocket = tmp;
 
         this.activity = activity;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
+        ConnectionManager.getInstance().setDeviceType(DeviceType.MASTER);
         stopSignal = false;
     }
 

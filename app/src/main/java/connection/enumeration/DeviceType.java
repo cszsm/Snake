@@ -6,7 +6,7 @@ package connection.enumeration;
  * Define the device's type
  */
 public enum DeviceType {
-    SERVER,
-    CLIENT,
+    MASTER,
+    SLAVE,
     NONE
 }

@@ -12,7 +12,7 @@ import control.SingleGameManager;
 import control.SlaveGameManager;
 import control.SnakeManager;
 
-import static connection.enumeration.DeviceType.SERVER;
+import static connection.enumeration.DeviceType.MASTER;
 import static connection.enumeration.DeviceType.NONE;
 
 /**
@@ -39,7 +39,7 @@ public class Game {
 
         if (ConnectionManager.getInstance().getDeviceType() == NONE) {
             gameManager = new SingleGameManager(snakeManager, foodManager);
-        } else if (ConnectionManager.getInstance().getDeviceType() == SERVER) {
+        } else if (ConnectionManager.getInstance().getDeviceType() == MASTER) {
             gameManager = new MasterGameManager(snakeManager, foodManager);
         } else {
             gameManager = new SlaveGameManager(snakeManager, foodManager);

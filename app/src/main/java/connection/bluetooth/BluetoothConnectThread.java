@@ -35,7 +35,7 @@ public class BluetoothConnectThread extends Thread {
         }
 
         bluetoothSocket = tmp;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
+        ConnectionManager.getInstance().setDeviceType(DeviceType.SLAVE);
     }
 
     /**

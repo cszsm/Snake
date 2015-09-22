@@ -51,7 +51,7 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
             if (networkInfo.isConnected()) {
                 manager.requestConnectionInfo(channel, activity);
 
-                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.SERVER) {
+                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.MASTER) {
                     activity.setStartButtonEnabled(true);
                 }
 
