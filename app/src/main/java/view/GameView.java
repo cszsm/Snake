@@ -15,6 +15,7 @@ import control.CollisionDetector;
 import control.TimingThread;
 import control.TouchControl;
 import model.Game;
+import model.enumeration.Player;
 
 /**
  * Created by Zsolt on 2015.03.06..
@@ -25,7 +26,8 @@ import model.Game;
 public class GameView extends View {
 
     private BoardView boardView;
-    private SnakeView snakeView;
+    private SnakeView snakeOneView;
+    private SnakeView snakeTwoView;
     private FoodView foodView;
 
     private TouchControl touchControl;
@@ -48,12 +50,13 @@ public class GameView extends View {
         int blockSize = ScreenResolution.getInstance().getY() / 9;
 
         boardView = new BoardView(blockSize, Game.getInstance().getBoard());
-        snakeView = new SnakeView(blockSize, Game.getInstance().getSnake());
+        snakeOneView = new SnakeView(blockSize, Game.getInstance().getSnakeOne(), Player.ONE);
+        snakeTwoView = new SnakeView(blockSize, Game.getInstance().getSnakeTwo(), Player.TWO);
         foodView = new FoodView(blockSize, Game.getInstance().getFoodManager());
 
         touchControl = new TouchControl();
 
-        collisionDetector = new CollisionDetector(Game.getInstance().getBoard(), Game.getInstance().getSnake());
+        collisionDetector = new CollisionDetector(Game.getInstance().getBoard(), Game.getInstance().getSnakeOne(), Game.getInstance().getSnakeTwo());
 
         timingThread = new TimingThread(this);
         timingThread.start();
@@ -76,7 +79,8 @@ public class GameView extends View {
         super.onDraw(canvas);
 
         boardView.draw(canvas);
-        snakeView.draw(canvas);
+        snakeOneView.draw(canvas);
+        snakeTwoView.draw(canvas);
         foodView.draw(canvas);
 
         if (collisionDetector.doesCollide()) {
@@ -98,14 +102,15 @@ public class GameView extends View {
     //** Sets the snake's direction defined by the swipe gesture */
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-        if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 touchControl.setLastDown(event);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 touchControl.setLastUp(event);
-                touchControl.setDirection(Game.getInstance().getSnakeManager());
+                if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER)
+                    touchControl.setDirection(Game.getInstance().getSnakeOneManager());
+                else
+                    touchControl.setDirection(Game.getInstance().getSnakeTwoManager());
             }
-        }
         return true;
     }
 

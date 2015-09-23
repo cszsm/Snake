@@ -9,30 +9,40 @@ import model.enumeration.BoardElement;
 /**
  * Created by Zsolt on 2015.03.07..
  * <p/>
- * Detects collision between the snake and a wall, or between two parts of the snake
+ * Detects collision between the snakeOne and a wall, or between two parts of the snakeOne
  */
 public class CollisionDetector {
 
     private Board board;
-    private Snake snake;
+    private Snake snakeOne;
+    private Snake snakeTwo;
 
-    public CollisionDetector(Board board, Snake snake) {
+    public CollisionDetector(Board board, Snake snakeOne, Snake snakeTwo) {
         this.board = board;
-        this.snake = snake;
+        this.snakeOne = snakeOne;
+        this.snakeTwo = snakeTwo;
     }
 
     /**
      * Detects collision
      */
     public boolean doesCollide() {
-        if (board.getFields()[snake.getHead().x][snake.getHead().y] == BoardElement.WALL) {
+        if (board.getFields()[snakeOne.getHead().x][snakeOne.getHead().y] == BoardElement.WALL ||
+                board.getFields()[snakeTwo.getHead().x][snakeTwo.getHead().y] == BoardElement.WALL) {
             return true;
         }
 
-        Point head = snake.getHead();
+        Point headOne = snakeOne.getHead();
+        Point headTwo = snakeTwo.getHead();
 
-        for (Point point : snake.getBody()) {
-            if (head.equals(point) && head != point) {
+        for (Point point : snakeOne.getBody()) {
+            if (headOne.equals(point) && headOne != point || headTwo.equals(point)) {
+                return true;
+            }
+        }
+
+        for (Point point : snakeTwo.getBody()) {
+            if (headTwo.equals(point) && headTwo != point || headOne.equals(point)) {
                 return true;
             }
         }

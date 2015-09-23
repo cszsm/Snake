@@ -10,8 +10,8 @@ import model.enumeration.Direction;
  */
 public class SlaveGameManager extends GameManager {
 
-    public SlaveGameManager(SnakeManager snakeManager, FoodManager foodManager) {
-        super(snakeManager, foodManager);
+    public SlaveGameManager(SnakeManager snakeOneManager, SnakeManager snakeTwoManager, FoodManager foodManager) {
+        super(snakeOneManager, snakeTwoManager, foodManager);
     }
 
     /**
@@ -19,19 +19,25 @@ public class SlaveGameManager extends GameManager {
      */
     public void step() {
         Packet packet = transferThread.getPacket();
+        sendPacket();
 
         if (packet != null) {
-            snakeManager.getSnake().setDirection(packet.getDirection());
+            snakeOneManager.getSnake().setDirection(packet.getDirection());
 
             setDirection(packet.getDirection());
 
             foodManager.getFood().setX(packet.getFoodX());
             foodManager.getFood().setY(packet.getFoodY());
 
-            snakeManager.step();
+            snakeOneManager.step();
+            snakeTwoManager.step();
 
-            if (!snakeManager.eat(foodManager.getFood())) {
-                snakeManager.removeTail();
+            if (!snakeOneManager.eat(foodManager.getFood())) {
+                snakeOneManager.removeTail();
+            }
+
+            if (!snakeTwoManager.eat(foodManager.getFood())) {
+                snakeTwoManager.removeTail();
             }
         }
     }
@@ -42,19 +48,28 @@ public class SlaveGameManager extends GameManager {
     private void setDirection(Direction direction) {
         switch (direction) {
             case RIGTH:
-                snakeManager.setRight();
+                snakeOneManager.setRight();
                 break;
             case LEFT:
-                snakeManager.setLeft();
+                snakeOneManager.setLeft();
                 break;
             case DOWN:
-                snakeManager.setDown();
+                snakeOneManager.setDown();
                 break;
             case UP:
-                snakeManager.setUp();
+                snakeOneManager.setUp();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * Sends a packet with the direction and the food's coordinates
+     */
+    private void sendPacket() {
+        Packet packet = new Packet(snakeTwoManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
+
+        transferThread.write(packet);
     }
 }

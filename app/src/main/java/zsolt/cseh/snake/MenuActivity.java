@@ -35,6 +35,7 @@ public class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
+        btnStart.setEnabled(false);
 
         Button btnBluetooth = (Button) findViewById(R.id.btnBluetooth);
         btnBluetooth.setOnClickListener(new View.OnClickListener() {

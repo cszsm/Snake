@@ -7,19 +7,19 @@ package control;
  */
 public class SingleGameManager extends GameManager {
 
-    public SingleGameManager(SnakeManager snakeManager, FoodManager foodManager) {
-        super(snakeManager, foodManager);
+    public SingleGameManager(SnakeManager snakeOneManager, SnakeManager snakeTwoManager, FoodManager foodManager) {
+        super(snakeOneManager, snakeTwoManager, foodManager);
     }
 
     /**
      * Steps the game
      */
     public void step() {
-        snakeManager.step();
+        snakeOneManager.step();
 
-        if (snakeManager.eat(foodManager.getFood())) {
-            foodManager.createFood(snakeManager.getSnake());
+        if (snakeOneManager.eat(foodManager.getFood())) {
+            foodManager.createFood(snakeOneManager.getSnake());
         } else
-            snakeManager.removeTail();
+            snakeOneManager.removeTail();
     }
 }

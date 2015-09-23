@@ -11,6 +11,7 @@ import control.MasterGameManager;
 import control.SingleGameManager;
 import control.SlaveGameManager;
 import control.SnakeManager;
+import model.enumeration.Direction;
 
 import static connection.enumeration.DeviceType.SERVER;
 import static connection.enumeration.DeviceType.NONE;
@@ -34,15 +35,16 @@ public class Game {
     protected Game() {
         board = new Board();
 
-        SnakeManager snakeManager = new SnakeManager(createSnake());
-        FoodManager foodManager = new FoodManager(board, snakeManager.getSnake());
+        SnakeManager snakeOneManager = new SnakeManager(createSnakeOne());
+        SnakeManager snakeTwoManager = new SnakeManager(createSnakeTwo());
+        FoodManager foodManager = new FoodManager(board, snakeOneManager.getSnake());
 
         if (ConnectionManager.getInstance().getDeviceType() == NONE) {
-            gameManager = new SingleGameManager(snakeManager, foodManager);
+            gameManager = new SingleGameManager(snakeOneManager, snakeTwoManager, foodManager);
         } else if (ConnectionManager.getInstance().getDeviceType() == SERVER) {
-            gameManager = new MasterGameManager(snakeManager, foodManager);
+            gameManager = new MasterGameManager(snakeOneManager, snakeTwoManager, foodManager);
         } else {
-            gameManager = new SlaveGameManager(snakeManager, foodManager);
+            gameManager = new SlaveGameManager(snakeOneManager, snakeTwoManager, foodManager);
         }
     }
 
@@ -57,12 +59,20 @@ public class Game {
         return board;
     }
 
-    public Snake getSnake() {
-        return gameManager.getSnake();
+    public Snake getSnakeOne() {
+        return gameManager.getSnakeOne();
     }
 
-    public SnakeManager getSnakeManager() {
-        return gameManager.getSnakeManager();
+    public Snake getSnakeTwo() {
+        return gameManager.getSnakeTwo();
+    }
+
+    public SnakeManager getSnakeOneManager() {
+        return gameManager.getSnakeOneManager();
+    }
+
+    public SnakeManager getSnakeTwoManager() {
+        return gameManager.getSnakeTwoManager();
     }
 
     public FoodManager getFoodManager() {
@@ -83,12 +93,21 @@ public class Game {
     /**
      * Creates a snake with default coordinates
      */
-    private Snake createSnake() {
+    private Snake createSnakeOne() {
         ArrayList<Point> snake = new ArrayList<>();
         snake.add(new Point(5, 2));
         snake.add(new Point(4, 2));
         snake.add(new Point(3, 2));
 
-        return new Snake(snake);
+        return new Snake(snake, Direction.RIGTH);
+    }
+
+    private Snake createSnakeTwo() {
+        ArrayList<Point> snake = new ArrayList<>();
+        snake.add(new Point(9, 6));
+        snake.add(new Point(10, 6));
+        snake.add(new Point(11, 6));
+
+        return new Snake(snake, Direction.LEFT);
     }
 }

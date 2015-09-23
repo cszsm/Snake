@@ -19,9 +19,9 @@ public class Snake {
     /**
      * Sets the snake's initial values
      */
-    public Snake(ArrayList<Point> body) {
+    public Snake(ArrayList<Point> body, Direction direction) {
         this.body = body;
-        direction = Direction.RIGTH;
+        this.direction = direction;
     }
 
     public ArrayList<Point> getBody() {

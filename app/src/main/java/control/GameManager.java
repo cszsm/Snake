@@ -10,12 +10,14 @@ import model.Snake;
  */
 public abstract class GameManager {
 
-    protected SnakeManager snakeManager;
+    protected SnakeManager snakeOneManager;
+    protected SnakeManager snakeTwoManager;
     protected FoodManager foodManager;
     protected TransferThread transferThread;
 
-    public GameManager(SnakeManager snakeManager, FoodManager foodManager) {
-        this.snakeManager = snakeManager;
+    public GameManager(SnakeManager snakeOneManager, SnakeManager snakeTwoManager, FoodManager foodManager) {
+        this.snakeOneManager = snakeOneManager;
+        this.snakeTwoManager = snakeTwoManager;
         this.foodManager = foodManager;
     }
 
@@ -24,12 +26,20 @@ public abstract class GameManager {
      */
     public abstract void step();
 
-    public Snake getSnake() {
-        return snakeManager.getSnake();
+    public Snake getSnakeOne() {
+        return snakeOneManager.getSnake();
     }
 
-    public SnakeManager getSnakeManager() {
-        return snakeManager;
+    public Snake getSnakeTwo() {
+        return snakeTwoManager.getSnake();
+    }
+
+    public SnakeManager getSnakeOneManager() {
+        return snakeOneManager;
+    }
+
+    public SnakeManager getSnakeTwoManager() {
+        return snakeTwoManager;
     }
 
     public FoodManager getFoodManager() {

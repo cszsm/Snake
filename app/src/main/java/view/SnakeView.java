@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 import model.Snake;
+import model.enumeration.Player;
 
 /**
  * Created by Zsolt on 2015.03.07..
@@ -22,7 +23,7 @@ public class SnakeView extends RectangleView {
     /**
      * Sets the colors of the food
      */
-    public SnakeView(int size, Snake snake) {
+    public SnakeView(int size, Snake snake, Player player) {
         fieldSize = size;
         this.snake = snake;
 
@@ -32,7 +33,11 @@ public class SnakeView extends RectangleView {
 
         paintBody = new Paint();
         paintBody.setStyle(Paint.Style.FILL);
-        paintBody.setColor(Color.argb(255, 0, 128, 0));
+        if (player == Player.ONE) {
+            paintBody.setColor(Color.argb(255, 0, 128, 0));
+        } else {
+            paintBody.setColor(Color.argb(255, 128, 0, 0));
+        }
     }
 
     /**

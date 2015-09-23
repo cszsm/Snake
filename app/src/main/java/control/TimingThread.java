@@ -30,7 +30,7 @@ public class TimingThread extends Thread {
         while (!stopSignal) {
             try {
                 if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
-                    Thread.sleep(400);
+                    Thread.sleep(1000);
                 } else {
                     Thread.sleep(20);
                 }
