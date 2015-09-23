@@ -42,6 +42,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ConnectionManager.getInstance().reset();
         gameView.stop();
     }
 

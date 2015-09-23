@@ -40,4 +40,9 @@ public class ConnectionManager {
     public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
     }
+
+    public void reset() {
+
+        instance = null;
+    }
 }
