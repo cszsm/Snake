@@ -19,12 +19,13 @@ public class MasterGameManager extends GameManager {
      */
     public void step() {
         Packet packet = transferThread.getPacket();
-        sendPacket();
 
         if (packet != null) {
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
             setDirection(packet.getDirection());
         }
+
+        sendPacket();
 
         snakeOneManager.step();
         snakeTwoManager.step();

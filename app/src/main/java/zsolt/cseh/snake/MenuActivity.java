@@ -45,6 +45,7 @@ public class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
+        btnBluetooth.setEnabled(false);
 
         Button btnWifi = (Button) findViewById(R.id.btnWifi);
         btnWifi.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +53,15 @@ public class MenuActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, WifiActivity.class);
                 startActivity(intent);
+            }
+        });
+        btnWifi.setEnabled(false);
+
+        Button btnTest = (Button) findViewById(R.id.btnTest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
             }
         });
     }
