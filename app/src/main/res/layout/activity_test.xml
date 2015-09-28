@@ -9,9 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="zsolt.cseh.snake.TestActivity">
 
-    <TextView
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Send packet"
+        android:id="@+id/btnSend"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testList"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnSend"
+        android:layout_toEndOf="@+id/btnSend" />
 </RelativeLayout>
