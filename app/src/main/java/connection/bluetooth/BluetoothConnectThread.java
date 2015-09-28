@@ -58,6 +58,6 @@ public class BluetoothConnectThread extends Thread {
         }
 
         ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
-        activity.startGame();
+        activity.startTest();
     }
 }

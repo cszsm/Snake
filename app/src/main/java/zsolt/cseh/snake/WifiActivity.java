@@ -165,6 +165,11 @@ public class WifiActivity extends Activity implements ConnectionInfoListener {
         startActivity(intent);
     }
 
+    public void startTest() {
+        Intent intent = new Intent(WifiActivity.this, TestActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo info) {
         this.info = info;

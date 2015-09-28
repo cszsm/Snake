@@ -142,4 +142,9 @@ public class BluetoothActivity extends Activity {
         Intent intent = new Intent(BluetoothActivity.this, MultiplayerActivity.class);
         startActivity(intent);
     }
+
+    public void startTest() {
+        Intent intent = new Intent(BluetoothActivity.this, TestActivity.class);
+        startActivity(intent);
+    }
 }
