@@ -76,6 +76,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
         </activity>
+        <activity
+            android:name=".SynchronizerActivity"
+            android:label="@string/title_activity_synchronizer"
+            android:parentActivityName=".MenuActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="zsolt.cseh.snake.MenuActivity" />
+        </activity>
     </application>
 
 </manifest>

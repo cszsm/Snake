@@ -1,6 +1,7 @@
 package control;
 
 import connection.Packet;
+import connection.SnakePacket;
 import model.enumeration.Direction;
 
 /**
@@ -18,7 +19,7 @@ public class MasterGameManager extends GameManager {
      * Steps the game and send a packet to the slave device
      */
     public void step() {
-        Packet packet = transferThread.getPacket();
+        SnakePacket packet = (SnakePacket) transferThread.getPacket();
 
         if (packet != null) {
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
@@ -69,7 +70,7 @@ public class MasterGameManager extends GameManager {
      * Sends a packet with the direction and the food's coordinates
      */
     private void sendPacket() {
-        Packet packet = new Packet(snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
+        SnakePacket packet = new SnakePacket(snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 
         transferThread.write(packet);
     }

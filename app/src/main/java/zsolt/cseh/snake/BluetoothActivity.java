@@ -147,4 +147,9 @@ public class BluetoothActivity extends Activity {
         Intent intent = new Intent(BluetoothActivity.this, TestActivity.class);
         startActivity(intent);
     }
+
+    public void startSynchronizer() {
+        Intent intent = new Intent(BluetoothActivity.this, SynchronizerActivity.class);
+        startActivity(intent);
+    }
 }

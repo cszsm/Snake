@@ -13,15 +13,16 @@ public class ConnectionManager {
 
     private ConnectionSocket socket;
     private DeviceType deviceType;
+    private long offset;
 
     protected ConnectionManager() {
+        offset = 0;
     }
 
     public static ConnectionManager getInstance() {
         if (instance == null) {
             instance = new ConnectionManager();
         }
-
         return instance;
     }
 
@@ -41,8 +42,15 @@ public class ConnectionManager {
         this.deviceType = deviceType;
     }
 
-    public void reset() {
+    public long getOffset() {
+        return offset;
+    }
 
+    public void setOffset(long offset) {
+        this.offset = offset;
+    }
+
+    public void reset() {
         instance = null;
     }
 }

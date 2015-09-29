@@ -50,13 +50,13 @@ public class WifiDirectConnectThread extends Thread {
 
         try {
             socket.bind(null);
-            socket.connect((new InetSocketAddress(host, 8888)), 1000);
+            socket.connect((new InetSocketAddress(host, 8888)), 5000);
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
         ConnectionManager.getInstance().setSocket(new WifiDirectSocket(socket));
-        activity.startTest();
+        activity.startSynchronizer();
     }
 }

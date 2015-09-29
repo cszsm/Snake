@@ -15,4 +15,5 @@
     <string name="title_activity_wifi_test">WifiTestActivity</string>
     <string name="title_activity_wifi_multiplayer">WifiMultiplayerActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_synchronizer">SynchronizerActivity</string>
 </resources>
