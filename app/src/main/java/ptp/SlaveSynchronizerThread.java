@@ -26,7 +26,7 @@ public class SlaveSynchronizerThread extends Thread {
 
         while (wait_for_sync) {
             sync = (SynchronizerPacket) transferThread.getPacket();
-            if(sync != null) {
+            if (sync != null) {
                 sync_time = TimeManager.getTime();
                 wait_for_sync = false;
             }
@@ -43,16 +43,16 @@ public class SlaveSynchronizerThread extends Thread {
 
         while (wait_for_delay_resp) {
             delay_resp = (SynchronizerPacket) transferThread.getPacket();
-            if(delay_resp != null) {
+            if (delay_resp != null) {
                 delay_resp_time = TimeManager.getTime();
                 wait_for_delay_resp = false;
             }
         }
 
-        long delay_1 = sync.getTime() - sync_time;
-        long delay_2 = (delay_resp_time - delay_req_time) / 2;
+        int delay = (int) (sync.getTime() - sync_time);
+        int transit = (int) ((delay_resp_time - delay_req_time) / 2);
 
-        ConnectionManager.getInstance().setOffset(delay_1 + delay_2);
+        ConnectionManager.getInstance().setOffset(delay + transit);
 
         Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
     }

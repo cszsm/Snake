@@ -13,7 +13,7 @@ public class ConnectionManager {
 
     private ConnectionSocket socket;
     private DeviceType deviceType;
-    private long offset;
+    private int offset;
 
     protected ConnectionManager() {
         offset = 0;
@@ -46,7 +46,7 @@ public class ConnectionManager {
         return offset;
     }
 
-    public void setOffset(long offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 
