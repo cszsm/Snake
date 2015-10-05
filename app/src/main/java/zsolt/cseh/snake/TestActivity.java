@@ -14,9 +14,11 @@ import java.util.Random;
 
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
+import connection.SnakePacket;
 import connection.TransferThread;
 import connection.enumeration.DeviceType;
 import control.TimeManager;
+import model.enumeration.Direction;
 import test.SenderThread;
 import test.TestManager;
 import test.TestPacket;
@@ -80,9 +82,16 @@ public class TestActivity extends Activity {
 //        arrayAdapter.notifyDataSetChanged();
 
         TestPacket packet = new TestPacket(timestamp + ConnectionManager.getInstance().getOffset(), list);
-        Log.v("packet", packet.getSender().toString() + ";" + packet.getId() + ";" +
-                TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
+//        Log.v("packetOffset", String.valueOf(ConnectionManager.getInstance().getOffset()));
+//        Log.v("packet", packet.getSender().toString() + ";" + packet.getId() + ";" +
+//                TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
 
+        return packet;
+    }
+
+    public SnakePacket createSnakePacket() {
+        SnakePacket packet = new SnakePacket(Direction.DOWN, 10, 10);
+        Log.v("packet", "send" + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
         return packet;
     }
 
@@ -91,8 +100,15 @@ public class TestActivity extends Activity {
 
         if (packet != null) {
 //            addPacket(packet.getTimestamp(), packet.getLength());
-            Log.v("packet", packet.getSender().toString() + ";" + packet.getId() + ";" +
-                    TimeManager.getTime(TimeManager.getTime()) + ";" + packet.getLength());
+            Log.v("packet", "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+                    TimeManager.getTime(TimeManager.getTime() - ConnectionManager.getInstance().getOffset()) + ";" + packet.getLength());
+        }
+    }
+
+    public void receiveSnakePacket() {
+        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+        if(packet != null) {
+            Log.v("packet", "received " + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
         }
     }
 
@@ -105,5 +121,11 @@ public class TestActivity extends Activity {
                 Log.v("receive", "receive");
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        testTimingThread.requestStop();
     }
 }

@@ -3,6 +3,7 @@ package test;
 import android.util.Log;
 
 import connection.TransferThread;
+import control.TimeManager;
 import zsolt.cseh.snake.TestActivity;
 
 /**
@@ -21,9 +22,12 @@ public class SenderThread extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-            thread.write(activity.createPacket());
+            TestPacket packet = activity.createPacket();
+            thread.write(packet);
+            Log.v("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+                    TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
             try {
-                sleep(50);
+                sleep(1000);
             } catch (InterruptedException e) {
                 Log.v("error", e.getMessage());
                 e.printStackTrace();
