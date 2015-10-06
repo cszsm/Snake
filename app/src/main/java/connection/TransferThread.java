@@ -1,8 +1,14 @@
 package connection;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import test.TestPacket;
 
 /**
  * Created by Zsolt on 2015.05.02..
@@ -15,8 +21,9 @@ public class TransferThread extends Thread {
     private final InputStream inputStream;
     private final OutputStream outputStream;
 
-    private Packet packet;
-    private int arrivedPackets;
+//        private Packet packet;
+    private Queue<Packet> packets;
+//    private int arrivedPackets;
     private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
@@ -24,7 +31,8 @@ public class TransferThread extends Thread {
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
 
-        arrivedPackets = 0;
+        packets = new LinkedList<>();
+//        arrivedPackets = 0;
 
         try {
             tmpIn = socket.getInputStream();
@@ -49,9 +57,14 @@ public class TransferThread extends Thread {
         while (!stopSignal) {
             if (bytes != 0) {
                 try {
-                    packet = PacketSerialization.deserialize(buffer);
-                    arrivedPackets++;
+//                    packet = PacketSerialization.deserialize(buffer);
+                    Packet packet = PacketSerialization.deserialize(buffer);
+                    packets.offer(packet);
+//                    Log.v("packet", String.valueOf(((TestPacket) packet).getTimestamp()));
+//                    Log.v("packets", "kap");
+//                    arrivedPackets++;
                 } catch (IOException | ClassNotFoundException e) {
+//                    Log.v("packets", "itt rossz");
                     e.printStackTrace();
                 }
             }
@@ -87,12 +100,14 @@ public class TransferThread extends Thread {
      * Returns with the last accepted package
      */
     public Packet getPacket() {
-        if (0 < arrivedPackets) {
-            arrivedPackets--;
-            return packet;
-        } else {
-            return null;
-        }
+//        if (0 < arrivedPackets) {
+//            arrivedPackets--;
+//            return packet;
+//            Log.v("fifo", String.valueOf(arrivedPackets) + String.valueOf(packets.size()));
+            return packets.poll();
+//        } else {
+//            return null;
+//        }
     }
 
     public void cancel() {

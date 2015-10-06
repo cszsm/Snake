@@ -55,5 +55,8 @@ public class SlaveSynchronizerThread extends Thread {
         ConnectionManager.getInstance().setOffset(delay + transit);
 
         Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
+
+//        transferThread.cancel();
+        ConnectionManager.getInstance().setTransferThread(transferThread);
     }
 }

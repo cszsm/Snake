@@ -39,6 +39,10 @@ public class TestPacket extends Packet {
         return timestamp;
     }
 
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public int getLength() {
         return list.size();
     }

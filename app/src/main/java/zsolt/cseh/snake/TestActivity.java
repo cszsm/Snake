@@ -14,6 +14,7 @@ import java.util.Random;
 
 import connection.ConnectionManager;
 import connection.ConnectionSocket;
+import connection.Packet;
 import connection.SnakePacket;
 import connection.TransferThread;
 import connection.enumeration.DeviceType;
@@ -30,7 +31,7 @@ public class TestActivity extends Activity {
     private TestManager testManager;
     private TransferThread transferThread;
     private TestTimingThread testTimingThread;
-    private List<String> packets;
+    private List<TestPacket> packets;
     private ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -41,11 +42,14 @@ public class TestActivity extends Activity {
         random = new Random();
 
         ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
-        transferThread = new TransferThread(socket);
-        transferThread.start();
+//        transferThread = new TransferThread(socket);
+        transferThread = ConnectionManager.getInstance().getTransferThread();
+//        transferThread.start();
 
         testTimingThread = new TestTimingThread(this);
         testTimingThread.start();
+
+        packets = new ArrayList<>();
 
         Button btnSend = (Button) findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +59,16 @@ public class TestActivity extends Activity {
 //                transferThread.write(createPacket());
                 SenderThread thread = new SenderThread(transferThread, TestActivity.this);
                 thread.start();
+            }
+        });
+
+        Button btnLog = (Button) findViewById(R.id.btnLog);
+        btnLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (TestPacket packet : packets) {
+                    Log.v("packet", getLog(packet));
+                }
             }
         });
 
@@ -72,16 +86,16 @@ public class TestActivity extends Activity {
             list.add(random.nextInt(100));
         }
 
-        long timestamp = TimeManager.getTime();
+//        long timestamp = TimeManager.getTime();
 
 //        packets.add(TimeManager.getTime(timestamp + ConnectionManager.getInstance().getOffset()) + " - " + list.size());
-        long offset = ConnectionManager.getInstance().getOffset();
-        String string = TimeManager.getTime(timestamp + offset);
+//        long offset = ConnectionManager.getInstance().getOffset();
+//        String string = TimeManager.getTime(timestamp + offset);
 
 //        Log.v("createPacket", string + " - " + String.valueOf(list.size()));
 //        arrayAdapter.notifyDataSetChanged();
 
-        TestPacket packet = new TestPacket(timestamp + ConnectionManager.getInstance().getOffset(), list);
+        TestPacket packet = new TestPacket(TimeManager.getTime() + ConnectionManager.getInstance().getOffset(), list);
 //        Log.v("packetOffset", String.valueOf(ConnectionManager.getInstance().getOffset()));
 //        Log.v("packet", packet.getSender().toString() + ";" + packet.getId() + ";" +
 //                TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
@@ -89,43 +103,54 @@ public class TestActivity extends Activity {
         return packet;
     }
 
-    public SnakePacket createSnakePacket() {
-        SnakePacket packet = new SnakePacket(Direction.DOWN, 10, 10);
-        Log.v("packet", "send" + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
-        return packet;
-    }
+//    public SnakePacket createSnakePacket() {
+//        SnakePacket packet = new SnakePacket(Direction.DOWN, 10, 10);
+//        Log.v("packet", "send" + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
+//        return packet;
+//    }
 
     public void receivePacket() {
         TestPacket packet = (TestPacket) transferThread.getPacket();
 
         if (packet != null) {
 //            addPacket(packet.getTimestamp(), packet.getLength());
-            Log.v("packet", "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
-                    TimeManager.getTime(TimeManager.getTime() - ConnectionManager.getInstance().getOffset()) + ";" + packet.getLength());
+//            Log.v("packet", "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+//                    TimeManager.getTime(TimeManager.getTime() - ConnectionManager.getInstance().getOffset()) +
+//                    ";" + packet.getLength());
+            packet.setTimestamp(TimeManager.getTime());
+            packets.add(packet);
         }
     }
 
-    public void receiveSnakePacket() {
-        SnakePacket packet = (SnakePacket) transferThread.getPacket();
-        if(packet != null) {
-            Log.v("packet", "received " + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
-        }
+    private String getLog(TestPacket packet) {
+        return "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+                    TimeManager.getTime(packet.getTimestamp() + ConnectionManager.getInstance().getOffset()) +
+                    ";" + packet.getLength();
+//        return String.valueOf(packet.getId());
     }
 
-    private void addPacket(final long timestamp, final int length) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                packets.add(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset()) + " - " + length);
-                arrayAdapter.notifyDataSetChanged();
-                Log.v("receive", "receive");
-            }
-        });
-    }
+//    public void receiveSnakePacket() {
+//        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+//        if(packet != null) {
+//            Log.v("packet", "received " + String.valueOf(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset())));
+//        }
+//    }
+
+//    private void addPacket(final long timestamp, final int length) {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                packets.add(TimeManager.getTime(TimeManager.getTime() + ConnectionManager.getInstance().getOffset()) + " - " + length);
+//                arrayAdapter.notifyDataSetChanged();
+//                Log.v("receive", "receive");
+//            }
+//        });
+//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        transferThread.cancel();
         testTimingThread.requestStop();
     }
 }

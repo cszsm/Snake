@@ -40,5 +40,8 @@ public class MasterSynchronizerThread extends Thread {
 
         // Sending delay_resp
         transferThread.write(new SynchronizerPacket(delay_req_time));
+
+//        transferThread.cancel();
+        ConnectionManager.getInstance().setTransferThread(transferThread);
     }
 }

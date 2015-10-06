@@ -10,22 +10,22 @@
     tools:context="zsolt.cseh.snake.SynchronizerActivity">
 
     <Button
+        android:id="@+id/btnSync"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Synchronize"
-        android:id="@+id/btnSync"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:text="Synchronize" />
 
     <Button
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
-        android:id="@+id/btnNext"
-        android:layout_below="@+id/btnSync"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/btnSync"
-        android:layout_alignStart="@+id/btnSync" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/btnSync"
+        android:layout_below="@+id/btnSync"
+        android:text="Next" />
 </RelativeLayout>

@@ -14,6 +14,7 @@ public class ConnectionManager {
     private ConnectionSocket socket;
     private DeviceType deviceType;
     private int offset;
+    private TransferThread transferThread;
 
     protected ConnectionManager() {
         offset = 0;
@@ -48,6 +49,14 @@ public class ConnectionManager {
 
     public void setOffset(int offset) {
         this.offset = offset;
+    }
+
+    public TransferThread getTransferThread() {
+        return transferThread;
+    }
+
+    public void setTransferThread(TransferThread transferThread) {
+        this.transferThread = transferThread;
     }
 
     public void reset() {
