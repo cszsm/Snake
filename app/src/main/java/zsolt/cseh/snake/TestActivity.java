@@ -66,8 +66,22 @@ public class TestActivity extends Activity {
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<TestPacket> logPackets = new ArrayList<>();
+                for (int i = 0; i < packets.get(packets.size() - 1).getId(); i++) {
+                    logPackets.add(new TestPacket(0, new ArrayList<Integer>()));
+                }
+
                 for (TestPacket packet : packets) {
-                    Log.v("packet", getLog(packet));
+                    logPackets.set(packet.getId() - 1, packet);
+                }
+
+                Log.v("packet", String.valueOf(logPackets.size()));
+                for (TestPacket packet : logPackets) {
+                    if (packet.getLength() != 0) {
+                        Log.v("packet", getLog(packet));
+                    } else {
+                        Log.v("packet", " ");
+                    }
                 }
             }
         });
@@ -124,8 +138,8 @@ public class TestActivity extends Activity {
 
     private String getLog(TestPacket packet) {
         return "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
-                    TimeManager.getTime(packet.getTimestamp() + ConnectionManager.getInstance().getOffset()) +
-                    ";" + packet.getLength();
+                TimeManager.getTime(packet.getTimestamp() + ConnectionManager.getInstance().getOffset()) +
+                ";" + packet.getLength();
 //        return String.valueOf(packet.getId());
     }
 

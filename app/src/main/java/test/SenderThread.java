@@ -21,7 +21,7 @@ public class SenderThread extends Thread {
 
     @Override
     public void run() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             TestPacket packet = activity.createPacket();
             thread.write(packet);
             Log.v("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
