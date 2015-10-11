@@ -21,9 +21,9 @@ public class TransferThread extends Thread {
     private final InputStream inputStream;
     private final OutputStream outputStream;
 
-//        private Packet packet;
+    //        private Packet packet;
     private Queue<Packet> packets;
-//    private int arrivedPackets;
+    //    private int arrivedPackets;
     private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
@@ -51,7 +51,7 @@ public class TransferThread extends Thread {
      */
     @Override
     public void run() {
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[2048];
         int bytes = 0;
 
         while (!stopSignal) {
@@ -60,6 +60,7 @@ public class TransferThread extends Thread {
 //                    packet = PacketSerialization.deserialize(buffer);
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
+
 //                    Log.v("packet", String.valueOf(((TestPacket) packet).getTimestamp()));
 //                    Log.v("packets", "kap");
 //                    arrivedPackets++;
@@ -90,6 +91,12 @@ public class TransferThread extends Thread {
         }
 
         try {
+            Log.v("size", String.valueOf(((TestPacket) packet).getId()) + " - " + String.valueOf(bytes.length));
+        } catch (Exception e) {
+            Log.v("size", "not testpacket --- " + e.getMessage());
+        }
+
+        try {
             outputStream.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,7 +111,7 @@ public class TransferThread extends Thread {
 //            arrivedPackets--;
 //            return packet;
 //            Log.v("fifo", String.valueOf(arrivedPackets) + String.valueOf(packets.size()));
-            return packets.poll();
+        return packets.poll();
 //        } else {
 //            return null;
 //        }

@@ -21,13 +21,13 @@ public class SenderThread extends Thread {
 
     @Override
     public void run() {
-        for (int i = 0; i < 1000; i++) {
-            TestPacket packet = activity.createPacket();
+        for (int i = 0; i < 500; i++) {
+            TestPacket packet = activity.createPacket((i / 10) + 1);
             thread.write(packet);
             Log.v("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
                     TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
             try {
-                sleep(20);
+                sleep(100);
             } catch (InterruptedException e) {
                 Log.v("error", e.getMessage());
                 e.printStackTrace();

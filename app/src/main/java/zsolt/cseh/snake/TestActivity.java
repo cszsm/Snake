@@ -93,10 +93,11 @@ public class TestActivity extends Activity {
 //        testList.setAdapter(arrayAdapter);
     }
 
-    public TestPacket createPacket() {
+    public TestPacket createPacket(int length) {
 
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < random.nextInt(1000); i++) {
+//        int length = random.nextInt(100);
+        for (int i = 0; i < length; i++) {
             list.add(random.nextInt(100));
         }
 
