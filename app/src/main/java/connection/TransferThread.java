@@ -18,8 +18,8 @@ import test.TestPacket;
 public class TransferThread extends Thread {
 
     private final ConnectionSocket socket;
-    private final InputStream inputStream;
-    private final OutputStream outputStream;
+//    private final InputStream inputStream;
+//    private final OutputStream outputStream;
 
     //        private Packet packet;
     private Queue<Packet> packets;
@@ -34,15 +34,15 @@ public class TransferThread extends Thread {
         packets = new LinkedList<>();
 //        arrivedPackets = 0;
 
-        try {
-            tmpIn = socket.getInputStream();
-            tmpOut = socket.getOutputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            tmpIn = socket.getInputStream();
+//            tmpOut = socket.getOutputStream();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        inputStream = tmpIn;
-        outputStream = tmpOut;
+//        inputStream = tmpIn;
+//        outputStream = tmpOut;
         stopSignal = false;
     }
 
@@ -71,7 +71,8 @@ public class TransferThread extends Thread {
             }
 
             try {
-                bytes = inputStream.read(buffer);
+//                bytes = inputStream.read(buffer);
+                bytes = socket.receive(buffer);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,7 +98,8 @@ public class TransferThread extends Thread {
         }
 
         try {
-            outputStream.write(bytes);
+//            outputStream.write(bytes);
+            socket.send(bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }

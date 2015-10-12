@@ -11,9 +11,13 @@ import java.io.OutputStream;
  */
 public interface ConnectionSocket {
 
-    InputStream getInputStream() throws IOException;
+//    InputStream getInputStream() throws IOException;
+//
+//    OutputStream getOutputStream() throws IOException;
 
-    OutputStream getOutputStream() throws IOException;
+    void send(byte[] packet) throws IOException;
+
+    int receive(byte[] packet) throws IOException;
 
     void close() throws IOException;
 }
