@@ -18,17 +18,18 @@ public class SynchronizerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synchronizer);
 
+        final Thread synchronizerThread;
+        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER) {
+            synchronizerThread = new MasterSynchronizerThread();
+        } else {
+            synchronizerThread = new SlaveSynchronizerThread();
+        }
+
         Button bntSync = (Button) findViewById(R.id.btnSync);
         bntSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER) {
-                    MasterSynchronizerThread synchronizerThread = new MasterSynchronizerThread();
-                    synchronizerThread.start();
-                } else {
-                    SlaveSynchronizerThread synchronizerThread = new SlaveSynchronizerThread();
-                    synchronizerThread.start();
-                }
+                synchronizerThread.start();
             }
         });
 

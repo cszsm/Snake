@@ -43,11 +43,11 @@
         android:layout_alignEnd="@+id/btnStart" />
 
     <Button
-        android:id="@+id/btnWifi"
+        android:id="@+id/btnWifiDirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnBluetooth"
-        android:text="Wi-Fi"
+        android:text="Wi-Fi Direct"
         android:layout_alignLeft="@+id/btnBluetooth"
         android:layout_alignStart="@+id/btnBluetooth"
         android:layout_alignRight="@+id/btnBluetooth"
@@ -56,12 +56,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"
-        android:id="@+id/btnTest"
-        android:layout_below="@+id/btnWifi"
-        android:layout_alignLeft="@+id/btnWifi"
-        android:layout_alignStart="@+id/btnWifi"
-        android:layout_alignRight="@+id/btnWifi"
-        android:layout_alignEnd="@+id/btnWifi" />
+        android:text="Wi-Fi"
+        android:id="@+id/btnWifi"
+        android:layout_below="@+id/btnWifiDirect"
+        android:layout_alignLeft="@+id/btnWifiDirect"
+        android:layout_alignStart="@+id/btnWifiDirect"
+        android:layout_alignRight="@+id/btnWifiDirect"
+        android:layout_alignEnd="@+id/btnWifiDirect" />
 
 </RelativeLayout>

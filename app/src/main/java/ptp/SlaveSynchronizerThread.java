@@ -19,42 +19,52 @@ public class SlaveSynchronizerThread extends Thread {
         TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
         transferThread.start();
 
-        // Waiting for sync
-        boolean wait_for_sync = true;
-        SynchronizerPacket sync = new SynchronizerPacket(0);
-        long sync_time = 0;
+        int averageDelay = 0;
 
-        while (wait_for_sync) {
-            sync = (SynchronizerPacket) transferThread.getPacket();
-            if (sync != null) {
-                sync_time = TimeManager.getTime();
-                wait_for_sync = false;
+        int i = 5;
+        while (i > 0) {
+            // Waiting for sync
+            boolean wait_for_sync = true;
+            SynchronizerPacket sync = new SynchronizerPacket(0);
+            long sync_time = 0;
+
+            while (wait_for_sync) {
+                sync = (SynchronizerPacket) transferThread.getPacket();
+                if (sync != null) {
+                    sync_time = TimeManager.getTime();
+                    wait_for_sync = false;
+                }
             }
+
+            // Sending delay_req
+            long delay_req_time = TimeManager.getTime();
+            transferThread.write(new SynchronizerPacket(0));
+
+            // Waiting for delay_resp
+            boolean wait_for_delay_resp = true;
+            SynchronizerPacket delay_resp;
+            long delay_resp_time = 0;
+
+            while (wait_for_delay_resp) {
+                delay_resp = (SynchronizerPacket) transferThread.getPacket();
+                if (delay_resp != null) {
+                    delay_resp_time = TimeManager.getTime();
+                    wait_for_delay_resp = false;
+                }
+            }
+
+            int delay = (int) (sync.getTime() - sync_time);
+            int transit = (int) ((delay_resp_time - delay_req_time) / 2);
+
+            averageDelay += delay + transit;
+
+            i--;
         }
 
-        // Sending delay_req
-        long delay_req_time = TimeManager.getTime();
-        transferThread.write(new SynchronizerPacket(0));
-
-        // Waiting for delay_resp
-        boolean wait_for_delay_resp = true;
-        SynchronizerPacket delay_resp;
-        long delay_resp_time = 0;
-
-        while (wait_for_delay_resp) {
-            delay_resp = (SynchronizerPacket) transferThread.getPacket();
-            if (delay_resp != null) {
-                delay_resp_time = TimeManager.getTime();
-                wait_for_delay_resp = false;
-            }
-        }
-
-        int delay = (int) (sync.getTime() - sync_time);
-        int transit = (int) ((delay_resp_time - delay_req_time) / 2);
-
-        ConnectionManager.getInstance().setOffset(delay + transit);
-
+        averageDelay /= 5;
+        ConnectionManager.getInstance().setOffset(averageDelay);
         Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
+        Log.v("sync", ConnectionManager.getInstance().getDeviceType().toString());
 
 //        transferThread.cancel();
         ConnectionManager.getInstance().setTransferThread(transferThread);

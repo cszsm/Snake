@@ -16,30 +16,34 @@ public class MasterSynchronizerThread extends Thread {
         TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
         transferThread.start();
 
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Sending sync
-        transferThread.write(new SynchronizerPacket(TimeManager.getTime()));
-
-        // Waiting for delay_req
-        boolean wait_for_delay_req = true;
-        SynchronizerPacket delay_req;
-        long delay_req_time = 0;
-
-        while (wait_for_delay_req) {
-            delay_req = (SynchronizerPacket) transferThread.getPacket();
-            if(delay_req != null) {
-                delay_req_time = TimeManager.getTime();
-                wait_for_delay_req = false;
+        int i = 5;
+        while (i > 0) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }
 
-        // Sending delay_resp
-        transferThread.write(new SynchronizerPacket(delay_req_time));
+            // Sending sync
+            transferThread.write(new SynchronizerPacket(TimeManager.getTime()));
+
+            // Waiting for delay_req
+            boolean wait_for_delay_req = true;
+            SynchronizerPacket delay_req;
+            long delay_req_time = 0;
+
+            while (wait_for_delay_req) {
+                delay_req = (SynchronizerPacket) transferThread.getPacket();
+                if(delay_req != null) {
+                    delay_req_time = TimeManager.getTime();
+                    wait_for_delay_req = false;
+                }
+            }
+
+            // Sending delay_resp
+            transferThread.write(new SynchronizerPacket(delay_req_time));
+            i--;
+        }
 
 //        transferThread.cancel();
         ConnectionManager.getInstance().setTransferThread(transferThread);

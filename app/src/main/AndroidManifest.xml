@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="zsolt.cseh.snake" >
+    package="zsolt.cseh.snake">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -9,17 +9,19 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +33,7 @@
             android:label="@string/title_activity_game"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -41,7 +43,7 @@
             android:label="@string/title_activity_bluetooth"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -51,7 +53,7 @@
             android:label="@string/title_activity_multiplayer"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -61,7 +63,7 @@
             android:label="@string/title_activity_wifi_direct"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -71,7 +73,7 @@
             android:label="@string/title_activity_test"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -81,7 +83,7 @@
             android:label="@string/title_activity_synchronizer"
             android:parentActivityName=".MenuActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
@@ -89,7 +91,9 @@
         <activity
             android:name=".WifiActivity"
             android:label="@string/title_activity_wifi"
-            android:parentActivityName=".MenuActivity" >
+            android:parentActivityName=".MenuActivity"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="zsolt.cseh.snake.MenuActivity" />
