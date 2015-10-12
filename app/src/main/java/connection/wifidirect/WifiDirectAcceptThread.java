@@ -1,4 +1,4 @@
-package connection.wifi;
+package connection.wifidirect;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,7 +6,7 @@ import java.net.Socket;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
-import zsolt.cseh.snake.WifiActivity;
+import zsolt.cseh.snake.WifiDirectActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
@@ -16,10 +16,10 @@ import zsolt.cseh.snake.WifiActivity;
 public class WifiDirectAcceptThread extends Thread {
 
     private final ServerSocket serverSocket;
-    private WifiActivity activity;
+    private WifiDirectActivity activity;
     private volatile boolean stopSignal;
 
-    public WifiDirectAcceptThread(WifiActivity activity) {
+    public WifiDirectAcceptThread(WifiDirectActivity activity) {
         ServerSocket tmp = null;
 
         try {

@@ -2,15 +2,12 @@ package zsolt.cseh.snake;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import model.Game;
@@ -56,7 +53,7 @@ public class MenuActivity extends Activity {
         btnWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, WifiActivity.class);
+                Intent intent = new Intent(MenuActivity.this, WifiDirectActivity.class);
                 startActivity(intent);
             }
         });

@@ -11,9 +11,10 @@
     <string name="title_activity_multiplayer">MultiplayerActivity</string>
     <string name="title_activity_bluetooth_test">BluetoothTest</string>
     <string name="title_activity_wi_fi">WiFiActivity</string>
-    <string name="title_activity_wifi">WifiActivity</string>
+    <string name="title_activity_wifi_direct">WifiDirectActivity</string>
     <string name="title_activity_wifi_test">WifiTestActivity</string>
     <string name="title_activity_wifi_multiplayer">WifiMultiplayerActivity</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_synchronizer">SynchronizerActivity</string>
+    <string name="title_activity_wifi">WifiActivity</string>
 </resources>

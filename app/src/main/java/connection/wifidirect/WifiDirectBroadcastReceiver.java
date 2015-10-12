@@ -1,4 +1,4 @@
-package connection.wifi;
+package connection.wifidirect;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
-import zsolt.cseh.snake.WifiActivity;
+import zsolt.cseh.snake.WifiDirectActivity;
 
 /**
  * Created by Zsolt on 2015.04.25..
@@ -21,11 +21,11 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
 
     private WifiP2pManager manager;
     private Channel channel;
-    private WifiActivity activity;
+    private WifiDirectActivity activity;
     private WifiP2pManager.PeerListListener peerListListener;
 
     public WifiDirectBroadcastReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel,
-                                       WifiActivity activity, WifiP2pManager.PeerListListener peerListListener) {
+                                       WifiDirectActivity activity, WifiP2pManager.PeerListListener peerListListener) {
         super();
         this.manager = manager;
         this.channel = channel;

@@ -1,4 +1,4 @@
-package connection.wifi;
+package connection.wifidirect;
 
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.widget.Toast;
@@ -9,7 +9,7 @@ import java.net.Socket;
 
 import connection.ConnectionManager;
 import connection.enumeration.DeviceType;
-import zsolt.cseh.snake.WifiActivity;
+import zsolt.cseh.snake.WifiDirectActivity;
 
 /**
  * Created by Zsolt on 2015.05.02..
@@ -18,10 +18,10 @@ import zsolt.cseh.snake.WifiActivity;
  */
 public class WifiDirectConnectThread extends Thread {
 
-    private WifiActivity activity;
+    private WifiDirectActivity activity;
     private WifiP2pInfo info;
 
-    public WifiDirectConnectThread(WifiActivity activity, WifiP2pInfo info) {
+    public WifiDirectConnectThread(WifiDirectActivity activity, WifiP2pInfo info) {
         this.activity = activity;
         this.info = info;
         ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
