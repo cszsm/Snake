@@ -21,8 +21,7 @@ public class SlaveSynchronizerThread extends Thread {
 
         int averageDelay = 0;
 
-        int i = 5;
-        while (i > 0) {
+        for (int i = 0; i < 11; i++) {
             // Waiting for sync
             boolean wait_for_sync = true;
             SynchronizerPacket sync = new SynchronizerPacket(0);
@@ -56,12 +55,13 @@ public class SlaveSynchronizerThread extends Thread {
             int delay = (int) (sync.getTime() - sync_time);
             int transit = (int) ((delay_resp_time - delay_req_time) / 2);
 
-            averageDelay += delay + transit;
-
-            i--;
+            if (i != 0) {
+                averageDelay += delay + transit;
+            }
+            Log.v("sync", "offset: " + (delay + transit));
         }
 
-        averageDelay /= 5;
+        averageDelay /= 10;
         ConnectionManager.getInstance().setOffset(averageDelay);
         Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
         Log.v("sync", ConnectionManager.getInstance().getDeviceType().toString());

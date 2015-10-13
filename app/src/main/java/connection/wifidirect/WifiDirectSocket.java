@@ -1,6 +1,8 @@
 package connection.wifidirect;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
 import connection.ConnectionSocket;
@@ -14,9 +16,17 @@ import connection.ConnectionSocket;
 public class WifiDirectSocket implements ConnectionSocket {
 
     private Socket socket;
+    private InputStream inputStream;
+    private OutputStream outputStream;
 
     public WifiDirectSocket(Socket socket) {
         this.socket = socket;
+        try {
+            inputStream = socket.getInputStream();
+            outputStream = socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Override
@@ -31,12 +41,12 @@ public class WifiDirectSocket implements ConnectionSocket {
 
     @Override
     public void send(byte[] packet) throws IOException {
-        socket.getOutputStream().write(packet);
+        outputStream.write(packet);
     }
 
     @Override
     public int receive(byte[] packet) throws IOException {
-        return socket.getInputStream().read(packet);
+        return inputStream.read(packet);
     }
 
     @Override

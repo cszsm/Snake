@@ -16,10 +16,15 @@ public class MasterSynchronizerThread extends Thread {
         TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
         transferThread.start();
 
-        int i = 5;
-        while (i > 0) {
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 11; i++) {
             try {
-                sleep(1000);
+                sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -42,7 +47,6 @@ public class MasterSynchronizerThread extends Thread {
 
             // Sending delay_resp
             transferThread.write(new SynchronizerPacket(delay_req_time));
-            i--;
         }
 
 //        transferThread.cancel();

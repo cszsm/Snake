@@ -18,9 +18,17 @@ import connection.Packet;
 public class BluetoothConnectionSocket implements ConnectionSocket {
 
     private BluetoothSocket socket;
+    private InputStream inputStream;
+    private OutputStream outputStream;
 
     public BluetoothConnectionSocket(BluetoothSocket socket) {
         this.socket = socket;
+        try {
+            inputStream = socket.getInputStream();
+            outputStream = socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    @Override
@@ -35,12 +43,12 @@ public class BluetoothConnectionSocket implements ConnectionSocket {
 
     @Override
     public void send(byte[] packet) throws IOException {
-        socket.getOutputStream().write(packet);
+        outputStream.write(packet);
     }
 
     @Override
     public int receive(byte[] packet) throws IOException {
-        return socket.getInputStream().read(packet);
+        return inputStream.read(packet);
     }
 
     @Override
