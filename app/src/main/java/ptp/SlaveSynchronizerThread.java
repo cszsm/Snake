@@ -16,8 +16,9 @@ public class SlaveSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
-        transferThread.start();
+//        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
+//        transferThread.start();
+        TransferThread transferThread = ConnectionManager.getInstance().getTransferThread();
 
         int averageDelay = 0;
 
@@ -66,7 +67,22 @@ public class SlaveSynchronizerThread extends Thread {
         Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
         Log.v("sync", ConnectionManager.getInstance().getDeviceType().toString());
 
+        boolean wait_for_start = true;
+        SynchronizerPacket startTimePacket;
+        long startTime = 0;
+        while(wait_for_start) {
+            startTimePacket = (SynchronizerPacket) transferThread.getPacket();
+            if(startTimePacket != null) {
+                startTime = startTimePacket.getTime();
+                wait_for_start = false;
+            }
+        }
+        Log.v("sync", String.valueOf(startTime));
+
+        while (TimeManager.getTime() + ConnectionManager.getInstance().getOffset() < startTime);
+
+
 //        transferThread.cancel();
-        ConnectionManager.getInstance().setTransferThread(transferThread);
+//        ConnectionManager.getInstance().setTransferThread(transferThread);
     }
 }

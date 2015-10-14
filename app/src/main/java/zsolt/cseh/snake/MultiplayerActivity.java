@@ -16,18 +16,19 @@ import view.GameView;
 public class MultiplayerActivity extends Activity {
 
     private GameView multiplayerView;
-    private TransferThread transferThread;
+//    private TransferThread transferThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
-        transferThread = new TransferThread(socket);
+        TransferThread transferThread = new TransferThread(socket);
         transferThread.start();
+        ConnectionManager.getInstance().setTransferThread(transferThread);
 
         Game.getInstance().reset();
-        Game.getInstance().getGameManager().setTransferThread(transferThread);
+//        Game.getInstance().getGameManager().setTransferThread(transferThread);
         multiplayerView = new GameView(getApplicationContext(), null);
 
         setContentView(multiplayerView);
@@ -36,7 +37,10 @@ public class MultiplayerActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        transferThread.cancel();
+
+//        transferThread.cancel();
+        ConnectionManager.getInstance().getTransferThread().cancel();
+
         Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

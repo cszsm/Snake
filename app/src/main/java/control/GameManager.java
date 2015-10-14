@@ -1,5 +1,6 @@
 package control;
 
+import connection.ConnectionManager;
 import connection.TransferThread;
 import model.Snake;
 
@@ -19,6 +20,8 @@ public abstract class GameManager {
         this.snakeOneManager = snakeOneManager;
         this.snakeTwoManager = snakeTwoManager;
         this.foodManager = foodManager;
+
+        transferThread = ConnectionManager.getInstance().getTransferThread();
     }
 
     /**

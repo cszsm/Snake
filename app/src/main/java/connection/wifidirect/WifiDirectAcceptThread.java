@@ -58,8 +58,8 @@ public class WifiDirectAcceptThread extends Thread {
                 }
 
                 ConnectionManager.getInstance().setSocket(new WifiDirectSocket(client));
-//                activity.startGame();
-                activity.startSynchronizer();
+                activity.startGame();
+//                activity.startSynchronizer();
 //                activity.startTest();
                 break;
             }

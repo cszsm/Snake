@@ -1,8 +1,13 @@
 package control;
 
+import android.util.Log;
+
 import connection.ConnectionManager;
+import connection.TransferThread;
 import connection.enumeration.DeviceType;
 import model.Game;
+import ptp.MasterSynchronizerThread;
+import ptp.SlaveSynchronizerThread;
 import view.GameView;
 
 /**
@@ -27,6 +32,21 @@ public class TimingThread extends Thread {
      */
     @Override
     public void run() {
+
+        Thread synchronizerThread;
+        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER) {
+            synchronizerThread = new MasterSynchronizerThread();
+        } else {
+            synchronizerThread = new SlaveSynchronizerThread();
+        }
+        synchronizerThread.start();
+
+        try {
+            synchronizerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         while (!stopSignal) {
             try {
                 if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {

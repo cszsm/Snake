@@ -1,5 +1,7 @@
 package ptp;
 
+import android.util.Log;
+
 import connection.ConnectionManager;
 import connection.TransferThread;
 import control.TimeManager;
@@ -13,8 +15,9 @@ public class MasterSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
-        transferThread.start();
+//        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
+//        transferThread.start();
+        TransferThread transferThread = ConnectionManager.getInstance().getTransferThread();
 
         try {
             sleep(1000);
@@ -49,7 +52,14 @@ public class MasterSynchronizerThread extends Thread {
             transferThread.write(new SynchronizerPacket(delay_req_time));
         }
 
+        long time = TimeManager.getTime();
+        time += 1000;
+        transferThread.write(new SynchronizerPacket(time));
+
+        Log.v("sync", String.valueOf(time));
+        while (TimeManager.getTime() < time);
+
 //        transferThread.cancel();
-        ConnectionManager.getInstance().setTransferThread(transferThread);
+//        ConnectionManager.getInstance().setTransferThread(transferThread);
     }
 }
