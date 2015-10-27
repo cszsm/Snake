@@ -17,6 +17,11 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import connection.SnakePacket;
+import connection.TransferThread;
+import connection.wifi.WifiSocket;
+import model.enumeration.Direction;
+
 public class WifiActivity extends Activity {
 
     @Override
@@ -31,45 +36,101 @@ public class WifiActivity extends Activity {
 //            Log.v("wifi", "datagramsocket... error");
 //        }
 
+
+        DatagramSocket datagramSocket = null;
+        try {
+            datagramSocket = new DatagramSocket();
+            datagramSocket.setBroadcast(true);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
+        WifiSocket wifiSocket = null;
+        try {
+            wifiSocket = new WifiSocket(datagramSocket, getBroadcastAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+        TransferThread transferThread = new TransferThread(wifiSocket);
+        transferThread.start();
+
+
+        SnakePacket packet = new SnakePacket(Direction.DOWN, 13, 42);
+        transferThread.write(packet);
+
         Button btnSend = (Button) findViewById(R.id.btnWifiSend);
+        final WifiSocket finalWifiSocket = wifiSocket;
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message = "Teszt";
-                try {
-                    DatagramSocket socket = new DatagramSocket();
-                    InetAddress local = InetAddress.getByName("10.80.1.95");
-                    byte[] bytes = message.getBytes();
-                    DatagramPacket packet = new DatagramPacket(bytes, message.length(), local, 8888);
-                    socket.send(packet);
-                } catch (SocketException e) {
-                    Log.v("wifi", "datagramsocket error");
-                } catch (UnknownHostException e) {
-                    Log.v("wifi", "inetadress error");
-                } catch (IOException e) {
-                    Log.v("wifi", "send error");
-                }
+                SnakePacket packet = new SnakePacket(Direction.DOWN, 13, 42);
+//                transferThread.write(packet);
+
+
+
+//                if (finalWifiSocket != null) {
+//                    try {
+//                        finalWifiSocket.send(bytes);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+
+
+
+
+//                try {
+//                    DatagramSocket socket = new DatagramSocket();
+//                    socket.setBroadcast(true);
+////                    InetAddress local = InetAddress.getByName("10.80.1.95");
+//                    byte[] bytes = message.getBytes();
+//                    DatagramPacket packet = new DatagramPacket(bytes, message.length(), getBroadcastAddress(), 8888);
+//                    socket.send(packet);
+//                } catch (SocketException e) {
+//                    Log.v("wifi", "datagramsocket error");
+//                } catch (UnknownHostException e) {
+//                    Log.v("wifi", "inetadress error");
+//                } catch (IOException e) {
+//                    Log.v("wifi", "send error");
+//                }
             }
         });
 
         Button btnReceive = (Button) findViewById(R.id.btnWifiReceive);
+        final WifiSocket finalWifiSocket1 = wifiSocket;
         btnReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message;
-                byte[] bytes = new byte[1024];
-                DatagramPacket packet = new DatagramPacket(bytes, bytes.length);
-                try {
-                    DatagramSocket socket = new DatagramSocket(8888);
-                    socket.receive(packet);
-                    message = new String(bytes, 0, packet.getLength());
-                    Log.v("wifi", "OK: " + message);
-                    socket.close();
-                } catch (SocketException e) {
-                    Log.v("wifi", "datagramsocket error");
-                } catch (IOException e) {
-                    Log.v("wifi", "receive exception");
-                }
+//                String message;
+//                byte[] bytes = new byte[1024];
+//
+//                int length = 0;
+//                try {
+//                    length = finalWifiSocket1.receive(bytes);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                message = new String(bytes, 0, length);
+//                Log.v("udp", message);
+
+
+
+
+//                byte[] bytes = new byte[1024];
+//                DatagramPacket packet = new DatagramPacket(bytes, bytes.length);
+//                try {
+//                    DatagramSocket socket = new DatagramSocket(8888);
+//                    socket.receive(packet);
+//                    message = new String(bytes, 0, packet.getLength());
+//                    Log.v("wifi", "OK: " + message);
+//                    socket.close();
+//                } catch (SocketException e) {
+//                    Log.v("wifi", "datagramsocket error");
+//                } catch (IOException e) {
+//                    Log.v("wifi", "receive exception");
+//                }
             }
         });
     }
@@ -78,7 +139,7 @@ public class WifiActivity extends Activity {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
         if(dhcpInfo == null) {
-            Log.v("wifi", "dhcpInfo is null");
+            Log.v("udp", "dhcpInfo is null");
             return null;
         }
 

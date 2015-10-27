@@ -28,8 +28,8 @@ public class TransferThread extends Thread {
 
     public TransferThread(ConnectionSocket socket) {
         this.socket = socket;
-        InputStream tmpIn = null;
-        OutputStream tmpOut = null;
+//        InputStream tmpIn = null;
+//        OutputStream tmpOut = null;
 
         packets = new LinkedList<>();
 //        arrivedPackets = 0;
