@@ -1,8 +1,5 @@
 package control;
 
-import android.util.Log;
-
-import connection.Packet;
 import connection.SnakePacket;
 import model.enumeration.Direction;
 
@@ -17,31 +14,36 @@ public class MasterGameManager extends GameManager {
         super(snakeOneManager, snakeTwoManager, foodManager);
     }
 
+    @Override
+    public void send() {
+        snakeOneManager.validateDirection();
+        sendPacket();
+    }
+
     /**
      * Steps the game and send a packet to the slave device
      */
     public void step() {
         SnakePacket packet = (SnakePacket) transferThread.getPacket();
-
         if (packet != null) {
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
             setDirection(packet.getDirection());
         }
 
-        sendPacket();
-
         snakeOneManager.step();
         snakeTwoManager.step();
 
-        if (!snakeOneManager.eat(foodManager.getFood())) {
+        boolean snakeOneAte = snakeOneManager.eat(foodManager.getFood());
+        if (!snakeOneAte) {
             snakeOneManager.removeTail();
         }
 
-        if (!snakeTwoManager.eat(foodManager.getFood())) {
+        boolean snakeTwoAte = snakeTwoManager.eat(foodManager.getFood());
+        if (!snakeTwoAte) {
             snakeTwoManager.removeTail();
         }
 
-        if (snakeOneManager.eat(foodManager.getFood()) || snakeTwoManager.eat(foodManager.getFood())) {
+        if (snakeOneAte || snakeTwoAte) {
             foodManager.createFood(snakeOneManager.getSnake());
         }
     }
@@ -73,7 +75,6 @@ public class MasterGameManager extends GameManager {
      */
     private void sendPacket() {
         SnakePacket packet = new SnakePacket(snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
-
         transferThread.write(packet);
     }
 }

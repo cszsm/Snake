@@ -25,6 +25,11 @@ public abstract class GameManager {
     }
 
     /**
+     * Sends the current direction...
+     */
+    public abstract void send();
+
+    /**
      * Steps the game
      */
     public abstract void step();

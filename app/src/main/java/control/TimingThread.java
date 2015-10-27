@@ -49,11 +49,19 @@ public class TimingThread extends Thread {
 
         while (!stopSignal) {
             try {
-                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
-                    Thread.sleep(1000);
-                } else {
-                    Thread.sleep(20);
+//                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
+//                    Thread.sleep(1000);
+//                } else {
+//                    Thread.sleep(20);
+//                }
+
+                Thread.sleep(900);
+
+                if (!pauseSignal) {
+                    Game.getInstance().getGameManager().send();
                 }
+
+                Thread.sleep(100);
 
                 if (!pauseSignal) {
                     Game.getInstance().getGameManager().step();
