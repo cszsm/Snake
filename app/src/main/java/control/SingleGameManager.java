@@ -11,6 +11,11 @@ public class SingleGameManager extends GameManager {
         super(snakeOneManager, snakeTwoManager, foodManager);
     }
 
+    @Override
+    public void send() {
+
+    }
+
     /**
      * Steps the game
      */
