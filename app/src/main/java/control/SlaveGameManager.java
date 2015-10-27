@@ -31,20 +31,20 @@ public class SlaveGameManager extends GameManager {
         if (packet != null) {
             snakeOneManager.getSnake().setDirection(packet.getDirection());
             setDirection(packet.getDirection());
-        }
 
-        foodManager.getFood().setX(packet.getFoodX());
-        foodManager.getFood().setY(packet.getFoodY());
+            foodManager.getFood().setX(packet.getFoodX());
+            foodManager.getFood().setY(packet.getFoodY());
 
-        snakeOneManager.step();
-        snakeTwoManager.step();
+            snakeOneManager.step();
+            snakeTwoManager.step();
 
-        if (!snakeOneManager.eat(foodManager.getFood())) {
-            snakeOneManager.removeTail();
-        }
+            if (!snakeOneManager.eat(foodManager.getFood())) {
+                snakeOneManager.removeTail();
+            }
 
-        if (!snakeTwoManager.eat(foodManager.getFood())) {
-            snakeTwoManager.removeTail();
+            if (!snakeTwoManager.eat(foodManager.getFood())) {
+                snakeTwoManager.removeTail();
+            }
         }
     }
 

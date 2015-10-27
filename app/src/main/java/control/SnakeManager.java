@@ -18,6 +18,7 @@ public class SnakeManager {
     public SnakeManager(Snake snake) {
         this.snake = snake;
         direction = snake.getDirection();
+        validDirection = direction;
     }
 
     public void validateDirection() {
