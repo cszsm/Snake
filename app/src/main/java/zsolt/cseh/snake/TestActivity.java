@@ -125,15 +125,19 @@ public class TestActivity extends Activity {
 //    }
 
     public void receivePacket() {
-        TestPacket packet = (TestPacket) transferThread.getPacket();
+        try {
+            TestPacket packet = (TestPacket) transferThread.getPacket();
 
-        if (packet != null) {
-//            addPacket(packet.getTimestamp(), packet.getLength());
-//            Log.v("packet", "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
-//                    TimeManager.getTime(TimeManager.getTime() - ConnectionManager.getInstance().getOffset()) +
-//                    ";" + packet.getLength());
-            packet.setTimestamp(TimeManager.getTime());
-            packets.add(packet);
+            if (packet != null) {
+    //            addPacket(packet.getTimestamp(), packet.getLength());
+    //            Log.v("packet", "received;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+    //                    TimeManager.getTime(TimeManager.getTime() - ConnectionManager.getInstance().getOffset()) +
+    //                    ";" + packet.getLength());
+                packet.setTimestamp(TimeManager.getTime());
+                packets.add(packet);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 

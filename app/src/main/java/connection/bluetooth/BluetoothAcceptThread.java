@@ -61,8 +61,8 @@ public class BluetoothAcceptThread extends Thread {
                 }
 
                 ConnectionManager.getInstance().setSocket(new BluetoothConnectionSocket(bluetoothSocket));
-                activity.startGame();
-//                activity.startTest();
+//                activity.startGame();
+                activity.startTest();
 //                activity.startSynchronizer();
                 break;
             }
