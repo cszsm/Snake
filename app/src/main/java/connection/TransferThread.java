@@ -60,6 +60,13 @@ public class TransferThread extends Thread {
 //                    packet = PacketSerialization.deserialize(buffer);
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
+                    Log.v("timer_sync", "received");
+                    try {
+                        SnakePacket snakePacket = (SnakePacket) packet;
+                        Log.v("timer_sync", snakePacket.getDirection().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
 //                    Log.v("packet", String.valueOf(((TestPacket) packet).getTimestamp()));
 //                    Log.v("packets", "kap");
@@ -100,6 +107,15 @@ public class TransferThread extends Thread {
         try {
 //            outputStream.write(bytes);
             socket.send(bytes);
+            Log.v("timer_sync", "sent");
+
+            try {
+                SnakePacket snakePacket = (SnakePacket) packet;
+                Log.v("timer_sync", snakePacket.getDirection().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,7 +129,15 @@ public class TransferThread extends Thread {
 //            arrivedPackets--;
 //            return packet;
 //            Log.v("fifo", String.valueOf(arrivedPackets) + String.valueOf(packets.size()));
-        return packets.poll();
+        Log.v("timer_sync", "got");
+        Packet packet = packets.poll();
+        try {
+            SnakePacket snakePacket = (SnakePacket) packet;
+            Log.v("timer_sync", snakePacket.getDirection().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return packet;
 //        } else {
 //            return null;
 //        }

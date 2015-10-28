@@ -16,8 +16,8 @@ public class MasterGameManager extends GameManager {
 
     @Override
     public void send() {
-        snakeOneManager.validateDirection();
         sendPacket();
+        snakeOneManager.validateDirection();
     }
 
     /**
@@ -27,6 +27,7 @@ public class MasterGameManager extends GameManager {
         SnakePacket packet = (SnakePacket) transferThread.getPacket();
         if (packet != null) {
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
+            snakeTwoManager.validateDirection();
             setDirection(packet.getDirection());
         }
 

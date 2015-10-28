@@ -19,17 +19,19 @@ public class SlaveGameManager extends GameManager {
 
     @Override
     public void send() {
-        snakeTwoManager.validateDirection();
         sendPacket();
+        snakeTwoManager.validateDirection();
     }
 
     /**
-     * Steps the game when a packet arrives
+     * Steps the game...
      */
     public void step() {
         SnakePacket packet = (SnakePacket) transferThread.getPacket();
         if (packet != null) {
+            Log.v("timer_sync", "STEP - " + packet.getDirection());
             snakeOneManager.getSnake().setDirection(packet.getDirection());
+            snakeOneManager.validateDirection();
             setDirection(packet.getDirection());
 
             foodManager.getFood().setX(packet.getFoodX());
