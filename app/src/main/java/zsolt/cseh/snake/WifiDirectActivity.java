@@ -64,7 +64,7 @@ public class WifiDirectActivity extends Activity implements ConnectionInfoListen
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
-        ListView listView = (ListView) findViewById(R.id.listWifiDevices);
+        ListView listView = (ListView) findViewById(R.id.listWifiP2pDevices);
         devices = new SimpleArrayMap<>();
 
         peerList = new ArrayList<>();

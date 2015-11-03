@@ -25,20 +25,21 @@ public class WifiSocket implements ConnectionSocket {
 
     @Override
     public void send(byte[] packet) throws IOException {
-        String message = "Teszt";
-        byte[] bytes = message.getBytes();
-        DatagramPacket datagramPacket = new DatagramPacket(bytes, 5, broadcastAddress, 8888);
+//        String message = "Teszt";
+//        byte[] bytes = message.getBytes();
+        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, broadcastAddress, 8888);
         socket.send(datagramPacket);
+        Log.v("udp", "SENT - WifiSocket");
     }
 
     @Override
     public int receive(byte[] packet) throws IOException {
-        byte[] bytes = new byte[1024];
-        DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);
+//        byte[] bytes = new byte[1024];
+        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length);
         socket.receive(datagramPacket);
-        packet = datagramPacket.getData();
-        String message = new String(bytes, 0, datagramPacket.getLength());
-        Log.v("udp", message);
+
+        String message = new String(packet, 0, datagramPacket.getLength());
+        Log.v("udp", "RECEIVE" + message);
         return datagramPacket.getLength();
     }
 

@@ -29,4 +29,24 @@
         android:layout_below="@+id/btnWifiSend"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id="@+id/btnWifiRefresh"
+        android:layout_below="@+id/btnWifiReceive"
+        android:layout_toRightOf="@+id/listWifiDevices"
+        android:layout_toEndOf="@+id/listWifiDevices" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listWifiDevices"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btnWifiSend"
+        android:layout_toStartOf="@+id/btnWifiSend" />
+
 </RelativeLayout>

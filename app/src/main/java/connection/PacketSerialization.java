@@ -1,5 +1,7 @@
 package connection;
 
+import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,6 +19,7 @@ public class PacketSerialization {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         ObjectOutputStream o = new ObjectOutputStream(b);
         o.writeObject(packet);
+        Log.v("udp", String.valueOf(b.size()));
         return b.toByteArray();
     }
 
