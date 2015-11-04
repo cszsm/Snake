@@ -22,9 +22,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import connection.TransferThread;
-import connection.wifi.WifiConnectionThread;
+import connection.wifi.WifiDiscovererThread;
 import connection.wifi.WifiSocket;
-import connection.wifi.WifiThread;
+import connection.wifi.WifiSenderThread;
 
 public class WifiActivity extends Activity {
 
@@ -40,6 +40,24 @@ public class WifiActivity extends Activity {
         ListView deviceListView = (ListView) findViewById(R.id.listWifiDevices);
         devices = new SimpleArrayMap<>();
 
+        DatagramSocket broadcastSocket = null;
+        try {
+            broadcastSocket = new DatagramSocket(8888);
+            broadcastSocket.setBroadcast(true);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
+        WifiSocket broadcastWifiSocket = null;
+        try {
+            broadcastWifiSocket = new WifiSocket(broadcastSocket, getBroadcastAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+        final TransferThread broadcastThread = new TransferThread(broadcastWifiSocket);
+        broadcastThread.start();
+
         deviceArrayList = new ArrayList<>();
         deviceArrayAdapter = new ArrayAdapter<>(WifiActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
         deviceListView.setAdapter(deviceArrayAdapter);
@@ -50,6 +68,23 @@ public class WifiActivity extends Activity {
                 TextView clickedView = (TextView) view;
                 InetAddress deviceAddress = devices.get(clickedView.getText());
                 Toast.makeText(WifiActivity.this, deviceAddress.toString(), Toast.LENGTH_SHORT).show();
+
+                broadcastThread.cancel();
+
+                DatagramSocket unicastSocket = null;
+                try {
+                    unicastSocket = new DatagramSocket(8888);
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                }
+
+                WifiSocket unicastWifiSocket = new WifiSocket(unicastSocket, deviceAddress);
+
+                TransferThread unicastThread = new TransferThread(unicastWifiSocket);
+                unicastThread.start();
+
+                WifiSenderThread wifiSenderThread = new WifiSenderThread(unicastThread, (WifiManager) getSystemService(WIFI_SERVICE));
+                wifiSenderThread.start();
             }
         });
 
@@ -60,36 +95,17 @@ public class WifiActivity extends Activity {
 //            Log.v("wifi", "datagramsocket... error");
 //        }
 
-
-        DatagramSocket datagramSocket = null;
-        try {
-            datagramSocket = new DatagramSocket(8888);
-            datagramSocket.setBroadcast(true);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-
-        WifiSocket wifiSocket = null;
-        try {
-            wifiSocket = new WifiSocket(datagramSocket, getBroadcastAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-
-        final TransferThread transferThread = new TransferThread(wifiSocket);
-        transferThread.start();
-
         Button btnSend = (Button) findViewById(R.id.btnWifiSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WifiThread wifiThread = new WifiThread(transferThread, (WifiManager) getSystemService(WIFI_SERVICE));
-                wifiThread.start();
+                WifiSenderThread wifiSenderThread = new WifiSenderThread(broadcastThread, (WifiManager) getSystemService(WIFI_SERVICE));
+                wifiSenderThread.start();
 
 
 
 //                SnakePacket packet = new SnakePacket(Direction.DOWN, 13, 42);
-//                transferThread.write(packet);
+//                broadcastThread.write(packet);
 
 
 //                if (finalWifiSocket != null) {
@@ -121,20 +137,20 @@ public class WifiActivity extends Activity {
         });
 
         Button btnReceive = (Button) findViewById(R.id.btnWifiReceive);
-//        final WifiSocket finalWifiSocket1 = wifiSocket;
+//        final WifiSocket finalWifiSocket1 = broadcastWifiSocket;
         btnReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                WifiConnectionThread connectionThread = new WifiConnectionThread(deviceArrayList, deviceArrayAdapter, devices, transferThread);
+                WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, deviceArrayAdapter, devices, broadcastThread);
                 connectionThread.start();
 
-//                SnakePacket packet = (SnakePacket) transferThread.getPacket();
+//                SnakePacket packet = (SnakePacket) broadcastThread.getPacket();
 
 //                byte[] packet;
 //                packet = new byte[1024];
-//                int bytes = transferThread.getPacket(packet);
-//                DatagramPacket packet = new DatagramPacket(transferThread.getPacket(), )
+//                int bytes = broadcastThread.getPacket(packet);
+//                DatagramPacket packet = new DatagramPacket(broadcastThread.getPacket(), )
 //                Log.v("udp", "GOT - " + packet.getDirection());
 
 
@@ -169,9 +185,15 @@ public class WifiActivity extends Activity {
 //                }
             }
         });
-    }
 
-    Button btnRefresh = (Button) findViewById(R.id.btnWifiRefresh);
+        Button btnRefresh = (Button) findViewById(R.id.btnWifiRefresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deviceArrayAdapter.notifyDataSetChanged();
+            }
+        });
+    }
 
     private InetAddress getBroadcastAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);

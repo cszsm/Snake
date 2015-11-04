@@ -42,6 +42,7 @@ public class TransferThread extends Thread {
                 try {
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
+                    Log.v("udp", "RECEIVED - TransferThread");
 //                    Log.v("timer_sync", "received");
 //                    try {
 //                        SnakePacket snakePacket = (SnakePacket) packet;

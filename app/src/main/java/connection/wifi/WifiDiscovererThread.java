@@ -11,13 +11,13 @@ import connection.TransferThread;
 /**
  * Created by zscse on 2015. 11. 03..
  */
-public class WifiConnectionThread extends Thread {
+public class WifiDiscovererThread extends Thread {
     private ArrayList<String> deviceArrayList;
     private ArrayAdapter<String> deviceArrayAdapter;
     private SimpleArrayMap<String, InetAddress> devices;
     private TransferThread transferThread;
 
-    public WifiConnectionThread(ArrayList<String> deviceArrayList,
+    public WifiDiscovererThread(ArrayList<String> deviceArrayList,
                                 ArrayAdapter<String> deviceArrayAdapter,
                                 SimpleArrayMap<String, InetAddress> devices,
                                 TransferThread transferThread) {
@@ -38,8 +38,8 @@ public class WifiConnectionThread extends Thread {
             connectionPacket = (WifiConnectionPacket) transferThread.getPacket();
             if (connectionPacket != null) {
 //                deviceArrayAdapter.add("igen");
-                deviceArrayList.add("igen");
-                devices.put("igen", connectionPacket.getAddress());
+                deviceArrayList.add(connectionPacket.getAddress().toString());
+                devices.put(connectionPacket.getAddress().toString(), connectionPacket.getAddress());
             }
         }
     }

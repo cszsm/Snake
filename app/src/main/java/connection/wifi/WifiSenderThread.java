@@ -16,12 +16,12 @@ import model.enumeration.Direction;
 /**
  * Created by zscse on 2015. 10. 31..
  */
-public class WifiThread extends Thread {
+public class WifiSenderThread extends Thread {
 
     private TransferThread transferThread;
     private WifiManager wifiManager;
 
-    public WifiThread(TransferThread transferThread, WifiManager wifiManager) {
+    public WifiSenderThread(TransferThread transferThread, WifiManager wifiManager) {
         this.transferThread = transferThread;
         this.wifiManager = wifiManager;
     }
