@@ -30,6 +30,7 @@ public class MasterGameManager extends GameManager {
         SnakePacket packet = (SnakePacket) transferThread.getPacket();
         if (packet != null) {
             snakeTwoManager.buildSnake(packet.getCorners());
+//            snakeTwoManager.setSnake(packet.getBody());
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
             snakeTwoManager.validateDirection();
             setDirection(packet.getDirection());
@@ -79,6 +80,7 @@ public class MasterGameManager extends GameManager {
      */
     private void sendPacket() {
         SnakePacket packet = new SnakePacket(snakeOneManager.getCorners(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
+//        SnakePacket packet = new SnakePacket(snakeOneManager.getSnake().getBody(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
         transferThread.write(packet);
     }
 }

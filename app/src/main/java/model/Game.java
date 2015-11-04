@@ -94,19 +94,19 @@ public class Game {
      * Creates a snake with default coordinates
      */
     private Snake createSnakeOne() {
-        ArrayList<Point> snake = new ArrayList<>();
-        snake.add(new Point(5, 2));
-        snake.add(new Point(4, 2));
-        snake.add(new Point(3, 2));
+        ArrayList<Position> snake = new ArrayList<>();
+        snake.add(new Position(5, 2));
+        snake.add(new Position(4, 2));
+        snake.add(new Position(3, 2));
 
         return new Snake(snake, Direction.RIGTH);
     }
 
     private Snake createSnakeTwo() {
-        ArrayList<Point> snake = new ArrayList<>();
-        snake.add(new Point(9, 6));
-        snake.add(new Point(10, 6));
-        snake.add(new Point(11, 6));
+        ArrayList<Position> snake = new ArrayList<>();
+        snake.add(new Position(9, 6));
+        snake.add(new Position(10, 6));
+        snake.add(new Position(11, 6));
 
         return new Snake(snake, Direction.LEFT);
     }

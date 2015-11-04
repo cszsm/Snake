@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Food;
+import model.Position;
 import model.Snake;
 import model.enumeration.Direction;
 
@@ -75,14 +76,14 @@ public class SnakeManager {
         return direction;
     }
 
-    public ArrayList<Point> getCorners() {
-        ArrayList<Point> body = snake.getBody();
-        ArrayList<Point> corners = new ArrayList<>();
+    public ArrayList<Position> getCorners() {
+        ArrayList<Position> body = snake.getBody();
+        ArrayList<Position> corners = new ArrayList<>();
         corners.add(body.get(0));
 
-        for(int i = 1; i < body.size() - 2; i++) {
-            Point prev = body.get(i - 1);
-            Point next = body.get(i + 1);
+        for(int i = 1; i < body.size() - 1; i++) {
+            Position prev = body.get(i - 1);
+            Position next = body.get(i + 1);
             if(prev.x != next.x && prev.y != next.y) {
                 corners.add(body.get(i));
             }
@@ -93,14 +94,14 @@ public class SnakeManager {
         return corners;
     }
 
-    public void buildSnake(List<Point> corners) {
-        ArrayList<Point> body = new ArrayList<>();
-        for (Point corner : corners) {
+    public void buildSnake(List<Position> corners) {
+        ArrayList<Position> body = new ArrayList<>();
+        for (Position corner : corners) {
             if (body.isEmpty()) {
                 body.add(corner);
             } else {
-                Point tail = body.get(body.size() - 1);
-                Point modifier = new Point();
+                Position tail = body.get(body.size() - 1);
+                Position modifier = new Position();
 
                 // count the direction of this section
                 if(tail.x == corner.x) {
@@ -121,14 +122,18 @@ public class SnakeManager {
 
                 // build the section
                 while (!tail.equals(corner)) {
-                    tail.x += modifier.x;
-                    tail.y += modifier.y;
-                    body.add(tail);
+                    Position tmp = new Position();
+                    tmp.x = tail.x + modifier.x;
+                    tmp.y = tail.y + modifier.y;
+                    body.add(tmp);
+                    tail = tmp;
                 }
-
-                body.add(corner);
             }
         }
+        snake.setBody(body);
+    }
+
+    public void setSnake(ArrayList<Position> body) {
         snake.setBody(body);
     }
 }

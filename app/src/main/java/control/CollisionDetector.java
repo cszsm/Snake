@@ -3,6 +3,7 @@ package control;
 import android.graphics.Point;
 
 import model.Board;
+import model.Position;
 import model.Snake;
 import model.enumeration.BoardElement;
 
@@ -32,17 +33,17 @@ public class CollisionDetector {
             return true;
         }
 
-        Point headOne = snakeOne.getHead();
-        Point headTwo = snakeTwo.getHead();
+        Position headOne = snakeOne.getHead();
+        Position headTwo = snakeTwo.getHead();
 
-        for (Point point : snakeOne.getBody()) {
-            if (headOne.equals(point) && headOne != point || headTwo.equals(point)) {
+        for (Position position : snakeOne.getBody()) {
+            if (headOne.equals(position) && headOne != position || headTwo.equals(position)) {
                 return true;
             }
         }
 
-        for (Point point : snakeTwo.getBody()) {
-            if (headTwo.equals(point) && headTwo != point || headOne.equals(point)) {
+        for (Position position : snakeTwo.getBody()) {
+            if (headTwo.equals(position) && headTwo != position || headOne.equals(position)) {
                 return true;
             }
         }

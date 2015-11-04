@@ -6,6 +6,7 @@ import java.util.Random;
 
 import model.Board;
 import model.Food;
+import model.Position;
 import model.Snake;
 import model.enumeration.BoardElement;
 
@@ -52,8 +53,8 @@ public class FoodManager {
             return false;
         }
 
-        for (Point p : snake.getBody()) {
-            if (p.equals(x, y)) {
+        for (Position position : snake.getBody()) {
+            if (position.equals(x, y)) {
                 return false;
             }
         }

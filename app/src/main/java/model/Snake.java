@@ -13,22 +13,22 @@ import model.enumeration.Direction;
  */
 public class Snake {
 
-    private ArrayList<Point> body;
+    private ArrayList<Position> body;
     private Direction direction;
 
     /**
      * Sets the snake's initial values
      */
-    public Snake(ArrayList<Point> body, Direction direction) {
+    public Snake(ArrayList<Position> body, Direction direction) {
         this.body = body;
         this.direction = direction;
     }
 
-    public ArrayList<Point> getBody() {
+    public ArrayList<Position> getBody() {
         return body;
     }
 
-    public void setBody(ArrayList<Point> body) {
+    public void setBody(ArrayList<Position> body) {
         this.body = body;
     }
 
@@ -44,27 +44,27 @@ public class Snake {
      * Moves the snake toward the current direction
      */
     public void step() {
-        Point head = getHead();
+        Position head = getHead();
 
         switch (direction) {
             case LEFT:
-                body.add(0, new Point(head.x - 1, head.y));
+                body.add(0, new Position(head.x - 1, head.y));
                 break;
             case RIGTH:
-                body.add(0, new Point(head.x + 1, head.y));
+                body.add(0, new Position(head.x + 1, head.y));
                 break;
             case UP:
-                body.add(0, new Point(head.x, head.y - 1));
+                body.add(0, new Position(head.x, head.y - 1));
                 break;
             case DOWN:
-                body.add(0, new Point(head.x, head.y + 1));
+                body.add(0, new Position(head.x, head.y + 1));
                 break;
             default:
                 break;
         }
     }
 
-    public Point getHead() {
+    public Position getHead() {
         return body.get(0);
     }
 

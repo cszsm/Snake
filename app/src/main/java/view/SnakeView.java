@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 
+import model.Position;
 import model.Snake;
 import model.enumeration.Player;
 
@@ -44,12 +45,12 @@ public class SnakeView extends RectangleView {
      * Draws the snake
      */
     public void draw(Canvas canvas) {
-        for (Point point : snake.getBody()) {
-            drawRectangle(point.x, point.y, canvas, paintBody);
-            drawRectangle(point.x, point.y, canvas, paintBorder);
+        for (Position position : snake.getBody()) {
+            drawRectangle(position.x, position.y, canvas, paintBody);
+            drawRectangle(position.x, position.y, canvas, paintBorder);
         }
 
-        Point head = snake.getBody().get(0);
+        Position head = snake.getBody().get(0);
         drawRectangle(head.x, head.y, canvas, paintHead);
         drawRectangle(head.x, head.y, canvas, paintBorder);
     }

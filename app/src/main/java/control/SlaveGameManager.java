@@ -32,6 +32,7 @@ public class SlaveGameManager extends GameManager {
         if (packet != null) {
             Log.v("timer_sync", "STEP - " + packet.getDirection());
             snakeOneManager.buildSnake(packet.getCorners());
+//            snakeOneManager.setSnake(packet.getBody());
             snakeOneManager.getSnake().setDirection(packet.getDirection());
             snakeOneManager.validateDirection();
             setDirection(packet.getDirection());
@@ -78,6 +79,7 @@ public class SlaveGameManager extends GameManager {
      */
     private void sendPacket() {
         SnakePacket packet = new SnakePacket(snakeTwoManager.getCorners(), snakeTwoManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
+//        SnakePacket packet = new SnakePacket(snakeTwoManager.getSnake().getBody(), snakeTwoManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 
         transferThread.write(packet);
     }
