@@ -27,9 +27,11 @@ public class SlaveGameManager extends GameManager {
      * Steps the game...
      */
     public void step() {
+        Log.v("type", "SLAVE");
         SnakePacket packet = (SnakePacket) transferThread.getPacket();
         if (packet != null) {
             Log.v("timer_sync", "STEP - " + packet.getDirection());
+            snakeOneManager.buildSnake(packet.getCorners());
             snakeOneManager.getSnake().setDirection(packet.getDirection());
             snakeOneManager.validateDirection();
             setDirection(packet.getDirection());
@@ -37,12 +39,11 @@ public class SlaveGameManager extends GameManager {
             foodManager.getFood().setX(packet.getFoodX());
             foodManager.getFood().setY(packet.getFoodY());
 
-            snakeOneManager.step();
             snakeTwoManager.step();
 
-            if (!snakeOneManager.eat(foodManager.getFood())) {
-                snakeOneManager.removeTail();
-            }
+//            if (!snakeOneManager.eat(foodManager.getFood())) {
+//                snakeOneManager.removeTail();
+//            }
 
             if (!snakeTwoManager.eat(foodManager.getFood())) {
                 snakeTwoManager.removeTail();
@@ -76,7 +77,7 @@ public class SlaveGameManager extends GameManager {
      * Sends a packet with the direction and the food's coordinates
      */
     private void sendPacket() {
-        SnakePacket packet = new SnakePacket(snakeTwoManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
+        SnakePacket packet = new SnakePacket(snakeTwoManager.getCorners(), snakeTwoManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 
         transferThread.write(packet);
     }

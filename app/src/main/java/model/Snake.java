@@ -28,6 +28,10 @@ public class Snake {
         return body;
     }
 
+    public void setBody(ArrayList<Point> body) {
+        this.body = body;
+    }
+
     public Direction getDirection() {
         return direction;
     }
