@@ -40,6 +40,7 @@ public class SlaveGameManager extends GameManager {
             foodManager.getFood().setX(packet.getFoodX());
             foodManager.getFood().setY(packet.getFoodY());
 
+//            snakeOneManager.step();
             snakeTwoManager.step();
 
 //            if (!snakeOneManager.eat(foodManager.getFood())) {

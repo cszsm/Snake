@@ -37,6 +37,7 @@ public class MasterGameManager extends GameManager {
         }
 
         snakeOneManager.step();
+//        snakeTwoManager.step();
 
         boolean snakeOneAte = snakeOneManager.eat(foodManager.getFood());
         if (!snakeOneAte) {
