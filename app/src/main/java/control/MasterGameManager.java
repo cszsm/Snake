@@ -3,6 +3,7 @@ package control;
 import android.util.Log;
 
 import connection.SnakePacket;
+import model.Snake;
 import model.enumeration.Direction;
 
 /**
@@ -32,12 +33,12 @@ public class MasterGameManager extends GameManager {
             snakeTwoManager.buildSnake(packet.getCorners());
 //            snakeTwoManager.setSnake(packet.getBody());
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
-            snakeTwoManager.validateDirection();
             setDirection(packet.getDirection());
+            snakeTwoManager.validateDirection();
         }
 
         snakeOneManager.step();
-//        snakeTwoManager.step();
+        snakeTwoManager.step();
 
         boolean snakeOneAte = snakeOneManager.eat(foodManager.getFood());
         if (!snakeOneAte) {
@@ -45,9 +46,9 @@ public class MasterGameManager extends GameManager {
         }
 
         boolean snakeTwoAte = snakeTwoManager.eat(foodManager.getFood());
-//        if (!snakeTwoAte) {
-//            snakeTwoManager.removeTail();
-//        }
+        if (!snakeTwoAte) {
+            snakeTwoManager.removeTail();
+        }
 
         if (snakeOneAte || snakeTwoAte) {
             foodManager.createFood(snakeOneManager.getSnake());
@@ -80,6 +81,14 @@ public class MasterGameManager extends GameManager {
      * Sends a packet with the direction and the food's coordinates
      */
     private void sendPacket() {
+//        Snake snake = new Snake(snakeOneManager.getSnake().getBody(), snakeOneManager.getSnake().getDirection());
+//        SnakeManager snakeManager = new SnakeManager(snake);
+//        snakeManager.step();
+//        if (!snakeManager.eat(foodManager.getFood())) {
+//            snakeManager.removeTail();
+//        }
+//
+//        SnakePacket packet = new SnakePacket(snakeManager.getCorners(), snakeManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
         SnakePacket packet = new SnakePacket(snakeOneManager.getCorners(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
 //        SnakePacket packet = new SnakePacket(snakeOneManager.getSnake().getBody(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
         transferThread.write(packet);
