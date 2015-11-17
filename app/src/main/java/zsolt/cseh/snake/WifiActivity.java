@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,15 @@ public class WifiActivity extends Activity {
         deviceArrayAdapter = new ArrayAdapter<>(WifiActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
         deviceListView.setAdapter(deviceArrayAdapter);
 
+//        DatagramSocket tmp = null;
+//        try {
+//            tmp = new DatagramSocket(8888);
+//        } catch (SocketException e) {
+//            Log.v("udp", e.getMessage());
+//            e.printStackTrace();
+//        }
+//        final DatagramSocket unicastSocket = tmp;
+
         deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -75,6 +85,7 @@ public class WifiActivity extends Activity {
                 try {
                     unicastSocket = new DatagramSocket(8888);
                 } catch (SocketException e) {
+                    Log.v("udp", e.getMessage());
                     e.printStackTrace();
                 }
 
@@ -83,8 +94,15 @@ public class WifiActivity extends Activity {
                 TransferThread unicastThread = new TransferThread(unicastWifiSocket);
                 unicastThread.start();
 
-                WifiSenderThread wifiSenderThread = new WifiSenderThread(unicastThread, (WifiManager) getSystemService(WIFI_SERVICE));
+                WifiSenderThread wifiSenderThread = new WifiSenderThread(unicastThread, (WifiManager) getSystemService(WIFI_SERVICE), true);
                 wifiSenderThread.start();
+
+                try {
+                    wifiSenderThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                unicastThread.cancel();
             }
         });
 
@@ -99,7 +117,7 @@ public class WifiActivity extends Activity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WifiSenderThread wifiSenderThread = new WifiSenderThread(broadcastThread, (WifiManager) getSystemService(WIFI_SERVICE));
+                WifiSenderThread wifiSenderThread = new WifiSenderThread(broadcastThread, (WifiManager) getSystemService(WIFI_SERVICE), false);
                 wifiSenderThread.start();
 
 
@@ -136,7 +154,7 @@ public class WifiActivity extends Activity {
             }
         });
 
-        Button btnReceive = (Button) findViewById(R.id.btnWifiReceive);
+        final Button btnReceive = (Button) findViewById(R.id.btnWifiReceive);
 //        final WifiSocket finalWifiSocket1 = broadcastWifiSocket;
         btnReceive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +162,7 @@ public class WifiActivity extends Activity {
 
                 WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, deviceArrayAdapter, devices, broadcastThread);
                 connectionThread.start();
+                btnReceive.setEnabled(false);
 
 //                SnakePacket packet = (SnakePacket) broadcastThread.getPacket();
 
@@ -209,7 +228,7 @@ public class WifiActivity extends Activity {
             quads[i] = (byte) ((broadcast >> i * 8) & 0xFF);
         }
 
-        Log.v("udp", String.valueOf(quads));
-        return InetAddress.getByAddress(quads);
+        InetAddress address = InetAddress.getByAddress(quads);
+        return address;
     }
 }
