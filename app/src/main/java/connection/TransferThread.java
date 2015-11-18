@@ -115,6 +115,10 @@ public class TransferThread extends Thread {
         return packet;
     }
 
+    public int getQueueLength() {
+        return packets.size();
+    }
+
     public void cancel() {
         stopSignal = true;
 

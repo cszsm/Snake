@@ -1,6 +1,7 @@
 package control;
 
 import connection.ConnectionManager;
+import connection.SnakePacket;
 import connection.TransferThread;
 import model.Snake;
 
@@ -56,5 +57,16 @@ public abstract class GameManager {
 
     public void setTransferThread(TransferThread transferThread) {
         this.transferThread = transferThread;
+    }
+
+    protected SnakePacket getLastPacket() {
+        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+        for (int i = 0; i < transferThread.getQueueLength() - 1; i++) {
+            SnakePacket tmp = (SnakePacket) transferThread.getPacket();
+            if(packet.getId() < tmp.getId()) {
+                packet = tmp;
+            }
+        }
+        return packet;
     }
 }

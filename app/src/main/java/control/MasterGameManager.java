@@ -2,6 +2,9 @@ package control;
 
 import android.util.Log;
 
+import java.util.Queue;
+
+import connection.Packet;
 import connection.SnakePacket;
 import model.Snake;
 import model.enumeration.Direction;
@@ -28,7 +31,8 @@ public class MasterGameManager extends GameManager {
      */
     public void step() {
         Log.v("type", "MASTER");
-        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+//        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+        SnakePacket packet = getLastPacket();
         if (packet != null) {
             snakeTwoManager.buildSnake(packet.getCorners());
 //            snakeTwoManager.setSnake(packet.getBody());

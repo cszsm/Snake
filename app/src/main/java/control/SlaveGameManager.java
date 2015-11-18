@@ -29,7 +29,8 @@ public class SlaveGameManager extends GameManager {
      */
     public void step() {
         Log.v("type", "SLAVE");
-        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+//        SnakePacket packet = (SnakePacket) transferThread.getPacket();
+        SnakePacket packet = getLastPacket();
         if (packet != null) {
             Log.v("timer_sync", "STEP - " + packet.getDirection());
             snakeOneManager.buildSnake(packet.getCorners());
