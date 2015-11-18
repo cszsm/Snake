@@ -8,27 +8,27 @@ import connection.Packet;
  * Created by zscse on 2015. 11. 02..
  */
 public class WifiConnectionPacket extends Packet {
-    private InetAddress address;
-    private boolean starter;
+    private InetAddress source;
+    private InetAddress destination;
 
-    public WifiConnectionPacket(InetAddress address, boolean starter) {
-        this.address = address;
-        this.starter = starter;
+    public WifiConnectionPacket(InetAddress source) {
+        this.source = source;
     }
 
-    public InetAddress getAddress() {
-        return address;
+    public WifiConnectionPacket(InetAddress source, InetAddress destination) {
+        this.source = source;
+        this.destination = destination;
     }
 
-    public void setAddress(InetAddress address) {
-        this.address = address;
+    public InetAddress getSource() {
+        return source;
     }
 
-    public boolean isStarter() {
-        return starter;
+    public InetAddress getDestination() {
+        return destination;
     }
 
-    public void setStarter(boolean starter) {
-        this.starter = starter;
+    public void setDestination(InetAddress address) {
+        this.destination = address;
     }
 }

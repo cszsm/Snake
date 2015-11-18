@@ -84,6 +84,7 @@ public class TransferThread extends Thread {
 
         try {
             socket.send(bytes);
+            Log.v("udp", "SENT");
 //            Log.v("timer_sync", "sent");
 
 //            try {
@@ -94,6 +95,7 @@ public class TransferThread extends Thread {
 //            }
 
         } catch (IOException e) {
+            Log.v("udp", "SENT Exception");
             e.printStackTrace();
         }
     }

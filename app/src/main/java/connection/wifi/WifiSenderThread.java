@@ -20,12 +20,17 @@ public class WifiSenderThread extends Thread {
 
     private TransferThread transferThread;
     private WifiManager wifiManager;
-    private boolean starter;
+    private InetAddress destination;
 
-    public WifiSenderThread(TransferThread transferThread, WifiManager wifiManager, boolean starter) {
+    public WifiSenderThread(TransferThread transferThread, WifiManager wifiManager) {
         this.transferThread = transferThread;
         this.wifiManager = wifiManager;
-        this.starter = starter;
+    }
+
+    public WifiSenderThread(TransferThread transferThread, WifiManager wifiManager, InetAddress destination) {
+        this.transferThread = transferThread;
+        this.wifiManager = wifiManager;
+        this.destination = destination;
     }
 
     @Override
@@ -35,16 +40,19 @@ public class WifiSenderThread extends Thread {
         byte[] bytes = BigInteger.valueOf(ipAddress).toByteArray();
         WifiConnectionPacket packet = null;
         try {
-            packet = new WifiConnectionPacket(InetAddress.getByAddress(bytes), starter);
+            if(destination != null) {
+                packet = new WifiConnectionPacket(InetAddress.getByAddress(bytes), destination);
+            } else {
+                packet = new WifiConnectionPacket(InetAddress.getByAddress(bytes));
+            }
+
 //            Log.v("udp", "SENT02");
         } catch (UnknownHostException e) {
 //            Log.v("udp", "SENT02__0");
             e.printStackTrace();
         }
-        Log.v("udp", packet.getAddress().getHostAddress());
+        Log.v("udp", packet.getSource().getHostAddress());
         transferThread.write(packet);
-
-        transferThread.cancel();
 //        if (packet != null) {
 //            Log.v("udp", "SENT03");
 //        } else {

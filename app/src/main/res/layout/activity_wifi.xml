@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Send"
         android:id="@+id/btnWifiSend"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/btnWifiReceive"
@@ -36,6 +36,15 @@
         android:text="Refresh"
         android:id="@+id/btnWifiRefresh"
         android:layout_below="@+id/btnWifiReceive"
+        android:layout_toRightOf="@+id/listWifiDevices"
+        android:layout_toEndOf="@+id/listWifiDevices" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RecUni"
+        android:id="@+id/btnWifiUni"
+        android:layout_below="@+id/btnWifiRefresh"
         android:layout_toRightOf="@+id/listWifiDevices"
         android:layout_toEndOf="@+id/listWifiDevices" />
 
