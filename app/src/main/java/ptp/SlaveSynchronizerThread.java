@@ -28,6 +28,7 @@ public class SlaveSynchronizerThread extends Thread {
             SynchronizerPacket sync = new SynchronizerPacket(0);
             long sync_time = 0;
 
+            Log.v("udp", "waiting for sync started");
             while (wait_for_sync) {
                 sync = (SynchronizerPacket) transferThread.getPacket();
                 if (sync != null) {

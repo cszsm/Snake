@@ -34,6 +34,7 @@ public class MasterSynchronizerThread extends Thread {
 
             // Sending sync
             transferThread.write(new SynchronizerPacket(TimeManager.getTime()));
+            Log.v("udp", "sync packet sent");
 
             // Waiting for delay_req
             boolean wait_for_delay_req = true;

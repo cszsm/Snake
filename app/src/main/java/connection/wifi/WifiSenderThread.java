@@ -36,14 +36,18 @@ public class WifiSenderThread extends Thread {
     @Override
     public void run() {
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
-        Log.v("udp", "IP " + ipAddress);
-        byte[] bytes = BigInteger.valueOf(ipAddress).toByteArray();
+        String ip = String.format("%d.%d.%d.%d",
+                (ipAddress & 0xff),
+                (ipAddress >> 8 & 0xff),
+                (ipAddress >> 16 & 0xff),
+                (ipAddress >> 24 & 0xff));
+        Log.v("udp", "IP " + ip);
         WifiConnectionPacket packet = null;
         try {
             if(destination != null) {
-                packet = new WifiConnectionPacket(InetAddress.getByAddress(bytes), destination);
+                packet = new WifiConnectionPacket(InetAddress.getByName(ip), destination);
             } else {
-                packet = new WifiConnectionPacket(InetAddress.getByAddress(bytes));
+                packet = new WifiConnectionPacket(InetAddress.getByName(ip));
             }
 
 //            Log.v("udp", "SENT02");

@@ -5,6 +5,7 @@ import android.net.wifi.WifiManager;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.net.DatagramPacket;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import connection.ConnectionManager;
 import connection.TransferThread;
+import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
 
 /**
@@ -27,6 +29,7 @@ public class WifiDiscovererThread extends Thread {
     private SimpleArrayMap<String, InetAddress> devices;
     private TransferThread transferThread;
     private WifiActivity activity;
+    private boolean stopSignal;
 
     public WifiDiscovererThread(ArrayList<String> deviceArrayList,
                                 ArrayAdapter<String> deviceArrayAdapter,
@@ -38,6 +41,7 @@ public class WifiDiscovererThread extends Thread {
         this.devices = devices;
         this.transferThread = transferThread;
         this.activity = activity;
+        stopSignal = false;
     }
 
     @Override
@@ -49,26 +53,36 @@ public class WifiDiscovererThread extends Thread {
 
         WifiManager wifiManager = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
+        String ip = String.format("%d.%d.%d.%d",
+                (ipAddress & 0xff),
+                (ipAddress >> 8 & 0xff),
+                (ipAddress >> 16 & 0xff),
+                (ipAddress >> 24 & 0xff));
+
         InetAddress address = null;
         try {
-            address = InetAddress.getByAddress(BigInteger.valueOf(ipAddress).toByteArray());
+            address = InetAddress.getByName(ip);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         Log.v("udp", "discovering started");
-        while (true) {
+        while (!stopSignal) {
             connectionPacket = (WifiConnectionPacket) transferThread.getPacket();
             if (connectionPacket != null) {
+                InetAddress destination = connectionPacket.getDestination();
                 try {
-                    Log.v("udp", "source" + connectionPacket.getSource().toString());
-                    Log.v("udp", "destination" + connectionPacket.getDestination().toString());
-                    Log.v("udp", "address" + address.toString());
+                    Log.v("udp", "source " + connectionPacket.getSource().toString());
+                    Log.v("udp", "destination " + destination.toString());
+                    Log.v("udp", "address " + address.toString());
+                    Log.v("udp", "ipaddress " + ip);
+
                 } catch (Exception e) {
                     Log.v("udp", "log error");
                     e.printStackTrace();
                 }
 //                deviceArrayAdapter.add("igen");
-                if(connectionPacket.getDestination() == address) {
+                // If the destination address in the received packet is the device's own address...
+                if (destination != null && destination.toString().equals(address.toString())) {
 
                     Log.v("udp", "dst - " + connectionPacket.getDestination().toString());
 
@@ -79,8 +93,10 @@ public class WifiDiscovererThread extends Thread {
                         e.printStackTrace();
                     }
 
-                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, connectionPacket.getDestination());
+                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, connectionPacket.getSource());
 
+                    stopSignal = true;
+                    ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
                     ConnectionManager.getInstance().setSocket(wifiSocket);
                     activity.startGame();
 

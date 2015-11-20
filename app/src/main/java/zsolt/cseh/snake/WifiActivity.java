@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import connection.ConnectionManager;
 import connection.TransferThread;
+import connection.enumeration.DeviceType;
 import connection.wifi.WifiConnectionPacket;
 import connection.wifi.WifiDiscovererThread;
 import connection.wifi.WifiSocket;
@@ -87,7 +88,11 @@ public class WifiActivity extends Activity {
                     }
 
                     WifiSocket wifiSocket = new WifiSocket(datagramSocket, deviceAddress);
+                    Log.v("udp", "Connection address " + deviceAddress);
+                    Log.v("udp", "Connection address " + deviceAddress.getAddress());
+                    Log.v("udp", "Connection address " + deviceAddress.getHostAddress());
 
+                    ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
                     ConnectionManager.getInstance().setSocket(wifiSocket);
                     startGame();
 
