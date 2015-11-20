@@ -83,7 +83,7 @@ public class WifiDiscovererThread extends Thread {
                         e.printStackTrace();
                     }
 
-                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, connectionPacket.getSource());
+                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, connectionPacket.getSource(), 8889);
                     Log.v("udp", "own address: " + address);
                     Log.v("udp", "destination address: " + connectionPacket.getSource());
 

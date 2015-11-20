@@ -55,7 +55,7 @@ public class WifiActivity extends Activity {
 
         WifiSocket broadcastWifiSocket = null;
         try {
-            broadcastWifiSocket = new WifiSocket(broadcastSocket, getBroadcastAddress());
+            broadcastWifiSocket = new WifiSocket(broadcastSocket, getBroadcastAddress(), 8888);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public class WifiActivity extends Activity {
                         e.printStackTrace();
                     }
 
-                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, deviceAddress);
+                    WifiSocket wifiSocket = new WifiSocket(datagramSocket, deviceAddress, 8889);
                     Log.v("udp", "destination address: " + deviceAddress);
 
                     connectionThread.cancel();

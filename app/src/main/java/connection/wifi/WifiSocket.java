@@ -17,17 +17,19 @@ public class WifiSocket implements ConnectionSocket {
 
     private DatagramSocket socket;
     private InetAddress broadcastAddress;
+    int port;
 
-    public WifiSocket(DatagramSocket socket, InetAddress broadcastAddress) {
+    public WifiSocket(DatagramSocket socket, InetAddress broadcastAddress, int port) {
         this.socket = socket;
         this.broadcastAddress = broadcastAddress;
+        this.port = port;
     }
 
     @Override
     public void send(byte[] packet) throws IOException {
 //        String message = "Teszt";
 //        byte[] bytes = message.getBytes();
-        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, broadcastAddress, 8888);
+        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, broadcastAddress, port);
         socket.send(datagramPacket);
         Log.v("udp", "SENT - WifiSocket");
     }
