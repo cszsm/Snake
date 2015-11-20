@@ -41,16 +41,21 @@ public class MasterSynchronizerThread extends Thread {
             SynchronizerPacket delay_req;
             long delay_req_time = 0;
 
+            Log.v("udp", "waiting for delay_req");
             while (wait_for_delay_req) {
+
                 delay_req = (SynchronizerPacket) transferThread.getPacket();
                 if(delay_req != null) {
+                    Log.v("udp", "NOTNULL");
                     delay_req_time = TimeManager.getTime();
                     wait_for_delay_req = false;
                 }
             }
+            Log.v("udp", "delay_req received");
 
             // Sending delay_resp
             transferThread.write(new SynchronizerPacket(delay_req_time));
+            Log.v("udp", "delay_resp sent");
         }
 
         long time = TimeManager.getTime();

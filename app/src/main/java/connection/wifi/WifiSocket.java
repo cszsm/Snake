@@ -37,9 +37,11 @@ public class WifiSocket implements ConnectionSocket {
 //        byte[] bytes = new byte[1024];
         DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length);
         socket.receive(datagramPacket);
+        Log.v("udp", "RECEIVED ADDRESS - " + datagramPacket.getAddress());
 
-        String message = new String(packet, 0, datagramPacket.getLength());
-        Log.v("udp", "RECEIVE" + message);
+//        String message = new String(packet, 0, datagramPacket.getLength());
+//        Log.v("udp", "RECEIVE" + message);
+        Log.v("udp", "RECEIVED - WifiSocket");
         return datagramPacket.getLength();
     }
 

@@ -36,10 +36,12 @@ public class SlaveSynchronizerThread extends Thread {
                     wait_for_sync = false;
                 }
             }
+            Log.v("udp", "sync received");
 
             // Sending delay_req
             long delay_req_time = TimeManager.getTime();
             transferThread.write(new SynchronizerPacket(0));
+            Log.v("udp", "delay_req sent");
 
             // Waiting for delay_resp
             boolean wait_for_delay_resp = true;

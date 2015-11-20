@@ -24,6 +24,7 @@ public class MultiplayerActivity extends Activity {
 
         ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
         TransferThread transferThread = new TransferThread(socket);
+
         transferThread.start();
         ConnectionManager.getInstance().setTransferThread(transferThread);
 

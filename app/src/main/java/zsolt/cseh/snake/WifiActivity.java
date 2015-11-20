@@ -67,6 +67,9 @@ public class WifiActivity extends Activity {
         deviceArrayAdapter = new ArrayAdapter<>(WifiActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
         deviceListView.setAdapter(deviceArrayAdapter);
 
+        final WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, deviceArrayAdapter, devices, broadcastThread, WifiActivity.this);
+        connectionThread.start();
+
         deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -88,10 +91,10 @@ public class WifiActivity extends Activity {
                     }
 
                     WifiSocket wifiSocket = new WifiSocket(datagramSocket, deviceAddress);
-                    Log.v("udp", "Connection address " + deviceAddress);
-                    Log.v("udp", "Connection address " + deviceAddress.getAddress());
-                    Log.v("udp", "Connection address " + deviceAddress.getHostAddress());
+                    Log.v("udp", "destination address: " + deviceAddress);
 
+                    connectionThread.cancel();
+                    broadcastThread.cancel();
                     ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
                     ConnectionManager.getInstance().setSocket(wifiSocket);
                     startGame();
@@ -108,18 +111,6 @@ public class WifiActivity extends Activity {
             public void onClick(View view) {
                 WifiSenderThread wifiSenderThread = new WifiSenderThread(broadcastThread, (WifiManager) getSystemService(WIFI_SERVICE));
                 wifiSenderThread.start();
-            }
-        });
-
-        final Button btnReceive = (Button) findViewById(R.id.btnWifiReceive);
-//        final WifiSocket finalWifiSocket1 = broadcastWifiSocket;
-        btnReceive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, deviceArrayAdapter, devices, broadcastThread, WifiActivity.this);
-                connectionThread.start();
-                btnReceive.setEnabled(false);
             }
         });
 
@@ -152,6 +143,7 @@ public class WifiActivity extends Activity {
 
     public void startGame() {
         Intent intent = new Intent(WifiActivity.this, MultiplayerActivity.class);
+//        Intent intent = new Intent(WifiActivity.this, TestActivity.class);
         startActivity(intent);
     }
 }

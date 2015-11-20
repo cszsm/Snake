@@ -41,7 +41,7 @@ public class WifiSenderThread extends Thread {
                 (ipAddress >> 8 & 0xff),
                 (ipAddress >> 16 & 0xff),
                 (ipAddress >> 24 & 0xff));
-        Log.v("udp", "IP " + ip);
+        Log.v("udp", "own address: " + ip);
         WifiConnectionPacket packet = null;
         try {
             if(destination != null) {

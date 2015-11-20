@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import control.TimeManager;
+import ptp.SynchronizerPacket;
 import test.TestPacket;
 
 /**
@@ -42,6 +44,7 @@ public class TransferThread extends Thread {
                 try {
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
+
                     Log.v("udp", "RECEIVED - TransferThread");
 //                    Log.v("timer_sync", "received");
 //                    try {
@@ -53,13 +56,18 @@ public class TransferThread extends Thread {
 
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
+                    Log.v("udp", "kivetelvolt" + e.getMessage());
                 }
             }
 
             try {
                 bytes = socket.receive(buffer);
+                if(bytes != 0) {
+                    Log.v("udp", "RECEIVED - TRANSFER");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.v("udp", e.getMessage());
             }
         }
     }
