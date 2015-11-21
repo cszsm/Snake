@@ -45,7 +45,6 @@ public class TransferThread extends Thread {
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
 
-                    Log.v("udp", "RECEIVED - TransferThread");
 //                    Log.v("timer_sync", "received");
 //                    try {
 //                        SnakePacket snakePacket = (SnakePacket) packet;
@@ -56,18 +55,15 @@ public class TransferThread extends Thread {
 
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
-                    Log.v("udp", "kivetelvolt" + e.getMessage());
                 }
             }
 
             try {
                 bytes = socket.receive(buffer);
                 if(bytes != 0) {
-                    Log.v("udp", "RECEIVED - TRANSFER");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.v("udp", e.getMessage());
             }
         }
     }
@@ -92,7 +88,6 @@ public class TransferThread extends Thread {
 
         try {
             socket.send(bytes);
-            Log.v("udp", "SENT");
 //            Log.v("timer_sync", "sent");
 
 //            try {
@@ -103,7 +98,6 @@ public class TransferThread extends Thread {
 //            }
 
         } catch (IOException e) {
-            Log.v("udp", "SENT Exception");
             e.printStackTrace();
         }
     }

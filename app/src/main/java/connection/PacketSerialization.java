@@ -19,7 +19,7 @@ public class PacketSerialization {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         ObjectOutputStream o = new ObjectOutputStream(b);
         o.writeObject(packet);
-        Log.v("udp", String.valueOf(b.size()));
+//        Log.v("udp", String.valueOf(b.size()));
         return b.toByteArray();
     }
 
