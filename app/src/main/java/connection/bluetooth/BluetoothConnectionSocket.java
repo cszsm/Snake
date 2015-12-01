@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import connection.ConnectionSocket;
-import connection.Packet;
 
 /**
  * Created by Zsolt on 2015.05.03..

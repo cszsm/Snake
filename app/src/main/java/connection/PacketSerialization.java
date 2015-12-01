@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by Zsolt on 2015.03.24..
@@ -15,7 +16,7 @@ import java.io.ObjectOutputStream;
  */
 public class PacketSerialization {
 
-    public static byte[] serialize(Packet packet) throws IOException {
+    public static byte[] serialize(Serializable packet) throws IOException {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         ObjectOutputStream o = new ObjectOutputStream(b);
         o.writeObject(packet);
@@ -23,9 +24,9 @@ public class PacketSerialization {
         return b.toByteArray();
     }
 
-    public static Packet deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+    public static Serializable deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
         ByteArrayInputStream b = new ByteArrayInputStream(bytes);
         ObjectInputStream o = new ObjectInputStream(b);
-        return (Packet) o.readObject();
+        return (Serializable) o.readObject();
     }
 }

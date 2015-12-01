@@ -2,9 +2,7 @@ package control;
 
 import android.util.Log;
 
-import connection.Packet;
 import connection.SnakePacket;
-import model.Snake;
 import model.enumeration.Direction;
 
 /**

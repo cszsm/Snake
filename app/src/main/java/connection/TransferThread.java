@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -21,7 +22,7 @@ public class TransferThread extends Thread {
 
     private final ConnectionSocket socket;
 
-    private Queue<Packet> packets;
+    private Queue<Serializable> packets;
     private boolean stopSignal;
 
     public TransferThread(ConnectionSocket socket) {
@@ -42,7 +43,7 @@ public class TransferThread extends Thread {
         while (!stopSignal) {
             if (bytes != 0) {
                 try {
-                    Packet packet = PacketSerialization.deserialize(buffer);
+                    Serializable packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
 
                     try {
@@ -68,7 +69,7 @@ public class TransferThread extends Thread {
     /**
      * Send packages to another device
      */
-    public void write(Packet packet) {
+    public void write(Serializable packet) {
         byte[] bytes = new byte[0];
 
         try {
@@ -93,7 +94,7 @@ public class TransferThread extends Thread {
     /**
      * Returns with the last accepted package
      */
-    public Packet getPacket() {
+    public Serializable getPacket() {
         return packets.poll();
     }
 

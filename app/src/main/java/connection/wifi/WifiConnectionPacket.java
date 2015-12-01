@@ -1,13 +1,12 @@
 package connection.wifi;
 
+import java.io.Serializable;
 import java.net.InetAddress;
-
-import connection.Packet;
 
 /**
  * Created by zscse on 2015. 11. 02..
  */
-public class WifiConnectionPacket extends Packet {
+public class WifiConnectionPacket implements Serializable {
     private InetAddress source;
     private InetAddress destination;
 

@@ -1,15 +1,15 @@
 package test;
 
+import java.io.Serializable;
 import java.util.List;
 
 import connection.ConnectionProperties;
-import connection.Packet;
 import connection.enumeration.DeviceType;
 
 /**
  * Created by zscse on 2015. 09. 28..
  */
-public class TestPacket extends Packet {
+public class TestPacket implements Serializable {
     private static int lastId = 1;
     private int id;
     private DeviceType sender;
