@@ -23,8 +23,9 @@ public class SenderThread extends Thread {
     public void run() {
         for (int i = 0; i < 500; i++) {
             TestPacket packet = activity.createPacket((i / 10) + 1);
+//            TestPacket packet = activity.createPacket(200 + (i / 10) + 1);
             thread.write(packet);
-            Log.v("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
+            Log.i("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
                     TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
             try {
                 sleep(100);

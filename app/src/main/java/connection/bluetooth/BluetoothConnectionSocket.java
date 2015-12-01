@@ -31,26 +31,25 @@ public class BluetoothConnectionSocket implements ConnectionSocket {
         }
     }
 
-//    @Override
-//    public InputStream getInputStream() throws IOException {
-//        return socket.getInputStream();
-//    }
-//
-//    @Override
-//    public OutputStream getOutputStream() throws IOException {
-//        return socket.getOutputStream();
-//    }
-
+    /**
+     * Sends a packet to the remote device
+     */
     @Override
     public void send(byte[] packet) throws IOException {
         outputStream.write(packet);
     }
 
+    /**
+     * Receive a packet from the remote device
+     */
     @Override
     public int receive(byte[] packet) throws IOException {
         return inputStream.read(packet);
     }
 
+    /**
+     * Closes the socket
+     */
     @Override
     public void close() throws IOException {
         socket.close();

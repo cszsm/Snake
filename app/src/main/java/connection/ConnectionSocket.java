@@ -11,13 +11,18 @@ import java.io.OutputStream;
  */
 public interface ConnectionSocket {
 
-//    InputStream getInputStream() throws IOException;
-//
-//    OutputStream getOutputStream() throws IOException;
-
+    /**
+     * Sends a packet to the remote device
+     */
     void send(byte[] packet) throws IOException;
 
+    /**
+     * Receive a packet from the remote device
+     */
     int receive(byte[] packet) throws IOException;
 
+    /**
+     * Closes the socket
+     */
     void close() throws IOException;
 }

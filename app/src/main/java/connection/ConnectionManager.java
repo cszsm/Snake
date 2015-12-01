@@ -11,10 +11,10 @@ public class ConnectionManager {
 
     private static ConnectionManager instance = null;
 
-    private ConnectionSocket socket;
     private DeviceType deviceType;
-    private int offset;
+    private ConnectionSocket socket;
     private TransferThread transferThread;
+    private int offset;
 
     protected ConnectionManager() {
         offset = 0;

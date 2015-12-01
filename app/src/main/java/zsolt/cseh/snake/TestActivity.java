@@ -44,6 +44,7 @@ public class TestActivity extends Activity {
         ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
 //        transferThread = new TransferThread(socket);
         transferThread = ConnectionManager.getInstance().getTransferThread();
+        Log.v("sync", "Queue length: " + transferThread.getQueueLength());
 //        transferThread.start();
 
         testTimingThread = new TestTimingThread(this);
@@ -75,12 +76,12 @@ public class TestActivity extends Activity {
                     logPackets.set(packet.getId() - 1, packet);
                 }
 
-                Log.v("packet", String.valueOf(logPackets.size()));
+                Log.i("packet", String.valueOf(logPackets.size()));
                 for (TestPacket packet : logPackets) {
                     if (packet.getLength() != 0) {
-                        Log.v("packet", getLog(packet));
+                        Log.i("packet", getLog(packet));
                     } else {
-                        Log.v("packet", " ");
+                        Log.i("packet", " ");
                     }
                 }
             }

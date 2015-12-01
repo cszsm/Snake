@@ -1,8 +1,5 @@
 package connection.wifi;
 
-import android.provider.ContactsContract;
-import android.util.Log;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -16,37 +13,37 @@ import connection.ConnectionSocket;
 public class WifiSocket implements ConnectionSocket {
 
     private DatagramSocket socket;
-    private InetAddress broadcastAddress;
+    private InetAddress address;
     int port;
 
-    public WifiSocket(DatagramSocket socket, InetAddress broadcastAddress, int port) {
+    public WifiSocket(DatagramSocket socket, InetAddress address, int port) {
         this.socket = socket;
-        this.broadcastAddress = broadcastAddress;
+        this.address = address;
         this.port = port;
     }
 
+    /**
+     * Sends a packet to the remote device
+     */
     @Override
     public void send(byte[] packet) throws IOException {
-//        String message = "Teszt";
-//        byte[] bytes = message.getBytes();
-        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, broadcastAddress, port);
+        DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length, address, port);
         socket.send(datagramPacket);
-//        Log.v("udp", "SENT - WifiSocket");
     }
 
+    /**
+     * Receive a packet from the remote device
+     */
     @Override
     public int receive(byte[] packet) throws IOException {
-//        byte[] bytes = new byte[1024];
         DatagramPacket datagramPacket = new DatagramPacket(packet, packet.length);
         socket.receive(datagramPacket);
-//        Log.v("udp", "RECEIVED ADDRESS - " + datagramPacket.getAddress());
-
-//        String message = new String(packet, 0, datagramPacket.getLength());
-//        Log.v("udp", "RECEIVE" + message);
-//        Log.v("udp", "RECEIVED - WifiSocket");
         return datagramPacket.getLength();
     }
 
+    /**
+     * Closes the socket
+     */
     @Override
     public void close() throws IOException {
         socket.close();

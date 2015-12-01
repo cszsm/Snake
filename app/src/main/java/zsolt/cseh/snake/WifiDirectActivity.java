@@ -161,7 +161,8 @@ public class WifiDirectActivity extends Activity implements ConnectionInfoListen
     }
 
     public void startGame() {
-        Intent intent = new Intent(WifiDirectActivity.this, MultiplayerActivity.class);
+//        Intent intent = new Intent(WifiDirectActivity.this, MultiplayerActivity.class);
+        Intent intent = new Intent(WifiDirectActivity.this, SynchronizerActivity.class);
         startActivity(intent);
     }
 

@@ -45,23 +45,20 @@ public class TransferThread extends Thread {
                     Packet packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
 
-//                    Log.v("timer_sync", "received");
-//                    try {
-//                        SnakePacket snakePacket = (SnakePacket) packet;
-//                        Log.v("timer_sync", snakePacket.getDirection().toString());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        Log.v("size", String.valueOf(((TestPacket) packet).getId()) + " - " + String.valueOf(buffer.length));
+                    } catch (Exception e) {
+                        Log.v("size", "not testpacket --- " + e.getMessage());
+                    }
 
                 } catch (IOException | ClassNotFoundException e) {
+                    Log.v("size", "most hiba");
                     e.printStackTrace();
                 }
             }
 
             try {
                 bytes = socket.receive(buffer);
-                if(bytes != 0) {
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -82,21 +79,12 @@ public class TransferThread extends Thread {
 
         try {
             Log.v("size", String.valueOf(((TestPacket) packet).getId()) + " - " + String.valueOf(bytes.length));
-        } catch (Exception e) {
+        } catch (ClassCastException e) {
             Log.v("size", "not testpacket --- " + e.getMessage());
         }
 
         try {
             socket.send(bytes);
-//            Log.v("timer_sync", "sent");
-
-//            try {
-//                SnakePacket snakePacket = (SnakePacket) packet;
-//                Log.v("timer_sync", snakePacket.getDirection().toString());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,15 +94,7 @@ public class TransferThread extends Thread {
      * Returns with the last accepted package
      */
     public Packet getPacket() {
-//        Log.v("timer_sync", "got");
-        Packet packet = packets.poll();
-//        try {
-//            SnakePacket snakePacket = (SnakePacket) packet;
-//            Log.v("timer_sync", snakePacket.getDirection().toString());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        return packet;
+        return packets.poll();
     }
 
     public int getQueueLength() {
