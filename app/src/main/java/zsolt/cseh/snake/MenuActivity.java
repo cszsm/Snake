@@ -28,17 +28,6 @@ public class MenuActivity extends Activity {
         ScreenResolution.getInstance().setX(point.x);
         ScreenResolution.getInstance().setY(point.y);
 
-        Button btnStart = (Button) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Game.getInstance();
-                Intent intent = new Intent(MenuActivity.this, GameActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnStart.setEnabled(false);
-
         Button btnBluetooth = (Button) findViewById(R.id.btnBluetooth);
         btnBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
