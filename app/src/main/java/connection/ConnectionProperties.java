@@ -7,22 +7,22 @@ import connection.enumeration.DeviceType;
  * <p/>
  * Manages the connection, stores the socket and the device's type
  */
-public class ConnectionManager {
+public class ConnectionProperties {
 
-    private static ConnectionManager instance = null;
+    private static ConnectionProperties instance = null;
 
     private DeviceType deviceType;
     private ConnectionSocket socket;
     private TransferThread transferThread;
     private int offset;
 
-    protected ConnectionManager() {
+    protected ConnectionProperties() {
         offset = 0;
     }
 
-    public static ConnectionManager getInstance() {
+    public static ConnectionProperties getInstance() {
         if (instance == null) {
-            instance = new ConnectionManager();
+            instance = new ConnectionProperties();
         }
         return instance;
     }

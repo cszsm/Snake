@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +22,9 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.TransferThread;
 import connection.enumeration.DeviceType;
-import connection.wifi.WifiConnectionPacket;
 import connection.wifi.WifiDiscovererThread;
 import connection.wifi.WifiSocket;
 import connection.wifi.WifiSenderThread;
@@ -95,8 +93,8 @@ public class WifiActivity extends Activity {
 
                     connectionThread.cancel();
                     broadcastThread.cancel();
-                    ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
-                    ConnectionManager.getInstance().setSocket(wifiSocket);
+                    ConnectionProperties.getInstance().setDeviceType(DeviceType.SERVER);
+                    ConnectionProperties.getInstance().setSocket(wifiSocket);
                     startGame();
 
                 } catch (InterruptedException e) {

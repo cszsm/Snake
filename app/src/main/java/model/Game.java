@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import control.FoodManager;
 import control.GameManager;
 import control.MasterGameManager;
@@ -35,7 +35,7 @@ public class Game {
         SnakeManager snakeTwoManager = new SnakeManager(createSnakeTwo());
         FoodManager foodManager = new FoodManager(board, snakeOneManager.getSnake());
 
-        if (ConnectionManager.getInstance().getDeviceType() == SERVER) {
+        if (ConnectionProperties.getInstance().getDeviceType() == SERVER) {
             gameManager = new MasterGameManager(snakeOneManager, snakeTwoManager, foodManager);
         } else {
             gameManager = new SlaveGameManager(snakeOneManager, snakeTwoManager, foodManager);

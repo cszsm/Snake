@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiDirectActivity;
 
@@ -24,7 +24,7 @@ public class WifiDirectConnectThread extends Thread {
     public WifiDirectConnectThread(WifiDirectActivity activity, WifiP2pInfo info) {
         this.activity = activity;
         this.info = info;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
+        ConnectionProperties.getInstance().setDeviceType(DeviceType.CLIENT);
     }
 
     /**
@@ -56,7 +56,7 @@ public class WifiDirectConnectThread extends Thread {
             return;
         }
 
-        ConnectionManager.getInstance().setSocket(new WifiDirectSocket(socket));
+        ConnectionProperties.getInstance().setSocket(new WifiDirectSocket(socket));
         activity.startGame();
 //        activity.startTest();
 //        activity.startSynchronizer();

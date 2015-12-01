@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.ConnectionSocket;
 import connection.TransferThread;
 import model.Game;
@@ -22,11 +22,11 @@ public class MultiplayerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
+        ConnectionSocket socket = ConnectionProperties.getInstance().getSocket();
         TransferThread transferThread = new TransferThread(socket);
 
         transferThread.start();
-        ConnectionManager.getInstance().setTransferThread(transferThread);
+        ConnectionProperties.getInstance().setTransferThread(transferThread);
 
         Game.getInstance().reset();
 //        Game.getInstance().getGameManager().setTransferThread(transferThread);
@@ -40,7 +40,7 @@ public class MultiplayerActivity extends Activity {
         super.onPause();
 
 //        transferThread.cancel();
-        ConnectionManager.getInstance().getTransferThread().cancel();
+        ConnectionProperties.getInstance().getTransferThread().cancel();
 
         Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

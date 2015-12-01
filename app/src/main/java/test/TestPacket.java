@@ -1,11 +1,8 @@
 package test;
 
-import android.graphics.Point;
-
-import java.io.Serializable;
 import java.util.List;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.Packet;
 import connection.enumeration.DeviceType;
 
@@ -22,7 +19,7 @@ public class TestPacket extends Packet {
     public TestPacket(long timestamp, List<Integer> list) {
         id = lastId;
         lastId++;
-        sender = ConnectionManager.getInstance().getDeviceType();
+        sender = ConnectionProperties.getInstance().getDeviceType();
         this.list = list;
         this.timestamp = timestamp;
     }

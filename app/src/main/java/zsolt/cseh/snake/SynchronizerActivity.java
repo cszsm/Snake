@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.ConnectionSocket;
 import connection.TransferThread;
 import connection.enumeration.DeviceType;
@@ -20,13 +20,13 @@ public class SynchronizerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synchronizer);
 
-        ConnectionSocket socket = ConnectionManager.getInstance().getSocket();
+        ConnectionSocket socket = ConnectionProperties.getInstance().getSocket();
         TransferThread transferThread = new TransferThread(socket);
         transferThread.start();
-        ConnectionManager.getInstance().setTransferThread(transferThread);
+        ConnectionProperties.getInstance().setTransferThread(transferThread);
 
         final Thread synchronizerThread;
-        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER) {
+        if (ConnectionProperties.getInstance().getDeviceType() == DeviceType.SERVER) {
             synchronizerThread = new MasterSynchronizerThread();
         } else {
             synchronizerThread = new SlaveSynchronizerThread();

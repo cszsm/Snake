@@ -5,17 +5,14 @@ import android.net.wifi.WifiManager;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import java.math.BigInteger;
-import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.TransferThread;
 import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiActivity;
@@ -89,8 +86,8 @@ public class WifiDiscovererThread extends Thread {
 
                     stopSignal = true;
                     transferThread.cancel();
-                    ConnectionManager.getInstance().setDeviceType(DeviceType.CLIENT);
-                    ConnectionManager.getInstance().setSocket(wifiSocket);
+                    ConnectionProperties.getInstance().setDeviceType(DeviceType.CLIENT);
+                    ConnectionProperties.getInstance().setSocket(wifiSocket);
                     activity.startGame();
 
 

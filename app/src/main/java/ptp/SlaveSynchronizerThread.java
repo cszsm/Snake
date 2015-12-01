@@ -2,9 +2,7 @@ package ptp;
 
 import android.util.Log;
 
-import java.sql.Connection;
-
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.TransferThread;
 import control.TimeManager;
 
@@ -16,9 +14,9 @@ public class SlaveSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-//        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
+//        TransferThread transferThread = new TransferThread(ConnectionProperties.getInstance().getSocket());
 //        transferThread.start();
-        TransferThread transferThread = ConnectionManager.getInstance().getTransferThread();
+        TransferThread transferThread = ConnectionProperties.getInstance().getTransferThread();
 
         int averageDelay = 0;
 
@@ -66,9 +64,9 @@ public class SlaveSynchronizerThread extends Thread {
         }
 
         averageDelay /= 10;
-        ConnectionManager.getInstance().setOffset(averageDelay);
-        Log.v("sync", "offset: " + ConnectionManager.getInstance().getOffset());
-        Log.v("sync", ConnectionManager.getInstance().getDeviceType().toString());
+        ConnectionProperties.getInstance().setOffset(averageDelay);
+        Log.v("sync", "offset: " + ConnectionProperties.getInstance().getOffset());
+        Log.v("sync", ConnectionProperties.getInstance().getDeviceType().toString());
 
         boolean wait_for_start = true;
         SynchronizerPacket startTimePacket;
@@ -82,10 +80,10 @@ public class SlaveSynchronizerThread extends Thread {
         }
         Log.v("sync", String.valueOf(startTime));
 
-        while (TimeManager.getTime() + ConnectionManager.getInstance().getOffset() < startTime);
+        while (TimeManager.getTime() + ConnectionProperties.getInstance().getOffset() < startTime);
 
 
 //        transferThread.cancel();
-//        ConnectionManager.getInstance().setTransferThread(transferThread);
+//        ConnectionProperties.getInstance().setTransferThread(transferThread);
     }
 }

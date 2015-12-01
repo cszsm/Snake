@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.enumeration.DeviceType;
 import control.CollisionDetector;
 import control.TimingThread;
@@ -106,7 +106,7 @@ public class GameView extends View {
                 touchControl.setLastDown(event);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 touchControl.setLastUp(event);
-                if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER)
+                if (ConnectionProperties.getInstance().getDeviceType() == DeviceType.SERVER)
                     touchControl.setDirection(Game.getInstance().getSnakeOneManager());
                 else
                     touchControl.setDirection(Game.getInstance().getSnakeTwoManager());

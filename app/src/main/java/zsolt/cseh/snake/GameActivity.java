@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import connection.ConnectionManager;
-import connection.enumeration.DeviceType;
+import connection.ConnectionProperties;
 import model.Game;
 import view.GameView;
 
@@ -40,7 +39,7 @@ public class GameActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ConnectionManager.getInstance().reset();
+        ConnectionProperties.getInstance().reset();
         gameView.stop();
     }
 

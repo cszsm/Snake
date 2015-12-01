@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.enumeration.DeviceType;
 import zsolt.cseh.snake.WifiDirectActivity;
 
@@ -31,7 +31,7 @@ public class WifiDirectAcceptThread extends Thread {
         serverSocket = tmp;
 
         this.activity = activity;
-        ConnectionManager.getInstance().setDeviceType(DeviceType.SERVER);
+        ConnectionProperties.getInstance().setDeviceType(DeviceType.SERVER);
         stopSignal = false;
     }
 
@@ -57,7 +57,7 @@ public class WifiDirectAcceptThread extends Thread {
                     e.printStackTrace();
                 }
 
-                ConnectionManager.getInstance().setSocket(new WifiDirectSocket(client));
+                ConnectionProperties.getInstance().setSocket(new WifiDirectSocket(client));
                 activity.startGame();
 //                activity.startTest();
 //                activity.startSynchronizer();

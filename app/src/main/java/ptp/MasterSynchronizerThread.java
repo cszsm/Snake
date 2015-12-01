@@ -2,10 +2,9 @@ package ptp;
 
 import android.util.Log;
 
-import connection.ConnectionManager;
+import connection.ConnectionProperties;
 import connection.TransferThread;
 import control.TimeManager;
-import test.TestPacket;
 
 /**
  * Created by zscse on 2015. 09. 29..
@@ -15,9 +14,9 @@ public class MasterSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-//        TransferThread transferThread = new TransferThread(ConnectionManager.getInstance().getSocket());
+//        TransferThread transferThread = new TransferThread(ConnectionProperties.getInstance().getSocket());
 //        transferThread.start();
-        TransferThread transferThread = ConnectionManager.getInstance().getTransferThread();
+        TransferThread transferThread = ConnectionProperties.getInstance().getTransferThread();
 
         try {
             sleep(1000);
@@ -66,6 +65,6 @@ public class MasterSynchronizerThread extends Thread {
         while (TimeManager.getTime() < time);
 
 //        transferThread.cancel();
-//        ConnectionManager.getInstance().setTransferThread(transferThread);
+//        ConnectionProperties.getInstance().setTransferThread(transferThread);
     }
 }

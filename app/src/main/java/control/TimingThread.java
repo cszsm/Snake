@@ -2,8 +2,7 @@ package control;
 
 import android.util.Log;
 
-import connection.ConnectionManager;
-import connection.TransferThread;
+import connection.ConnectionProperties;
 import connection.enumeration.DeviceType;
 import model.Game;
 import ptp.MasterSynchronizerThread;
@@ -36,7 +35,7 @@ public class TimingThread extends Thread {
         Log.v("udp", "timing started");
 
         Thread synchronizerThread;
-        if (ConnectionManager.getInstance().getDeviceType() == DeviceType.SERVER) {
+        if (ConnectionProperties.getInstance().getDeviceType() == DeviceType.SERVER) {
             Log.v("udp", "SERVER");
             synchronizerThread = new MasterSynchronizerThread();
         } else {
@@ -57,7 +56,7 @@ public class TimingThread extends Thread {
 
         while (!stopSignal) {
             try {
-//                if (ConnectionManager.getInstance().getDeviceType() != DeviceType.CLIENT) {
+//                if (ConnectionProperties.getInstance().getDeviceType() != DeviceType.CLIENT) {
 //                    Thread.sleep(1000);
 //                } else {
 //                    Thread.sleep(20);
