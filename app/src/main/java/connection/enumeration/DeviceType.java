@@ -7,6 +7,5 @@ package connection.enumeration;
  */
 public enum DeviceType {
     SERVER,
-    CLIENT,
-    NONE
+    CLIENT
 }

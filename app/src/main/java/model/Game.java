@@ -1,20 +1,16 @@
 package model;
 
-import android.graphics.Point;
-
 import java.util.ArrayList;
 
 import connection.ConnectionManager;
 import control.FoodManager;
 import control.GameManager;
 import control.MasterGameManager;
-import control.SingleGameManager;
 import control.SlaveGameManager;
 import control.SnakeManager;
 import model.enumeration.Direction;
 
 import static connection.enumeration.DeviceType.SERVER;
-import static connection.enumeration.DeviceType.NONE;
 
 /**
  * Created by Zsolt on 2015.03.06..
@@ -39,9 +35,7 @@ public class Game {
         SnakeManager snakeTwoManager = new SnakeManager(createSnakeTwo());
         FoodManager foodManager = new FoodManager(board, snakeOneManager.getSnake());
 
-        if (ConnectionManager.getInstance().getDeviceType() == NONE) {
-            gameManager = new SingleGameManager(snakeOneManager, snakeTwoManager, foodManager);
-        } else if (ConnectionManager.getInstance().getDeviceType() == SERVER) {
+        if (ConnectionManager.getInstance().getDeviceType() == SERVER) {
             gameManager = new MasterGameManager(snakeOneManager, snakeTwoManager, foodManager);
         } else {
             gameManager = new SlaveGameManager(snakeOneManager, snakeTwoManager, foodManager);

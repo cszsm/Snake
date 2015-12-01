@@ -20,8 +20,6 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConnectionManager.getInstance().setDeviceType(DeviceType.NONE);
-
         Game.getInstance().reset();
         gameView = new GameView(getApplicationContext(), null);
         setContentView(gameView);
