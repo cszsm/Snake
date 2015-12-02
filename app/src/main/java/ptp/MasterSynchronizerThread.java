@@ -61,7 +61,7 @@ public class MasterSynchronizerThread extends Thread {
         time += 1000;
         transferThread.write(new SynchronizerPacket(time));
 
-        Log.v("sync", String.valueOf(time));
+        Log.i("sync", String.valueOf(time));
         while (TimeManager.getTime() < time);
 
 //        transferThread.cancel();

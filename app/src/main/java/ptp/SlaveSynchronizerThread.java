@@ -65,8 +65,8 @@ public class SlaveSynchronizerThread extends Thread {
 
         averageDelay /= 10;
         ConnectionProperties.getInstance().setOffset(averageDelay);
-        Log.v("sync", "offset: " + ConnectionProperties.getInstance().getOffset());
-        Log.v("sync", ConnectionProperties.getInstance().getDeviceType().toString());
+        Log.i("sync", "average offset: " + ConnectionProperties.getInstance().getOffset());
+        Log.i("sync", ConnectionProperties.getInstance().getDeviceType().toString());
 
         boolean wait_for_start = true;
         SynchronizerPacket startTimePacket;
