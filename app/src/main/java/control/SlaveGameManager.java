@@ -37,12 +37,9 @@ public class SlaveGameManager extends GameManager {
             setDirection(packet.getDirection());
             snakeOneManager.validateDirection();
 
-            /**
-             *  Mi lenne, ha itt vége lenne az if-nek?
-             */
-
             foodManager.getFood().setX(packet.getFoodX());
             foodManager.getFood().setY(packet.getFoodY());
+        }
 
             snakeOneManager.step();
             snakeTwoManager.step();
@@ -54,7 +51,7 @@ public class SlaveGameManager extends GameManager {
             if (!snakeTwoManager.eat(foodManager.getFood())) {
                 snakeTwoManager.removeTail();
             }
-        }
+//        }
     }
 
     /**
