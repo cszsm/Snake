@@ -32,27 +32,7 @@ public class TimingThread extends Thread {
     @Override
     public void run() {
 
-        Log.v("udp", "timing started");
-
-        Thread synchronizerThread;
-        if (ConnectionProperties.getInstance().getDeviceType() == DeviceType.SERVER) {
-            Log.v("udp", "SERVER");
-            synchronizerThread = new MasterSynchronizerThread();
-        } else {
-            Log.v("udp", "CLIENT");
-            synchronizerThread = new SlaveSynchronizerThread();
-        }
-        Log.v("udp", "it really started");
-        synchronizerThread.start();
-        Log.v("udp", "sync thread started");
-
-        try {
-            synchronizerThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Log.v("udp", "sync thread finished");
+        synchronize();
 
         while (!stopSignal) {
             try {
@@ -78,6 +58,30 @@ public class TimingThread extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void synchronize() {
+        Log.v("udp", "timing started");
+
+        Thread synchronizerThread;
+        if (ConnectionProperties.getInstance().getDeviceType() == DeviceType.SERVER) {
+            Log.v("udp", "SERVER");
+            synchronizerThread = new MasterSynchronizerThread();
+        } else {
+            Log.v("udp", "CLIENT");
+            synchronizerThread = new SlaveSynchronizerThread();
+        }
+        Log.v("udp", "it really started");
+        synchronizerThread.start();
+        Log.v("udp", "sync thread started");
+
+        try {
+            synchronizerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Log.v("udp", "sync thread finished");
     }
 
     public void requestStop() {

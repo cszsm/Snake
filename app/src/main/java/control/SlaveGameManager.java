@@ -37,6 +37,10 @@ public class SlaveGameManager extends GameManager {
             setDirection(packet.getDirection());
             snakeOneManager.validateDirection();
 
+            /**
+             *  Mi lenne, ha itt vége lenne az if-nek?
+             */
+
             foodManager.getFood().setX(packet.getFoodX());
             foodManager.getFood().setY(packet.getFoodY());
 

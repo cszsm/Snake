@@ -28,11 +28,12 @@ public class SnakeManager {
     }
 
     public void validateDirection() {
-        validDirection = direction;
+//        validDirection = direction;
+        snake.setDirection(direction);
     }
 
     public void step() {
-        snake.setDirection(validDirection);
+//        snake.setDirection(validDirection);
         snake.step();
     }
 

@@ -31,7 +31,7 @@ public class MasterGameManager extends GameManager {
         SnakePacket packet = getLastPacket();
         if (packet != null) {
             snakeTwoManager.buildSnake(packet.getCorners());
-//            snakeTwoManager.setSnake(packet.getBody());
+
             snakeTwoManager.getSnake().setDirection(packet.getDirection());
             setDirection(packet.getDirection());
             snakeTwoManager.validateDirection();

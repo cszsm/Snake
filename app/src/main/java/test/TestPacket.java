@@ -43,4 +43,8 @@ public class TestPacket implements Serializable {
     public int getLength() {
         return list.size();
     }
+
+    public static void resetId() {
+        lastId = 1;
+    }
 }

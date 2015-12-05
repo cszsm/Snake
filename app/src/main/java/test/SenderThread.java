@@ -21,6 +21,7 @@ public class SenderThread extends Thread {
 
     @Override
     public void run() {
+        TestPacket.resetId();
         for (int i = 0; i < 500; i++) {
             TestPacket packet = activity.createPacket(((i / 10) + 1) * 2);
 //            TestPacket packet = activity.createPacket(200 + (i / 10) + 1);
