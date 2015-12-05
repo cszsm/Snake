@@ -32,7 +32,7 @@ public class SlaveGameManager extends GameManager {
         if (packet != null) {
             Log.v("timer_sync", "STEP - " + packet.getDirection());
             snakeOneManager.buildSnake(packet.getCorners());
-//            snakeOneManager.setSnake(packet.getBody());
+
             snakeOneManager.getSnake().setDirection(packet.getDirection());
             setDirection(packet.getDirection());
             snakeOneManager.validateDirection();

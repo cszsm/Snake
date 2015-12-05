@@ -142,7 +142,6 @@ public class WifiActivity extends Activity {
     public void startGame() {
 //        Intent intent = new Intent(WifiActivity.this, MultiplayerActivity.class);
         Intent intent = new Intent(WifiActivity.this, SynchronizerActivity.class);
-//        Intent intent = new Intent(WifiActivity.this, TestActivity.class);
         startActivity(intent);
     }
 }
