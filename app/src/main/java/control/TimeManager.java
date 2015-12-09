@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
  * Created by zscse on 2015. 09. 28..
  */
 public class TimeManager {
-//    private static GregorianCalendar calendar = new GregorianCalendar();
 
     public static long getTime() {
         GregorianCalendar calendar = new GregorianCalendar();

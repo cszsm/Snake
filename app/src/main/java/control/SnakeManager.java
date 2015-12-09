@@ -19,21 +19,17 @@ public class SnakeManager {
 
     private Snake snake;
     private Direction direction;
-    private Direction validDirection;
 
     public SnakeManager(Snake snake) {
         this.snake = snake;
         direction = snake.getDirection();
-        validDirection = direction;
     }
 
     public void validateDirection() {
-//        validDirection = direction;
         snake.setDirection(direction);
     }
 
     public void step() {
-//        snake.setDirection(validDirection);
         snake.step();
     }
 

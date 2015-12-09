@@ -26,8 +26,6 @@ public class MasterGameManager extends GameManager {
      * Steps the game and send a packet to the slave device
      */
     public void step() {
-        Log.v("type", "MASTER");
-//        SnakePacket packet = (SnakePacket) transferThread.getPacket();
         SnakePacket packet = getLastPacket();
         if (packet != null) {
             snakeTwoManager.buildSnake(packet.getCorners());
@@ -81,16 +79,7 @@ public class MasterGameManager extends GameManager {
      * Sends a packet with the direction and the food's coordinates
      */
     private void sendPacket() {
-//        Snake snake = new Snake(snakeOneManager.getSnake().getBody(), snakeOneManager.getSnake().getDirection());
-//        SnakeManager snakeManager = new SnakeManager(snake);
-//        snakeManager.step();
-//        if (!snakeManager.eat(foodManager.getFood())) {
-//            snakeManager.removeTail();
-//        }
-//
-//        SnakePacket packet = new SnakePacket(snakeManager.getCorners(), snakeManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
         SnakePacket packet = new SnakePacket(snakeOneManager.getCorners(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
-//        SnakePacket packet = new SnakePacket(snakeOneManager.getSnake().getBody(), snakeOneManager.getDirection(), foodManager.getFood().getX(), foodManager.getFood().getY());
         transferThread.write(packet);
     }
 }
