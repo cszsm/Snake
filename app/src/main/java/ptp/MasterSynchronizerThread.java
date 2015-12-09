@@ -14,8 +14,6 @@ public class MasterSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-//        TransferThread transferThread = new TransferThread(ConnectionProperties.getInstance().getSocket());
-//        transferThread.start();
         TransferThread transferThread = ConnectionProperties.getInstance().getTransferThread();
 
         try {
@@ -63,8 +61,5 @@ public class MasterSynchronizerThread extends Thread {
 
         Log.i("sync", String.valueOf(time));
         while (TimeManager.getTime() < time);
-
-//        transferThread.cancel();
-//        ConnectionProperties.getInstance().setTransferThread(transferThread);
     }
 }

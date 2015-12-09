@@ -14,8 +14,6 @@ public class SlaveSynchronizerThread extends Thread {
     @Override
     public void run() {
         // Preparing for synchronization
-//        TransferThread transferThread = new TransferThread(ConnectionProperties.getInstance().getSocket());
-//        transferThread.start();
         TransferThread transferThread = ConnectionProperties.getInstance().getTransferThread();
 
         int averageDelay = 0;
@@ -81,9 +79,5 @@ public class SlaveSynchronizerThread extends Thread {
         Log.v("sync", String.valueOf(startTime));
 
         while (TimeManager.getTime() + ConnectionProperties.getInstance().getOffset() < startTime);
-
-
-//        transferThread.cancel();
-//        ConnectionProperties.getInstance().setTransferThread(transferThread);
     }
 }
