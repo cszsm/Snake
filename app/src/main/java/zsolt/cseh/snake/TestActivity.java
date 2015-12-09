@@ -21,22 +21,16 @@ import test.TestTimingThread;
 
 public class TestActivity extends Activity {
 
-    private Random random;
     private TransferThread transferThread;
     private TestTimingThread testTimingThread;
     private List<TestPacket> packets;
-    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        random = new Random();
-
-        ConnectionSocket socket = ConnectionProperties.getInstance().getSocket();
         transferThread = ConnectionProperties.getInstance().getTransferThread();
-        Log.v("sync", "Queue length: " + transferThread.getQueueLength());
 
         testTimingThread = new TestTimingThread(this);
         testTimingThread.start();

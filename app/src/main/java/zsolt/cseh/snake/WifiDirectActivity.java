@@ -102,7 +102,6 @@ public class WifiDirectActivity extends Activity implements ConnectionInfoListen
 
                     @Override
                     public void onFailure(int reason) {
-                        Log.e("wifi", "Cannot discover devices - reason: " + String.valueOf(reason));
                         Toast.makeText(WifiDirectActivity.this, "Cannot discover devices.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -140,7 +139,6 @@ public class WifiDirectActivity extends Activity implements ConnectionInfoListen
 
                     @Override
                     public void onFailure(int reason) {
-                        Log.e("wifi", "Cannot connect to device - reason: " + String.valueOf(reason));
                         Toast.makeText(WifiDirectActivity.this, "Cannot connect to this device.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -162,16 +160,6 @@ public class WifiDirectActivity extends Activity implements ConnectionInfoListen
 
     public void startGame() {
 //        Intent intent = new Intent(WifiDirectActivity.this, MultiplayerActivity.class);
-        Intent intent = new Intent(WifiDirectActivity.this, SynchronizerActivity.class);
-        startActivity(intent);
-    }
-
-    public void startTest() {
-        Intent intent = new Intent(WifiDirectActivity.this, TestActivity.class);
-        startActivity(intent);
-    }
-
-    public void startSynchronizer() {
         Intent intent = new Intent(WifiDirectActivity.this, SynchronizerActivity.class);
         startActivity(intent);
     }

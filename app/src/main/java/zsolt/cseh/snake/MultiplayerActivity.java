@@ -16,7 +16,6 @@ import view.GameView;
 public class MultiplayerActivity extends Activity {
 
     private GameView multiplayerView;
-//    private TransferThread transferThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class MultiplayerActivity extends Activity {
         ConnectionProperties.getInstance().setTransferThread(transferThread);
 
         Game.getInstance().reset();
-//        Game.getInstance().getGameManager().setTransferThread(transferThread);
         multiplayerView = new GameView(getApplicationContext(), null);
 
         setContentView(multiplayerView);
@@ -39,7 +37,6 @@ public class MultiplayerActivity extends Activity {
     protected void onPause() {
         super.onPause();
 
-//        transferThread.cancel();
         ConnectionProperties.getInstance().getTransferThread().cancel();
 
         Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
