@@ -59,16 +59,14 @@ public class WifiDiscovererThread extends Thread {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        Log.v("udp", "discovering started");
+
         while (!stopSignal) {
             connectionPacket = (WifiConnectionPacket) transferThread.getPacket();
             if (connectionPacket != null) {
                 InetAddress destination = connectionPacket.getDestination();
-//                deviceArrayAdapter.add("igen");
+
                 // If the destination address in the received packet is the device's own address...
                 if (destination != null && destination.toString().equals(address.toString())) {
-
-                    Log.v("udp", "dst - " + connectionPacket.getDestination().toString());
 
                     DatagramSocket datagramSocket = null;
                     try {
@@ -78,8 +76,6 @@ public class WifiDiscovererThread extends Thread {
                     }
 
                     WifiSocket wifiSocket = new WifiSocket(datagramSocket, connectionPacket.getSource(), 8889);
-                    Log.v("udp", "own address: " + address);
-                    Log.v("udp", "destination address: " + connectionPacket.getSource());
 
                     stopSignal = true;
                     transferThread.cancel();
@@ -89,7 +85,6 @@ public class WifiDiscovererThread extends Thread {
 
 
                 } else {
-                    Log.v("udp", "tolist");
                     deviceArrayList.add(connectionPacket.getSource().toString());
                     devices.put(connectionPacket.getSource().toString(), connectionPacket.getSource());
                 }
