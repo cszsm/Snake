@@ -46,14 +46,7 @@ public class TransferThread extends Thread {
                     Serializable packet = PacketSerialization.deserialize(buffer);
                     packets.offer(packet);
 
-                    try {
-                        Log.v("size", String.valueOf(((TestPacket) packet).getId()) + " - " + String.valueOf(buffer.length));
-                    } catch (Exception e) {
-                        Log.v("size", "not testpacket --- " + e.getMessage());
-                    }
-
                 } catch (IOException | ClassNotFoundException e) {
-                    Log.v("size", "most hiba");
                     e.printStackTrace();
                 }
             }
@@ -76,12 +69,6 @@ public class TransferThread extends Thread {
             bytes = PacketSerialization.serialize(packet);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        try {
-            Log.v("size", String.valueOf(((TestPacket) packet).getId()) + " - " + String.valueOf(bytes.length));
-        } catch (ClassCastException e) {
-            Log.v("size", "not testpacket --- " + e.getMessage());
         }
 
         try {
