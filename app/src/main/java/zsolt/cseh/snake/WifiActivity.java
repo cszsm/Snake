@@ -31,7 +31,6 @@ import connection.wifi.WifiSenderThread;
 
 public class WifiActivity extends Activity {
 
-    private ArrayList<String> deviceArrayList;
     private ArrayAdapter<String> deviceArrayAdapter;
     private SimpleArrayMap<String, InetAddress> devices;
 
@@ -61,11 +60,11 @@ public class WifiActivity extends Activity {
         final TransferThread broadcastThread = new TransferThread(broadcastWifiSocket);
         broadcastThread.start();
 
-        deviceArrayList = new ArrayList<>();
+        ArrayList<String> deviceArrayList = new ArrayList<>();
         deviceArrayAdapter = new ArrayAdapter<>(WifiActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
         deviceListView.setAdapter(deviceArrayAdapter);
 
-        final WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, deviceArrayAdapter, devices, broadcastThread, WifiActivity.this);
+        final WifiDiscovererThread connectionThread = new WifiDiscovererThread(deviceArrayList, devices, broadcastThread, WifiActivity.this);
         connectionThread.start();
 
         deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,7 +88,6 @@ public class WifiActivity extends Activity {
                     }
 
                     WifiSocket wifiSocket = new WifiSocket(datagramSocket, deviceAddress, 8889);
-                    Log.v("udp", "destination address: " + deviceAddress);
 
                     connectionThread.cancel();
                     broadcastThread.cancel();
@@ -125,7 +123,6 @@ public class WifiActivity extends Activity {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
         if(dhcpInfo == null) {
-            Log.v("udp", "dhcpInfo is null");
             return null;
         }
 
@@ -135,8 +132,7 @@ public class WifiActivity extends Activity {
             quads[i] = (byte) ((broadcast >> i * 8) & 0xFF);
         }
 
-        InetAddress address = InetAddress.getByAddress(quads);
-        return address;
+        return InetAddress.getByAddress(quads);
     }
 
     public void startGame() {

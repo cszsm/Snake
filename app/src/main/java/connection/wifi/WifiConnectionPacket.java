@@ -26,8 +26,4 @@ public class WifiConnectionPacket implements Serializable {
     public InetAddress getDestination() {
         return destination;
     }
-
-    public void setDestination(InetAddress address) {
-        this.destination = address;
-    }
 }

@@ -24,31 +24,31 @@
         android:id="@+id/btnBluetooth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bluetooth"
-        android:layout_below="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
         android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_below="@+id/textView"
+        android:text="Bluetooth" />
 
     <Button
         android:id="@+id/btnWifiDirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnBluetooth"
-        android:text="Wi-Fi Direct"
+        android:layout_alignEnd="@+id/btnBluetooth"
         android:layout_alignLeft="@+id/btnBluetooth"
-        android:layout_alignStart="@+id/btnBluetooth"
         android:layout_alignRight="@+id/btnBluetooth"
-        android:layout_alignEnd="@+id/btnBluetooth" />
+        android:layout_alignStart="@+id/btnBluetooth"
+        android:layout_below="@+id/btnBluetooth"
+        android:text="Wi-Fi Direct" />
 
     <Button
+        android:id="@+id/btnWifi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wi-Fi"
-        android:id="@+id/btnWifi"
-        android:layout_below="@+id/btnWifiDirect"
+        android:layout_alignEnd="@+id/btnWifiDirect"
         android:layout_alignLeft="@+id/btnWifiDirect"
-        android:layout_alignStart="@+id/btnWifiDirect"
         android:layout_alignRight="@+id/btnWifiDirect"
-        android:layout_alignEnd="@+id/btnWifiDirect" />
+        android:layout_alignStart="@+id/btnWifiDirect"
+        android:layout_below="@+id/btnWifiDirect"
+        android:text="Wi-Fi" />
 
 </RelativeLayout>

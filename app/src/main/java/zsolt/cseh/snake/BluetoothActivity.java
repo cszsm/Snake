@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -139,8 +140,13 @@ public class BluetoothActivity extends Activity {
     }
 
     public void startGame() {
-//        Intent intent = new Intent(BluetoothActivity.this, MultiplayerActivity.class);
-        Intent intent = new Intent(BluetoothActivity.this, SynchronizerActivity.class);
+        Intent intent;
+        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.tbtBtTest);
+        if(toggleButton.isChecked()) {
+            intent = new Intent(BluetoothActivity.this, SynchronizerActivity.class);
+        } else {
+            intent = new Intent(BluetoothActivity.this, MultiplayerActivity.class);
+        }
         startActivity(intent);
     }
 }

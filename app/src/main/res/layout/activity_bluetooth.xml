@@ -9,6 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="zsolt.cseh.snake.BluetoothActivity">
 
+    <TextView
+        android:id="@+id/textBtTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnStartServer"
+        android:layout_toStartOf="@+id/tbtBtTest"
+        android:gravity="center"
+        android:text="Test"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignBottom="@+id/tbtBtTest"
+        android:layout_toLeftOf="@+id/tbtBtTest" />
+
     <ListView
         android:id="@+id/listDevices"
         android:layout_width="wrap_content"
@@ -24,20 +38,30 @@
         android:id="@+id/btnStartDiscovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start discovery"
         android:layout_above="@+id/btnStartServer"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:text="Start discovery" />
 
     <Button
         android:id="@+id/btnStartServer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start server"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/listDevices"
-        android:layout_toStartOf="@+id/listDevices"/>
+        android:layout_toStartOf="@+id/listDevices"
+        android:text="Start server" />
+
+    <ToggleButton
+        android:id="@+id/tbtBtTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnStartServer"
+        android:layout_alignRight="@+id/btnStartServer"
+        android:layout_below="@+id/btnStartServer"
+        android:checked="false"
+        android:text="Test" />
 
 </RelativeLayout>

@@ -41,7 +41,6 @@ public class WifiSenderThread extends Thread {
                 (ipAddress >> 8 & 0xff),
                 (ipAddress >> 16 & 0xff),
                 (ipAddress >> 24 & 0xff));
-        Log.v("udp", "own address: " + ip);
         WifiConnectionPacket packet = null;
         try {
             if(destination != null) {
@@ -50,36 +49,9 @@ public class WifiSenderThread extends Thread {
                 packet = new WifiConnectionPacket(InetAddress.getByName(ip));
             }
 
-//            Log.v("udp", "SENT02");
         } catch (UnknownHostException e) {
-//            Log.v("udp", "SENT02__0");
             e.printStackTrace();
         }
-        Log.v("udp", packet.getSource().getHostAddress());
         transferThread.write(packet);
-//        if (packet != null) {
-//            Log.v("udp", "SENT03");
-//        } else {
-//            Log.v("udp", "SENT04");
-//        }
-
-//        try {
-//            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-//            int ipAddress = wifiInfo.getIpAddress();
-//            String ip = String.format(Locale.getDefault(), "%d.%d.%d.%d",
-//                    (ipAddress & 0xff), (ipAddress >> 8 & 0xff),
-//                    (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
-//            Log.v("udp", "IP - " + ip);
-//        } catch (Exception e) {
-//            Log.v("udp", "error: address");
-//        }
-
-//        try {
-//            InetAddress address = InetAddress.getLocalHost();
-//            Log.v("udp", "IP - " + address);
-//        } catch (UnknownHostException e) {
-//            Log.v("udp", "error: address");
-//            e.printStackTrace();
-//        }
     }
 }

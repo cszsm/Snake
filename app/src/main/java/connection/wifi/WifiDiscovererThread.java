@@ -22,19 +22,16 @@ import zsolt.cseh.snake.WifiActivity;
  */
 public class WifiDiscovererThread extends Thread {
     private ArrayList<String> deviceArrayList;
-    private ArrayAdapter<String> deviceArrayAdapter;
     private SimpleArrayMap<String, InetAddress> devices;
     private TransferThread transferThread;
     private WifiActivity activity;
     private boolean stopSignal;
 
     public WifiDiscovererThread(ArrayList<String> deviceArrayList,
-                                ArrayAdapter<String> deviceArrayAdapter,
                                 SimpleArrayMap<String, InetAddress> devices,
                                 TransferThread transferThread,
                                 WifiActivity activity) {
         this.deviceArrayList = deviceArrayList;
-        this.deviceArrayAdapter = deviceArrayAdapter;
         this.devices = devices;
         this.transferThread = transferThread;
         this.activity = activity;
