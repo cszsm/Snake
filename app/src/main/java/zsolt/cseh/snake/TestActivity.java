@@ -16,14 +16,12 @@ import connection.ConnectionSocket;
 import connection.TransferThread;
 import control.TimeManager;
 import test.SenderThread;
-import test.TestManager;
 import test.TestPacket;
 import test.TestTimingThread;
 
 public class TestActivity extends Activity {
 
     private Random random;
-    private TestManager testManager;
     private TransferThread transferThread;
     private TestTimingThread testTimingThread;
     private List<TestPacket> packets;
