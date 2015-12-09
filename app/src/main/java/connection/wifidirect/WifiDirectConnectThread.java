@@ -58,7 +58,5 @@ public class WifiDirectConnectThread extends Thread {
 
         ConnectionProperties.getInstance().setSocket(new WifiDirectSocket(socket));
         activity.startGame();
-//        activity.startTest();
-//        activity.startSynchronizer();
     }
 }
