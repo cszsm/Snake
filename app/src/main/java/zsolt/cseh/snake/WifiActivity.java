@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -122,7 +123,7 @@ public class WifiActivity extends Activity {
     public InetAddress getBroadcastAddress() throws UnknownHostException {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
-        if(dhcpInfo == null) {
+        if (dhcpInfo == null) {
             return null;
         }
 
@@ -136,8 +137,13 @@ public class WifiActivity extends Activity {
     }
 
     public void startGame() {
-//        Intent intent = new Intent(WifiActivity.this, MultiplayerActivity.class);
-        Intent intent = new Intent(WifiActivity.this, SynchronizerActivity.class);
+        Intent intent;
+        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.tbtWTest);
+        if (toggleButton.isChecked()) {
+            intent = new Intent(WifiActivity.this, SynchronizerActivity.class);
+        } else {
+            intent = new Intent(WifiActivity.this, MultiplayerActivity.class);
+        }
         startActivity(intent);
     }
 }

@@ -28,7 +28,7 @@ public class SenderThread extends Thread {
             Log.i("packet", "sent;" + packet.getSender().toString() + ";" + packet.getId() + ";" +
                     TimeManager.getTime(packet.getTimestamp()) + ";" + packet.getLength());
             try {
-                sleep(1000);
+                sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

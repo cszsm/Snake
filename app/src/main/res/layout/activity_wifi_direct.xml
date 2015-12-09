@@ -39,4 +39,29 @@
         android:layout_toLeftOf="@+id/listWifiP2pDevices"
         android:text="Start game" />
 
+    <ToggleButton
+        android:id="@+id/tbtWdTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnWifiStartGame"
+        android:layout_alignRight="@+id/btnWifiStartGame"
+        android:layout_below="@+id/btnWifiStartGame"
+        android:checked="false"
+        android:text="Test" />
+
+    <TextView
+        android:id="@+id/textWdTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tbtWdTest"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnWifiStartGame"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tbtWdTest"
+        android:layout_toStartOf="@+id/tbtWdTest"
+        android:gravity="center"
+        android:text="Test"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

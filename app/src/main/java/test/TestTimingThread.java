@@ -23,7 +23,7 @@ public class TestTimingThread extends Thread {
     public void run() {
         while (!stopSignal) {
             try {
-                Thread.sleep(20);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
