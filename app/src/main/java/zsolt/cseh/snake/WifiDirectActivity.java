@@ -32,7 +32,7 @@ import connection.wifidirect.WifiDirectBroadcastReceiver;
 import connection.wifidirect.WifiDirectConnectThread;
 
 /**
- * The wifi menu activity
+ * The wifi direct menu activity
  * Allows to create a multiplayer game or connect to another via wifi direct
  */
 public class WifiDirectActivity extends Activity implements ConnectionInfoListener {

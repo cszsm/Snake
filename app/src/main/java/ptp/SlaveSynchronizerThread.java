@@ -8,6 +8,8 @@ import model.TimeManager;
 
 /**
  * Created by zscse on 2015. 09. 29..
+ *
+ * Sends and receives PTP messages if the device is slave
  */
 public class SlaveSynchronizerThread extends Thread {
 
@@ -24,7 +26,6 @@ public class SlaveSynchronizerThread extends Thread {
             SynchronizerPacket sync = new SynchronizerPacket(0);
             long sync_time = 0;
 
-            Log.v("udp", "waiting for sync started");
             while (wait_for_sync) {
                 sync = (SynchronizerPacket) transferThread.getPacket();
                 if (sync != null) {
@@ -32,12 +33,10 @@ public class SlaveSynchronizerThread extends Thread {
                     wait_for_sync = false;
                 }
             }
-            Log.v("udp", "sync received");
 
             // Sending delay_req
             long delay_req_time = TimeManager.getTime();
             transferThread.write(new SynchronizerPacket(0));
-            Log.v("udp", "delay_req sent");
 
             // Waiting for delay_resp
             boolean wait_for_delay_resp = true;
@@ -58,13 +57,11 @@ public class SlaveSynchronizerThread extends Thread {
             if (i != 0) {
                 averageDelay += delay + transit;
             }
-            Log.v("sync", "offset: " + (delay + transit));
         }
 
         averageDelay /= 10;
         ConnectionProperties.getInstance().setOffset(averageDelay);
         Log.i("sync", "average offset: " + ConnectionProperties.getInstance().getOffset());
-        Log.i("sync", ConnectionProperties.getInstance().getDeviceType().toString());
 
         boolean wait_for_start = true;
         SynchronizerPacket startTimePacket;
@@ -76,7 +73,6 @@ public class SlaveSynchronizerThread extends Thread {
                 wait_for_start = false;
             }
         }
-        Log.v("sync", String.valueOf(startTime));
 
         while (TimeManager.getTime() + ConnectionProperties.getInstance().getOffset() < startTime);
     }

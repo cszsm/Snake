@@ -5,6 +5,8 @@ import java.net.InetAddress;
 
 /**
  * Created by zscse on 2015. 11. 02..
+ *
+ * A packet for sending IP addresses
  */
 public class WifiConnectionPacket implements Serializable {
     private InetAddress source;

@@ -8,6 +8,8 @@ import connection.enumeration.DeviceType;
 
 /**
  * Created by zscse on 2015. 09. 28..
+ *
+ * A packet for measurement
  */
 public class TestPacket implements Serializable {
     private static int lastId = 1;

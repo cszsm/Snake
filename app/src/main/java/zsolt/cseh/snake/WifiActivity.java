@@ -30,6 +30,10 @@ import connection.wifi.WifiDiscovererThread;
 import connection.wifi.WifiSocket;
 import connection.wifi.WifiSenderThread;
 
+/**
+ * The wifi menu activity
+ * Allows to create a multiplayer game or connect to another via wifi
+ */
 public class WifiActivity extends Activity {
 
     private ArrayAdapter<String> deviceArrayAdapter;

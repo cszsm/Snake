@@ -15,6 +15,8 @@ import model.enumeration.Direction;
 
 /**
  * Created by zscse on 2015. 10. 31..
+ *
+ * Sends a broadcast message with the device's IP address
  */
 public class WifiSenderThread extends Thread {
 
@@ -48,7 +50,6 @@ public class WifiSenderThread extends Thread {
             } else {
                 packet = new WifiConnectionPacket(InetAddress.getByName(ip));
             }
-
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

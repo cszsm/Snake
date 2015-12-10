@@ -7,6 +7,8 @@ import zsolt.cseh.snake.TestActivity;
 
 /**
  * Created by zscse on 2015. 09. 28..
+ *
+ * Receives packets
  */
 public class TestTimingThread extends Thread {
 

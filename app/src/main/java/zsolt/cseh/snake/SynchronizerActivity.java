@@ -13,6 +13,10 @@ import connection.enumeration.DeviceType;
 import ptp.MasterSynchronizerThread;
 import ptp.SlaveSynchronizerThread;
 
+/**
+ * The synchronizer activity
+ * Allows to synchronize two devices' clock
+ */
 public class SynchronizerActivity extends Activity {
 
     @Override

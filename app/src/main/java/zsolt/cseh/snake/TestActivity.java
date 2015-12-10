@@ -16,6 +16,10 @@ import test.SenderThread;
 import test.TestPacket;
 import test.TestTimingThread;
 
+/**
+ * The test activity
+ * Allows to measure connections
+ */
 public class TestActivity extends Activity {
 
     private TransferThread transferThread;

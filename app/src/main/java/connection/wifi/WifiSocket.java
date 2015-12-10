@@ -9,6 +9,9 @@ import connection.ConnectionSocket;
 
 /**
  * Created by zscse on 2015. 10. 12..
+ *
+ * Delegator class for DatagramSocket
+ * Implements ConnectionSocket
  */
 public class WifiSocket implements ConnectionSocket {
 

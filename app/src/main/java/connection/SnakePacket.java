@@ -8,6 +8,8 @@ import model.enumeration.Direction;
 
 /**
  * Created by zscse on 2015. 09. 29..
+ *
+ * A packet for sending the snake's attributes
  */
 public class SnakePacket implements Serializable {
 

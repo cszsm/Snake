@@ -19,6 +19,8 @@ import zsolt.cseh.snake.WifiActivity;
 
 /**
  * Created by zscse on 2015. 11. 03..
+ *
+ * Discovers devices by receiving their IP addresses
  */
 public class WifiDiscovererThread extends Thread {
     private ArrayList<String> deviceArrayList;

@@ -8,6 +8,8 @@ import zsolt.cseh.snake.TestActivity;
 
 /**
  * Created by zscse on 2015. 10. 05..
+ *
+ * Sends packets for measurement
  */
 public class SenderThread extends Thread {
 
