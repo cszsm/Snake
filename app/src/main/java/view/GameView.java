@@ -11,7 +11,7 @@ import android.view.View;
 
 import connection.ConnectionProperties;
 import connection.enumeration.DeviceType;
-import control.CollisionDetector;
+import model.CollisionDetector;
 import control.TimingThread;
 import control.TouchControl;
 import model.Game;

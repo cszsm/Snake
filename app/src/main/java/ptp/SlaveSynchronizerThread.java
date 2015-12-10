@@ -4,7 +4,7 @@ import android.util.Log;
 
 import connection.ConnectionProperties;
 import connection.TransferThread;
-import control.TimeManager;
+import model.TimeManager;
 
 /**
  * Created by zscse on 2015. 09. 29..

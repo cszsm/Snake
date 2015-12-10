@@ -3,11 +3,6 @@ package model;
 import java.util.ArrayList;
 
 import connection.ConnectionProperties;
-import control.FoodManager;
-import control.GameManager;
-import control.MasterGameManager;
-import control.SlaveGameManager;
-import control.SnakeManager;
 import model.enumeration.Direction;
 
 import static connection.enumeration.DeviceType.SERVER;

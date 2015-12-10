@@ -3,7 +3,7 @@ package test;
 import android.util.Log;
 
 import connection.TransferThread;
-import control.TimeManager;
+import model.TimeManager;
 import zsolt.cseh.snake.TestActivity;
 
 /**

@@ -1,6 +1,4 @@
-package control;
-
-import android.util.Log;
+package model;
 
 import connection.SnakePacket;
 import model.enumeration.Direction;

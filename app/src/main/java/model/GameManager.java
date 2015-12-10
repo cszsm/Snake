@@ -1,9 +1,8 @@
-package control;
+package model;
 
 import connection.ConnectionProperties;
 import connection.SnakePacket;
 import connection.TransferThread;
-import model.Snake;
 
 /**
  * Created by Zsolt on 2015.03.14..

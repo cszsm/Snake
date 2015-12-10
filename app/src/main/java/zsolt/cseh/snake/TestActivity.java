@@ -4,17 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import connection.ConnectionProperties;
-import connection.ConnectionSocket;
 import connection.TransferThread;
-import control.TimeManager;
+import model.TimeManager;
 import test.SenderThread;
 import test.TestPacket;
 import test.TestTimingThread;
