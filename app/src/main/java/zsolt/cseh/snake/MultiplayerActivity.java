@@ -37,8 +37,6 @@ public class MultiplayerActivity extends Activity {
     protected void onPause() {
         super.onPause();
 
-        ConnectionProperties.getInstance().getTransferThread().cancel();
-
         Intent intent = new Intent(MultiplayerActivity.this, MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -48,6 +46,7 @@ public class MultiplayerActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         multiplayerView.stop();
+        ConnectionProperties.getInstance().getTransferThread().cancel();
     }
 
     @Override
