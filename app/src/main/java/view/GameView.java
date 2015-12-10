@@ -21,7 +21,7 @@ import model.enumeration.Player;
  * Created by Zsolt on 2015.03.06..
  * <p/>
  * Draws the game
- * This is the GameActivity's view
+ * This is the MultiplayerActivity's view
  */
 public class GameView extends View {
 
